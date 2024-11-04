@@ -1,0 +1,427 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Visualización de datos con R",
+    "section": "",
+    "text": "Prefacio\nEn este taller exploramos los fundamentos prácticos para la creación de gráficos para visualización de datos utilizando el lenguaje R. La representación gráfica de la información es un apartado fundamental en todo proyecto de Ciencia de Datos, puesto que permite descubrir patrones y características no evidentes, identificar valores atípicos, así como resumir la información de forma más evidente y directa para el espectador. Aunque este apartado es en sí mismo muy amplio, en este taller vamos a centrarnos en los típos de gráficos básicos, así como en visualizaciones que por su especial relevancia para aplicaciones en Ciencias Agrarias y Ambientales puedan resultar interesantes para los/as participantes\nEste es un taller práctico que presenta ejemplos reales y comandos para crear paso a paso visualizaciones de datos efectivas con R. Además, junto a la explicación de los conceptos clave para entender este proceso también se ofrecen recomendaciones sobre buenas prácticas para crear gáficos más informativos y claros, evitando errores comunes y potenciando su capacidad de condensar gran cantidad de información sin que conlleve una excesiva complejidad para su correcta interpretación.\nLos apuntes para este taller práctico se han realizado con Quarto, una herramienta para creación de documentación científica y programación literaria compatible con R y otros lenguajes de programación científica.",
+    "crumbs": [
+      "Prefacio"
+    ]
+  },
+  {
+    "objectID": "index.html#requisitos-previos",
+    "href": "index.html#requisitos-previos",
+    "title": "Visualización de datos con R",
+    "section": "Requisitos previos",
+    "text": "Requisitos previos\nPara poder realizar los ejemplos inlcuidos en este taller necesitas tener instalado R y una IDE de desarrollo para este lenguaje. Se recomienda instalar RStudio o MS Visual Code como entorno de programación.\n\nInstalación de R.\nInstalación de RStudio.\n\nAdicionalmente, es necesario instalar una serie de paquetes R antes de ejecutar los ejemplos, para que todas las dependencias estén disponibles en nuestro sistema. Consulta el Apéndice B.1 Requisitos previos para comprobar el listado de paquetes R necesarios.",
+    "crumbs": [
+      "Prefacio"
+    ]
+  },
+  {
+    "objectID": "01-elements.html",
+    "href": "01-elements.html",
+    "title": "1  Elementos de la visualización de datos",
+    "section": "",
+    "text": "1.1 Canales",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Elementos de la visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "01-elements.html#canales",
+    "href": "01-elements.html#canales",
+    "title": "1  Elementos de la visualización de datos",
+    "section": "",
+    "text": "T. Munzner",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Elementos de la visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "01-elements.html#selección-de-gráficos",
+    "href": "01-elements.html#selección-de-gráficos",
+    "title": "1  Elementos de la visualización de datos",
+    "section": "1.2 Selección de gráficos",
+    "text": "1.2 Selección de gráficos\n\nSegún el tipo de variables.",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Elementos de la visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "01-elements.html#paletas-de-colores",
+    "href": "01-elements.html#paletas-de-colores",
+    "title": "1  Elementos de la visualización de datos",
+    "section": "1.3 Paletas de colores",
+    "text": "1.3 Paletas de colores",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Elementos de la visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "01-elements.html#gráficos-dinámicos",
+    "href": "01-elements.html#gráficos-dinámicos",
+    "title": "1  Elementos de la visualización de datos",
+    "section": "1.4 Gráficos dinámicos",
+    "text": "1.4 Gráficos dinámicos",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Elementos de la visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "01-elements.html#interactividad",
+    "href": "01-elements.html#interactividad",
+    "title": "1  Elementos de la visualización de datos",
+    "section": "1.5 Interactividad",
+    "text": "1.5 Interactividad\n\nInterfaces interactivas\nComponentes reactivos",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Elementos de la visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "02-principles.html",
+    "href": "02-principles.html",
+    "title": "2  Principios de visualización de datos",
+    "section": "",
+    "text": "2.1 Principios de E. Tufte",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Principios de visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "02-principles.html#buenas-prácticas-y-recomendaciones",
+    "href": "02-principles.html#buenas-prácticas-y-recomendaciones",
+    "title": "2  Principios de visualización de datos",
+    "section": "2.2 Buenas prácticas y recomendaciones",
+    "text": "2.2 Buenas prácticas y recomendaciones\n\nK. Healy\nC. Wilke",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Principios de visualización de datos</span>"
+    ]
+  },
+  {
+    "objectID": "03-chart-types.html",
+    "href": "03-chart-types.html",
+    "title": "3  Galería de gráficos",
+    "section": "",
+    "text": "3.1 Taxonomía de gráficos",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Galería de gráficos</span>"
+    ]
+  },
+  {
+    "objectID": "03-chart-types.html#taxonomía-de-gráficos",
+    "href": "03-chart-types.html#taxonomía-de-gráficos",
+    "title": "3  Galería de gráficos",
+    "section": "",
+    "text": "Storytelling with Data.",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Galería de gráficos</span>"
+    ]
+  },
+  {
+    "objectID": "04-grammar.html",
+    "href": "04-grammar.html",
+    "title": "4  Gramática de gráficos",
+    "section": "",
+    "text": "4.1 Origen y propósito\nL. Wilkinson",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Gramática de gráficos</span>"
+    ]
+  },
+  {
+    "objectID": "04-grammar.html#librerías-y-paquetes",
+    "href": "04-grammar.html#librerías-y-paquetes",
+    "title": "4  Gramática de gráficos",
+    "section": "4.2 Librerías y paquetes",
+    "text": "4.2 Librerías y paquetes\nEjemplos de paquetes y librerías en R y otros lenguajes que adoptan el paradigma de la grammar of graphics.",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Gramática de gráficos</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html",
+    "href": "05-ggplot2.html",
+    "title": "5  El paquete ggplot2",
+    "section": "",
+    "text": "5.1 Anatomía de un gráfico con ggplot2",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#elementos-estéticos",
+    "href": "05-ggplot2.html#elementos-estéticos",
+    "title": "5  El paquete ggplot2",
+    "section": "5.2 Elementos estéticos",
+    "text": "5.2 Elementos estéticos",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#geometrías",
+    "href": "05-ggplot2.html#geometrías",
+    "title": "5  El paquete ggplot2",
+    "section": "5.3 Geometrías",
+    "text": "5.3 Geometrías",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#escalas",
+    "href": "05-ggplot2.html#escalas",
+    "title": "5  El paquete ggplot2",
+    "section": "5.4 Escalas",
+    "text": "5.4 Escalas",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#etiquetas-y-título",
+    "href": "05-ggplot2.html#etiquetas-y-título",
+    "title": "5  El paquete ggplot2",
+    "section": "5.5 Etiquetas y título",
+    "text": "5.5 Etiquetas y título",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#anotaciones",
+    "href": "05-ggplot2.html#anotaciones",
+    "title": "5  El paquete ggplot2",
+    "section": "5.6 Anotaciones",
+    "text": "5.6 Anotaciones",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#temas",
+    "href": "05-ggplot2.html#temas",
+    "title": "5  El paquete ggplot2",
+    "section": "5.7 Temas",
+    "text": "5.7 Temas",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#extensiones-de-ggplot2",
+    "href": "05-ggplot2.html#extensiones-de-ggplot2",
+    "title": "5  El paquete ggplot2",
+    "section": "5.8 Extensiones de ggplot2",
+    "text": "5.8 Extensiones de ggplot2",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "05-ggplot2.html#taller-práctico-1-construcción-de-gráficos-paso-a-paso",
+    "href": "05-ggplot2.html#taller-práctico-1-construcción-de-gráficos-paso-a-paso",
+    "title": "5  El paquete ggplot2",
+    "section": "5.9 Taller práctico 1: construcción de gráficos paso a paso",
+    "text": "5.9 Taller práctico 1: construcción de gráficos paso a paso",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>El paquete `ggplot2`</span>"
+    ]
+  },
+  {
+    "objectID": "06-models.html",
+    "href": "06-models.html",
+    "title": "6  Gráficos para evaluación de modelos",
+    "section": "",
+    "text": "6.1 Evaluación de modelos",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Gráficos para evaluación de modelos</span>"
+    ]
+  },
+  {
+    "objectID": "06-models.html#ejemplo-modelos-de-regresión",
+    "href": "06-models.html#ejemplo-modelos-de-regresión",
+    "title": "6  Gráficos para evaluación de modelos",
+    "section": "6.2 Ejemplo: modelos de regresión",
+    "text": "6.2 Ejemplo: modelos de regresión\n\nGráficos clásicos de resumen de resultados.\nGráficos clásicos para evaluación de modelos.",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Gráficos para evaluación de modelos</span>"
+    ]
+  },
+  {
+    "objectID": "06-models.html#ejemplo-explicabilidad-de-modelos",
+    "href": "06-models.html#ejemplo-explicabilidad-de-modelos",
+    "title": "6  Gráficos para evaluación de modelos",
+    "section": "6.3 Ejemplo: explicabilidad de modelos",
+    "text": "6.3 Ejemplo: explicabilidad de modelos\nCasos sencillos sobre importancia de variables.",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Gráficos para evaluación de modelos</span>"
+    ]
+  },
+  {
+    "objectID": "07-time-series.html",
+    "href": "07-time-series.html",
+    "title": "7  Visualización de series temporales",
+    "section": "",
+    "text": "7.1 Datos de series temporales\nBreve introducción a la estructura y representación de datos se series temporales, centrándonos en el paquete tsibble.",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualización de series temporales</span>"
+    ]
+  },
+  {
+    "objectID": "07-time-series.html#taller-práctico-2-representación-de-series-temporales",
+    "href": "07-time-series.html#taller-práctico-2-representación-de-series-temporales",
+    "title": "7  Visualización de series temporales",
+    "section": "7.2 Taller práctico 2: representación de series temporales",
+    "text": "7.2 Taller práctico 2: representación de series temporales",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualización de series temporales</span>"
+    ]
+  },
+  {
+    "objectID": "07-time-series.html#taller-práctico-3-visualización-de-modelos-de-predicción",
+    "href": "07-time-series.html#taller-práctico-3-visualización-de-modelos-de-predicción",
+    "title": "7  Visualización de series temporales",
+    "section": "7.3 Taller práctico 3: visualización de modelos de predicción",
+    "text": "7.3 Taller práctico 3: visualización de modelos de predicción",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualización de series temporales</span>"
+    ]
+  },
+  {
+    "objectID": "08-spatial.html",
+    "href": "08-spatial.html",
+    "title": "8  Visualización de datos espaciales",
+    "section": "",
+    "text": "8.1 Datos espaciales",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualización de datos espaciales</span>"
+    ]
+  },
+  {
+    "objectID": "08-spatial.html#representación-de-datos-espaciales",
+    "href": "08-spatial.html#representación-de-datos-espaciales",
+    "title": "8  Visualización de datos espaciales",
+    "section": "8.2 Representación de datos espaciales",
+    "text": "8.2 Representación de datos espaciales",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualización de datos espaciales</span>"
+    ]
+  },
+  {
+    "objectID": "08-spatial.html#taller-práctico-4-el-paquete-leaflet",
+    "href": "08-spatial.html#taller-práctico-4-el-paquete-leaflet",
+    "title": "8  Visualización de datos espaciales",
+    "section": "8.3 Taller práctico 4: el paquete leaflet",
+    "text": "8.3 Taller práctico 4: el paquete leaflet",
+    "crumbs": [
+      "Implementación",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualización de datos espaciales</span>"
+    ]
+  },
+  {
+    "objectID": "09-add-resources.html",
+    "href": "09-add-resources.html",
+    "title": "9  Recursos adicionales",
+    "section": "",
+    "text": "Listado de recursos adicionales de interés.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, D. E. (1984). Literate Programming. Comput. J., 27(2), 97-111. https://doi.org/10.1093/comjnl/27.2.97",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Recursos adicionales</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "Referencias",
+    "section": "",
+    "text": "Knuth, D. E. (1984). Literate programming. Comput. J.,\n27(2), 97–111. https://doi.org/10.1093/comjnl/27.2.97",
+    "crumbs": [
+      "Referencias"
+    ]
+  },
+  {
+    "objectID": "A-command-ref.html",
+    "href": "A-command-ref.html",
+    "title": "Apéndice A — Referencia de comandos",
+    "section": "",
+    "text": "A.1 Paquete ggplot2",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Referencia de comandos</span>"
+    ]
+  },
+  {
+    "objectID": "A-command-ref.html#series-temporales",
+    "href": "A-command-ref.html#series-temporales",
+    "title": "Apéndice A — Referencia de comandos",
+    "section": "A.2 Series temporales",
+    "text": "A.2 Series temporales",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Referencia de comandos</span>"
+    ]
+  },
+  {
+    "objectID": "A-command-ref.html#datos-espaciales",
+    "href": "A-command-ref.html#datos-espaciales",
+    "title": "Apéndice A — Referencia de comandos",
+    "section": "A.3 Datos espaciales",
+    "text": "A.3 Datos espaciales",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Referencia de comandos</span>"
+    ]
+  },
+  {
+    "objectID": "B-packages.html",
+    "href": "B-packages.html",
+    "title": "Apéndice B — Paquetes R y atribuciones",
+    "section": "",
+    "text": "B.1 Requisitos previos\nPara ejecutar los ejemplos incluidos en este taller, se necesita tener instalado R y una IDE de desarrollo para este lenguaje, como por ejemplo RStudio o Microsoft VS Code.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Paquetes R y atribuciones</span>"
+    ]
+  },
+  {
+    "objectID": "B-packages.html#atribución-de-imágenes-e-iconos",
+    "href": "B-packages.html#atribución-de-imágenes-e-iconos",
+    "title": "Apéndice B — Paquetes R y atribuciones",
+    "section": "B.2 Atribución de imágenes e iconos",
+    "text": "B.2 Atribución de imágenes e iconos",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Paquetes R y atribuciones</span>"
+    ]
+  }
+]
