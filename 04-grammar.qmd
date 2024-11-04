@@ -1,0 +1,13 @@
+# Gramática de gráficos
+
+Breve presentación del paradigma de *grammar of graphics*, adoptado
+por muchas de las principales bibliotecas de visualización de datos.
+
+## Origen y propósito
+
+L. Wilkinson
+
+## Librerías y paquetes
+
+Ejemplos de paquetes y librerías en R y otros lenguajes que adoptan el
+paradigma de la *grammar of graphics*.

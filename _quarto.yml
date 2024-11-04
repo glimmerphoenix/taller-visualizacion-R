@@ -1,0 +1,72 @@
+project:
+  type: book
+  output-dir: docs
+  preview:
+    port: 9001
+    browser: true
+
+book:
+  title: "Visualización de datos con R"
+  author:
+    - "Felipe Ortega"
+    - "María Jesús Algar"
+  date: "2024/11/14"
+  chapters:
+    - index.qmd
+    - part: "Fundamentos"
+      chapters:
+        - 01-elements.qmd
+        - 02-principles.qmd
+        - 03-chart-types.qmd
+        - 04-grammar.qmd
+    - part: "Implementación"
+      chapters:
+        - 05-ggplot2.qmd
+        - 06-models.qmd
+        - 07-time-series.qmd
+        - 08-spatial.qmd
+    - 09-add-resources.qmd
+    - references.qmd
+  appendices:
+    - A-command-ref.qmd
+    - B-packages.qmd
+    - app-refs.qmd
+  downloads: [pdf]
+  repo-url: https://github.com/glimmerphoenix/taller-reprod-R
+  repo-actions: [source, edit, issue]
+
+lang: es
+bibliography: references.bib
+csl: apa.csl
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+  pdf:
+    documentclass: scrbook
+    classoption:
+      - a4paper 
+      - oneside
+      - parskip=half+
+      - numbers=noenddot
+      - cleardoublepage=empty
+      - DIV=15
+    hyperrefoptions: 
+      - linktocpage=true
+    include-in-header: 
+       text: |
+        % Line and page breaking
+        \sloppy
+        \clubpenalty = 10000
+        \widowpenalty = 10000
+        \brokenpenalty = 10000
+
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+          commandchars=\\\{\},
+          breaklines, breaknonspaceingroup, breakanywhere
+        }
+
+
+

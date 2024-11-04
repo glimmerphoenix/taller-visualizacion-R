@@ -1,0 +1,38 @@
+# Prefacio {.unnumbered}
+
+En este taller exploramos los fundamentos prácticos para la creación de
+gráficos para visualización de datos utilizando el lenguaje R. La
+representación gráfica de la información es un apartado fundamental en todo
+proyecto de Ciencia de Datos, puesto que permite descubrir patrones y
+características no evidentes, identificar valores atípicos, así como
+resumir la información de forma más evidente y directa para el espectador.
+Aunque este apartado es en sí mismo muy amplio, en este taller vamos a centrarnos
+en los típos de gráficos básicos, así como en visualizaciones que por
+su especial relevancia para aplicaciones en Ciencias Agrarias y Ambientales
+puedan resultar interesantes para los/as participantes
+
+Este es un **taller práctico** que presenta ejemplos reales y comandos para
+crear paso a paso visualizaciones de datos efectivas con R. Además,
+junto a la explicación de los conceptos clave para entender este proceso también
+se ofrecen recomendaciones sobre buenas prácticas para crear gáficos más informativos
+y claros, evitando errores comunes y potenciando su capacidad de condensar
+gran cantidad de información sin que conlleve una excesiva complejidad para su
+correcta interpretación.
+
+Los apuntes para este taller práctico se han realizado con 
+[Quarto](https://quarto.org), una herramienta para creación de
+documentación científica y programación literaria compatible con
+R y otros lenguajes de programación científica.
+
+## Requisitos previos
+
+Para poder realizar los ejemplos inlcuidos en este taller necesitas tener instalado
+R y una IDE de desarrollo para este lenguaje. Se recomienda instalar RStudio o MS
+Visual Code como entorno de programación.
+
+- [Instalación de R](https://cran.r-project.org/).
+- [Instalación de RStudio](https://posit.co/download/rstudio-desktop/).
+
+Adicionalmente, es necesario instalar una serie de paquetes R antes de ejecutar los
+ejemplos, para que todas las dependencias estén disponibles en nuestro sistema.
+Consulta el Apéndice [@sec-pkg-requirements] para comprobar el listado de paquetes R necesarios.

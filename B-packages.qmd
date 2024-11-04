@@ -1,0 +1,11 @@
+# Paquetes R y atribuciones
+
+## Requisitos previos {#sec-pkg-requirements}
+
+Para ejecutar los ejemplos incluidos en este taller, se necesita tener instalado
+R y una IDE de desarrollo para este lenguaje, como por ejemplo RStudio o Microsoft
+VS Code. 
+
+
+
+## Atribución de imágenes e iconos

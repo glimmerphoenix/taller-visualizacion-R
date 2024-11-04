@@ -1,0 +1,11 @@
+# Visualización de series temporales
+
+## Datos de series temporales
+
+Breve introducción a la estructura y representación de datos se series
+temporales, centrándonos en el paquete `tsibble`.
+
+## Taller práctico 2: representación de series temporales
+
+
+## Taller práctico 3: visualización de modelos de predicción

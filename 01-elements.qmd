@@ -1,0 +1,20 @@
+# Elementos de la visualización de datos
+
+## Canales
+
+- T. Munzner
+
+## Selección de gráficos
+
+- Según el tipo de variables.
+
+## Paletas de colores
+
+## Gráficos dinámicos
+
+## Interactividad
+
+- Interfaces interactivas
+
+- Componentes reactivos
+

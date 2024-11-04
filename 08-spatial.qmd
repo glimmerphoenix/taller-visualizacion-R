@@ -1,0 +1,9 @@
+# Visualización de datos espaciales
+
+## Datos espaciales
+
+
+## Representación de datos espaciales
+
+
+## Taller práctico 4: el paquete `leaflet`

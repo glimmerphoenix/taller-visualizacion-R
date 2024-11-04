@@ -1,0 +1,9 @@
+# Principios de visualización de datos
+
+
+## Principios de E. Tufte
+
+## Buenas prácticas y recomendaciones
+
+- K. Healy
+- C. Wilke

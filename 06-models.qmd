@@ -1,0 +1,14 @@
+# Gráficos para evaluación de modelos
+
+## Evaluación de modelos
+
+
+## Ejemplo: modelos de regresión
+
+- Gráficos clásicos de resumen de resultados.
+
+- Gráficos clásicos para evaluación de modelos.
+
+## Ejemplo: explicabilidad de modelos
+
+Casos sencillos sobre importancia de variables.

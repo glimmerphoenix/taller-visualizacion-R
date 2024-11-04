@@ -1,0 +1,5 @@
+# Recursos adicionales
+
+Listado de recursos adicionales de interés.
+
+See @knuth84 for additional discussion of literate programming.

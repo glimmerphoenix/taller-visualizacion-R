@@ -1,0 +1,11 @@
+# Galería de gráficos
+
+En este capítulo, presentamos los principales tipos gráficos para
+visualización de datos que se suelen encontrar en proyectos de
+análisis de datos. Es esencial saber con qué opciones contamos
+para después elegir el tipo de gráfico y su modalidad que mejor
+se adapte a nuestros objetivos.
+
+## Taxonomía de gráficos
+
+- Storytelling with Data.

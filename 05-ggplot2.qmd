@@ -1,0 +1,23 @@
+# El paquete `ggplot2`
+
+En este capítulo se introduce el paquete `ggplot2` de R, una de las
+herramientas de visualización de datos más populares en la actualidad y
+que ha sido incluso exportado a otros lenguajes (como Python).
+
+## Anatomía de un gráfico con `ggplot2`
+
+## Elementos estéticos
+
+## Geometrías
+
+## Escalas
+
+## Etiquetas y título
+
+## Anotaciones
+
+## Temas
+
+## Extensiones de `ggplot2`
+
+## Taller práctico 1: construcción de gráficos paso a paso
