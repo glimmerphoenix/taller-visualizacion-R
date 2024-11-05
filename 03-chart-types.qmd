@@ -8,4 +8,292 @@ se adapte a nuestros objetivos.
 
 ## Taxonomía de gráficos
 
-- Storytelling with Data.
+A continuación, presentamos una taxonomía tentativa para clasificar
+diferentes tipos de gráficos en función del tipo de datos y atributos
+que queremos representar [@wilke2019].
+
+### Análisis exploratorio de datos
+
+El primer conjunto de tipos de gráficos corresponden a herramientas que podemos
+utilizar para representar distribuciones de valores. Estos gráficos se suelen emplear
+para resumir propiedades de conjuntos de datos en la fase de análisis exploratorio.
+
+La @fig-graphs-distrib-i muestra un primer conjunto de gráficos para este propósito,
+que representa distribuciones de valores univariantes.
+
+![Algunos gráficos para representar distribuciones univariantes de valores numéricos. Fuente: [@wilke2019].](img/graphs-distribution-i.png){#fig-graphs-distrib-i width=95%}
+
+- **Histograma**: El histograma nos permite representar mediante un diagrama de barras verticales el número
+de ocurrencias o la frecuencia de aparición respecto al total de un intervalo de valores de un atributo numérico. Lo
+más usual es que los intervalos se representen en el eje horizontal y tengan todos la misma longitud, pero esto
+no siempre se cumple. Existen diferentes algoritmos y criterios para determinar el número de intervalos generados
+y el ancho de los mismos.
+
+- **Diagrama de densidad de probabilidad** (KDE): Se puede ver como una aproximación continua del histograma,
+que muestra la frecuencia de aparición de los diferentes valores numéricos de la distribución descrita, es decir, la
+su *función de densidad de probabilidad* (o f.d.p.). Para su estimación se emplea el Estimador de Densidad del
+Kernel (KDE por sus siglas en inglés). Nuevamente, existen diferentes algoritmos y métodos para calcular dicho
+estimador. Este tipo de función tiene la ventaja de que permite comparar en el mismo gráfico varias f.d.p.
+simultáneamente, si no rellenamos el área bajo las curvas.
+
+- **Diagrama de densidad acumulada** (CDF): Otra visión alternativa sobre cómo está repartida la distribución de valores
+de un atributo numérico. En este caso se representa la funcisió de densidad de probabilidad acumulada (o CDF, por sus
+siglas en inglés). Suele ser una herramienta muy versátil, tanto para interpretar mejor una distribución como para
+identificar qué posible función de distribución de probabilidad teórica se podría ajustar a un conjunto de valores.
+
+- **Gráfico cuantil-cuantil** (*qqplot*): Herramienta gráfica comumnmente empleada para comprobar la bondad del
+ajuste de una distribución de valores empírica respecto de una distribución teórica. Por ejemplo, un uso frecuente
+es el de contrastar si los residuos de un modelo de regresión se ajustan de forma creíble a una distribución Normal.
+
+El segundo conjunto de gráficos que muestra la @fig-graphs-distrib-ii recoge herramientas para
+representar distribuciones de valores de un atributo en función de los valores de otro atributo
+categórico (factor en R).
+
+![Algunos gráficos para representar distribuciones de valores en función de otro atributo categórico. Fuente: [@wilke2019].](img/graphs-distribution-ii.png){#fig-graphs-distrib-ii width=95%}
+
+- **Boxplot**: Su creación se debe al insigne estadístico John W. Tukey [@tukey1977], que lo propuso 
+como herramienta básica para el EDA. Originalmente también se denominó *box-and-whiskers* plot, ya
+que consiste en la combinación de una caja con líneas o "bigotes" a ambos lados. 
+Se trata de un gráfico que muestra un resumen simplificado de la distribución de valores
+de un atributo numérico, centrándose en cinco estadísticos de resumen claves que se muestran
+en la @fig-boxplot-annotated:
+
+    - *Mediana*: se representa mediante una línea dentro de la caja.
+    - *Rango intercuartílico* (IQR): determina las dimensiones de la caja o *box* en el gráfico. El IQR
+    se calcula como la diferencia entre el percentil 25 (primer cuartil o $Q_1$) y 
+    el percentil 75 (tercer cuartil o $Q_3$) de la distribución de valores.
+    - *Valores dentro del "cuerpo principal" de la distribución*: los "bigotes" o líneas a ambos lados de la
+    caja se extienden en cada sentido hasta $Q_1 - 1.5*IQR$ y $Q_3 + 1.5*IQR$. Los valores que caen más allá
+    de estos dos puntos a cada lado de la distribución se pueden considerar como valores **atípicos** (en inglés
+    *outliers*).
+    - *Valores atípicos*: se representan como puntos o símbolos individuales en el gráfico, a ambos lados del cuerpo
+    principal de la distribución (si es que existen).
+
+
+![Explicación anotada de los elementos que componen un *boxplot*. Fuente: <https://www.data-to-viz.com/caveat/boxplot.html>.](img/boxplot-annotated.png){#fig-boxplot-annotated width=100%}
+
+- **Violín**: Una importante limitación del *boxplot* es que al resumir el aspecto de la distribución de valores
+mediante un gráfico esquemático en forma de caja perdemos información sobre la *forma* de la distribución real
+de valores subyancente (la f.d.p.). En consecuencia, se han propuesto alternativas como, por ejemplo, el gráfico
+de violín (en inglés *violing plot*), que representa la estimación de la f.d.p. en ambos laterales de lo que sería
+la caja del boxplot, añadiendo más información al gráfico. Sin embargo, esta alternativa es, de igual modo, más difícil
+de interpretar.
+
+::: {.callout-note}
+## Añadir *jitter* o puntos con desplazamiento aleatorio
+
+Otra alternativa (quizá aún más confusa, depende de la situación) para añadir más información sobre la distribución
+de valores subyacente en el boxplot consiste en representar los elementos reales como puntos o símbolos superpuestos a la
+caja, como se representa en la @fig-boxplot-jitter. Para poder ver todos los puntos se añade horizontalmente un pequeño
+desplazamiento aleatorio o *jitter*, de forma que se repartan por todo el área de la caja pero respetando su ubicación en la
+distribución de valores.
+:::
+
+![Cómo añadir puntos con *jitter* sobrepuestos al *boxplot* original. Fuente: <https://r-graph-gallery.com/89-box-and-scatter-plot-with-ggplot2.html>.](img/boxplot-jitter.png){#fig-boxplot-jitter width=85%}
+
+- *Strip charts*: semejantes a los gráficos de boxplot con puntos sobrepuestos utilizando *jitter*, pero eliminando
+la representació esquemática de la caja y las líneas del cuerpo principal de la distribución. En ocasiones, la forma
+del gráfico de violín se combina con el *strip chart* para crear un *swarm plot* o *beeswarm plot*, que también se puede crear
+fácilmente en R con el paquete []`ggbeeswarm`](https://r-charts.com/distribution/ggbeeswarm/).
+
+- Histogramas apilados:
+
+- Diagramas de densidad solapados:
+
+- *Ridgeline plot*:
+
+### Relaciones cuantiativo-cuantitativo (gráficos X-Y)
+
+En esta sección resumimos algunos gráficos para representación de relaciones entre variables cuantitativas en ambos
+ejes (suponiendo un gráfico 2D). Empezamos por los tipos báiscos que se muestran en la @fig-graphs-xy.
+
+![Algunos gráficos para representar relaciones entre valores de dos atributos numéricos. Fuente: [@wilke2019].](img/graphs-scatter-i.png){#fig-graphs-xy width=95%}
+
+- Gráfico de dispersión o *scatterplot*: es el típico gráfico de coordenadas cartesianas, representando cada elemento
+por un punto o un símbolo. En el caso de que, además, se quieran representar puntos pertenecientes a varias categorías
+se puede emplear un canal adicional (color, símbolo) con una leyenda para facilitar la interpretación del gráfico.
+
+- Gráfico de burbujas: permite representar simultáneamente tres atributos cuantitativos, utilizando el tamaño del
+círculo o burbuja para representar la tercera dimensión de los atributos.
+
+- *Scatterplot* emparejado: es un caso especial en el que se comparan dos medidas del mismo atributo o de atributos
+diferentes pero medidos en las mismas unidades y con la misma escala. En ese caso, suele ser útil representar la línea
+$x=y$. Un ejemplo de este tipo de gráficos que hemos mencionado antes es el *qqplot*.
+
+- *Slopegraph*: otro tipo de gráfico para representar parejas de datos. Cada pareja de puntos se une mediante una línea
+horizontal, que nos da una idea de la variación que se ha producido entre los valores de esa pareja.
+
+Continuamos con otro conjunto de gráficos que permiten resumir los datos usando curvas de nivel o contorno, intervalos
+o *bins* o correlogramas, que se muestran en la @fig-graphs-xy-binning.
+
+![Algunos gráficos para resumir relaciones entre valores de dos atributos numéricos. Fuente: [@wilke2019].](img/graphs-xy-binning.png){#fig-graphs-xy-binning width=95%}
+
+- Curvas de nivel: Las curvas de nivel permiten representar valores cuantitativos repartidos en una superficie continua,
+de forma que puedan ser interpretables.
+
+- Celdas o intervalos en 2D y hexagonales: Otra variante para representar datos cuantitativos repartidos en una superficie
+continua consiste en establecer primero una malla de celdas (cuadradas o hexagonales) representando mediante un canal (normalmente
+color) el valor promedio de la variable cuantitativa dentro de esa celda.
+
+    - Una variante de los *bins* cuadrados en 2D es el gráfico de actividad que muestra número de acciones en cada
+    periodo de tiempo (días, semanas, etc.). Un buen ejemplo son los gráficos de actividad para los perfiles de usuario
+    de GitHub, como se muestra en la @fig-wickham-github-contribs.
+
+![Gráfico de actividad con bins en 2D que muestra el número de contribuciones diarias del usuario H. Wickham en GitHub. Fuente: <https://github.com/hadley>.](img/wickham-github-contribs.png){#fig-wickham-github-contribs width=95%}
+
+- Correlograma: es un gráfico en el que se representa gráficamente el grado de correlación entre los valores
+de varios atributos. La representación concreta de cada correlograma puede variar mucho. Algunos utilizan el canal
+de color y una paleta divergente para distinguir claramente las correlaciones positivas o negativas. En otros casos
+se añaden más canales (cambios de forma, formas incompletas representando correlación parcial). La 
+@fig-correlogram presenta un ejemplo de correlograma creado con el paquete `ggcorrplot`.
+
+```{r}
+#| label: fig-correlogram
+#| fig-cap: "Correlograma para las variables cuantitativas del *dataset* `mtcars` producido con el paquete `ggcorrplot`."
+
+library(ggcorrplot)
+library(colorspace)
+data(mtcars)
+corr <- round(cor(mtcars), 2)
+my_palette <- diverging_hcl(3, palette = "Blue-Red")
+
+ggcorrplot(corr, hc.order = TRUE, type = "lower",
+   outline.col = "white",
+   ggtheme = ggplot2::theme_gray,
+   colors = my_palette)
+```
+
+Por último, existe un subconjunto de gráficos en esta categoría para representar datos con estricta dependencia
+temporal, o bien con dependencia de una variable con ordenación (por ejemplo, cantidad de dosis administrada de un
+fertilizante o un fungicida). También se encuentran en este subconjunto las líneas de estimación de tendencia o
+*smooth line*. Todos ellos se muestran en la @fig-graphs-xy-lines.
+
+![Algunos gráficos para representar valores numéricos con dependencia temporal, relacionados con variables ordenadas o para estimar tendencias. Fuente: [@wilke2019]](img/graphs-xy-lines.png){#fig-graphs-xy-lines width=95%}
+
+- Gráfico de línea: los puntos o símbolos del gráfico se enlazan mediante una línea que remarca la secuencialidad
+entre las muestras. Un ejemplo de este tipo son los gráficos de series temporales, como el que se muestra en la
+@fig-timeseries-example.
+
+![Series temporales del número total de envíos mensuales de artículos de investigación a tres servidores de *preprints* en investigación biomédica. Fuente: [@wilke2019]; fuente de datos: Jordan Anaya, <http://www.prepubmed.org/>.](img/time-series-example.png){#fig-timeseries-example}
+
+- Scatterplot conectado: es un gráfico en el que se representan valores de un diagrama de dispersión conectados por
+lineas que denotan una secuencialidad temporal entre los elementos. Hay que usarlos con cuidado, sobre todo al
+construirlos, para que el resultado no sea difícil de intrepretar.
+
+- Línea suavizada de tendencia (*smooth line*): se trata de funciones suavizadas que resumen tendencias globales
+de los valores en gráficos de dispersión. Existen diversos algoritmos para generarlas, como por ejemplo el
+LOESS [@cleveland1992] o LOWESS [@cleveland1981lowess]. Veamos un ejemplo con el paquete `ggplot2` y la función
+integrada `geom_smooth()`, ilustrado en la @fig-geom-smooth.
+
+```{r}
+#| label: fig-geom-smooth
+#| fig-cap: "Diagramas de dispersión comparando el cubicaje y la autonomía de diferentes modelos de automóviles en 1999 y 2008."
+
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() +
+  geom_smooth(method = "loess", formula = 'y ~ x') + 
+  facet_wrap(~year)
+```
+
+### Relaciones cuantitativo-cualitativo
+
+En la @fig-graphs-amounts se muestran los tipos básicos de gráficos para representación de valores numéricos frente
+a valores de una variable categórica.
+
+![Gráficos para representar relaciones entre un atributo cuantitativo y otro categórico. Fuente: [@wilke2019].](img/graphs-amounts-i.png){#fig-graphs-amounts width=95%}
+
+- Diagrama de barras:
+
+- *Dotplot* (diagrama de puntos): propuesto por W. Cleveland para simplificar la representación de la información
+en un diagrama de barras.
+
+La @fig-graphs-amounts-multi muestra gráficos que permiten representar relaciones entre una variable cuantitativa y
+varias categorías de manera simultánea en la misma imagen.
+
+![Gráficos para representar relaciones entre un atributo cuantitativo y varias categorías simultáneamente. Fuente: [@wilke2019].](img/graphs-amounts-multi.png){#fig-graphs-amounts-multi width=95%}
+
+- Diagrama de barras agrupado:
+
+- Diagrama de barras apiladas (*stacked bars*):
+
+- Mapa de calor (*heatmap*):
+
+### Proporciones
+
+Los gráficos básicos para representación de proporciones están resumidos en la @fig-graphs-props.
+
+![Gráficos básicos para representación de proporciones. Fuente: [@wilke2019].](img/graphs-proportions.png){#fig-graphs-props width=95%}
+
+- Diagrama de sectores (*pie chart*):
+
+- Diagrama de barras (porcentual):
+
+A su vez, la @fig-graphs-props-multi muestra distintos tipos de diagramas para representar mútiples conjuntos de proporciones.
+
+![Gráficos básicos para representación de múltiples conjuntos de proporciones. Fuente: [@wilke2019].](img/graphs-proportions-multi.png){#fig-graphs-props-multi width=95%}
+
+- Diagramas de sectores múltiples:
+
+- Diagramas de barras agrupados y apilados:
+
+- Diagramas de densidades apiladas:
+
+Por último, la @fig-graphs-props-comp muestra gráficos para desglosar proporciones en función de más de una variable categórica
+a la vez en la misma figura.
+
+![Gráficos para representación de proporciones en función de más de una categoría de forma simultánea. Fuente: [@wilke2019].](img/graphs-proportions-comp.png){#fig-graphs-props-comp width=95%}
+
+- Gráfico de mosaico (*mosaic plot*):
+
+- *Treemap*:
+
+- Conjuntos paralelos (*parallel sets* o *alluvial plot*):
+
+### Datos espaciales
+
+La @fig-graphs-geo muestra algunos gráficos básicos para representación de datos con dependencias espaciales.
+
+![Gráficos básicos para representación de datos espaciales. Fuente: [@wilke2019].](img/graphs-geospatial.png){#fig-graphs-geo width=95%}
+
+- Mapa:
+
+- *Choropleth*:
+
+- Cartograma:
+
+- Cartograma de calor (*cartogram heatmap*):
+
+### Representación de la incertidumbre
+
+La @fig-graphs-error-bars muestra varios ejemplos de gráficos que representan márgenes de error en medidas o estimaciones
+estadísticas.
+
+![Gráficos básicos para representación de barras de estimaciones de error. Fuente: [@wilke2019].](img/graphs-errorbars.png){#fig-graphs-error-bars width=95%}
+
+- Barras de error:
+
+- Barras de error en 2D:
+
+- Barras de error con gradación:
+
+A su vez, la @fig-conf-dist muestra varios ejemplos de gráficos para visualización de la distribución de probabilidad en intervalos
+de confianza o en modelos (*a priori* y *a posteriori*).
+
+![Gráficos básicos para representación de estimaciones estadísticas. Fuente: [@wilke2019].](img/graphs-confidence-dists.png){#fig-conf-dist width=95%}
+
+- Bandas de confianza:
+
+- Ojos y medios ojos (*half-eyes*):
+
+- Diagrama de puntos de cuantiles:
+
+Por último, tenemos algunas modalidades para representar bandas de intervalos de confianza en estimaciones gráficas (curvas
+resultado de ajustes y modelos), que suelen incluir diferentes anchos o gradaciones para indicar diferentes intervalos en el
+mismo gráfico (c.i. 90%; c.i. 95%, etc.). Varios ejemplos aparecen esquematizados en la @fig-graphs-conf-bands.
+
+![Gráficos básicos para representación de intervalos de confianza en estimaciones. Fuente: [@wilke2019].](img/graphs-confidence-bands.png){#fig-graphs-conf-bands width=95%}
+
+
+## Arbol de decisión: ¿qué grafico escojo?
+
+<https://www.data-to-viz.com/>

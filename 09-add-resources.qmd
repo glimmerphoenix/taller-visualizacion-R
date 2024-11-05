@@ -1,5 +1,3 @@
 # Recursos adicionales
 
-Listado de recursos adicionales de interés.
-
-See @knuth84 for additional discussion of literate programming.
+- Manual de `ggplot2`: <https://ggplot2-book.org> (3ª ed. en progreso).
