@@ -306,7 +306,7 @@ div.csl-indent {
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/01-elements.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/01-elements.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-elements.html">Fundamentos</a></li><li class="breadcrumb-item"><a href="./01-elements.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Elementos de la visualización de datos</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -481,7 +481,7 @@ Figura&nbsp;1.7: Catálogo de algunas marcas y canales que podemos utilizar en n
 </div>
 <p>Debemos prestar atención a la clasificación que muestra la <a href="#fig-marks-channels" class="quarto-xref">Figura&nbsp;<span>1.7</span></a>, puesto que no todas las marcas ni todos los canales tienen la misma <em>efectividad</em> al representar la información para que el espectador la reciba e interprete. Por ejemplo, a pesar de que se usa con mucha frecuencia el canal de luminancia o saturación de la paleta de colores es mucho menos efectivo para codificar la información y que el espectador la inteprete que la longitud o el área 2D. A su vez, la representación de datos en volúmenes 3D debe ser un recurso que no se utilice a la ligera y su empleo debe estar muy bien justificado puesto que, en general, es un canal de información mucho más difícil de intepretar (sobre todo para ciertas tareas, como comparaciones).</p>
 </section>
-<section id="paletas-de-colores" class="level2" data-number="1.6">
+<section id="paletas-de-colores" class="level2 page-columns page-full" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="paletas-de-colores"><span class="header-section-number">1.6</span> Paletas de colores</h2>
 <p>Existen multitud <a href="https://r-charts.com/color-palettes/">paletas de colores</a> que podemos usar en R para la representación gráfica de nuestros datos. Tanta variedad puede, ciertamente, abrumar al usuario poco experimentado, que no sabe bien qué opción es la mejor para determinada aplicación. Por si eso no fuera suficiente, es posible personalizar cualquier paleta o construir nuestra propia paleta de colores para una visualización.</p>
 <p>Sin embargo, se pueden encontrar <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf">algunas recomendaciones</a> interesantes que nos pueden servir de guía:</p>
@@ -512,14 +512,14 @@ Figura&nbsp;1.8: Catálogo de paletas de colores incluidas en el paquete <code>R
 <li><p>El paquete <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a> y su versión reducida <code>viridisLite</code> (enlazado por defecto en el conocido paquete <code>ggplot2</code>) presenta paletas de colores diseñadas para mejorar su legibilidad en espectadores con formas habituales de ceguera a algún color u otros tipos de deficiencias visuales. Los mapas de color que ofrecen tienen una escala de percepción uniforme y todos ellos son directamente convertibles a formato B/N para impresión en escala de grises.</p></li>
 <li><p>El paquete <a href="https://cran.r-project.org/web/packages/colorspace/vignettes/colorspace.html"><code>colorspace</code></a> proporciona paletas específicamente diseñadas dependiendo del tipo de atributo que queremos representar, incluyendo valores categóricos, secuenciales, divergentes, etc. La <a href="#fig-hcl-palettes" class="quarto-xref">Figura&nbsp;<span>1.9</span></a> muestra un ejemplo de paletas diseñadas en base a los valores de tonalidad, crominancia y luminancia para varios tipos de atributos.</p></li>
 </ul>
-<div class="cell">
+<div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorspace)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hcl_palettes</span>(<span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div id="fig-hcl-palettes" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-hcl-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="01-elements_files/figure-html/fig-hcl-palettes-1.png" class="img-fluid figure-img" width="672">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-hcl-palettes" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-hcl-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="01-elements_files/figure-html/fig-hcl-palettes-1.png" class="img-fluid figure-img column-page-right" width="1152">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hcl-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;1.9: Paletas incluidas en el paquete <code>colorspace</code> para diferentes tipos de atributos.
@@ -528,8 +528,64 @@ Figura&nbsp;1.9: Paletas incluidas en el paquete <code>colorspace</code> para di
 </div>
 </div>
 </div>
+<p>Además, este paquete incluye funciones muy potentes para evaluar la paleta de colores escogida, mostrando gráficos que describen sus características más destacadas para ponderar si la elección es adecuada para nuestros intereses.</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>q4 <span class="ot">&lt;-</span> <span class="fu">qualitative_hcl</span>(<span class="dv">4</span>, <span class="at">palette =</span> <span class="st">"Dark 3"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">demoplot</span>(q4, <span class="st">"bar"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hclplot</span>(q4)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">specplot</span>(q4, <span class="at">type =</span> <span class="st">"o"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-eval-hcl-palette" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-eval-hcl-palette-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-eval-hcl-palette" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-eval-hcl-palette-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-eval-hcl-palette-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-elements_files/figure-html/fig-eval-hcl-palette-1.png" class="img-fluid figure-img" data-ref-parent="fig-eval-hcl-palette" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-eval-hcl-palette-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Gráfico de de barras para comprobar el efecto de la paleta escogida.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-eval-hcl-palette" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-eval-hcl-palette-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-eval-hcl-palette-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-elements_files/figure-html/fig-eval-hcl-palette-2.png" class="img-fluid figure-img" data-ref-parent="fig-eval-hcl-palette" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-eval-hcl-palette-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Valores HCL de la paleta.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-eval-hcl-palette" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-eval-hcl-palette-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-eval-hcl-palette-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-elements_files/figure-html/fig-eval-hcl-palette-3.png" class="img-fluid figure-img" data-ref-parent="fig-eval-hcl-palette" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-eval-hcl-palette-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Los valores de luminancia son constantes en toda la paleta; la tonalidad cambia linealmente.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eval-hcl-palette-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.10: Gráficos de evaluación de una paleta de color incluida en el paquete <code>colorspace</code>.
+</figcaption>
+</figure>
+</div>
 <ul>
-<li>Otro paquete muy conocido es <code>RColorBrewer</code>, muy popular en cartografía puesto que ofrece una <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">herramienta interactiva de selección de paletas</a> en función de los objetivos de nuestro mapa.</li>
+<li>Otro paquete muy conocido es <code>RColorBrewer</code>, utilizado con frecuencia en cartografía puesto que ofrece una <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">herramienta interactiva de selección de paletas</a> en función de los objetivos de nuestro mapa.</li>
 </ul>
 
 

@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -69,6 +123,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -237,7 +320,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#taxonomía-de-gráficos" id="toc-taxonomía-de-gráficos" class="nav-link active" data-scroll-target="#taxonomía-de-gráficos"><span class="header-section-number">3.1</span> Taxonomía de gráficos</a></li>
+  <li><a href="#taxonomía-de-gráficos" id="toc-taxonomía-de-gráficos" class="nav-link active" data-scroll-target="#taxonomía-de-gráficos"><span class="header-section-number">3.1</span> Taxonomía de gráficos</a>
+  <ul class="collapse">
+  <li><a href="#análisis-exploratorio-de-datos" id="toc-análisis-exploratorio-de-datos" class="nav-link" data-scroll-target="#análisis-exploratorio-de-datos"><span class="header-section-number">3.1.1</span> Análisis exploratorio de datos</a></li>
+  <li><a href="#relaciones-cuantiativo-cuantitativo-gráficos-x-y" id="toc-relaciones-cuantiativo-cuantitativo-gráficos-x-y" class="nav-link" data-scroll-target="#relaciones-cuantiativo-cuantitativo-gráficos-x-y"><span class="header-section-number">3.1.2</span> Relaciones cuantiativo-cuantitativo (gráficos X-Y)</a></li>
+  <li><a href="#relaciones-cuantitativo-cualitativo" id="toc-relaciones-cuantitativo-cualitativo" class="nav-link" data-scroll-target="#relaciones-cuantitativo-cualitativo"><span class="header-section-number">3.1.3</span> Relaciones cuantitativo-cualitativo</a></li>
+  <li><a href="#proporciones" id="toc-proporciones" class="nav-link" data-scroll-target="#proporciones"><span class="header-section-number">3.1.4</span> Proporciones</a></li>
+  <li><a href="#datos-espaciales" id="toc-datos-espaciales" class="nav-link" data-scroll-target="#datos-espaciales"><span class="header-section-number">3.1.5</span> Datos espaciales</a></li>
+  <li><a href="#representación-de-la-incertidumbre" id="toc-representación-de-la-incertidumbre" class="nav-link" data-scroll-target="#representación-de-la-incertidumbre"><span class="header-section-number">3.1.6</span> Representación de la incertidumbre</a></li>
+  </ul></li>
+  <li><a href="#arbol-de-decisión-qué-grafico-escojo" id="toc-arbol-de-decisión-qué-grafico-escojo" class="nav-link" data-scroll-target="#arbol-de-decisión-qué-grafico-escojo"><span class="header-section-number">3.2</span> Arbol de decisión: ¿qué grafico escojo?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/03-chart-types.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/03-chart-types.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
@@ -266,11 +358,387 @@ ul.task-list li input[type="checkbox"] {
 <p>En este capítulo, presentamos los principales tipos gráficos para visualización de datos que se suelen encontrar en proyectos de análisis de datos. Es esencial saber con qué opciones contamos para después elegir el tipo de gráfico y su modalidad que mejor se adapte a nuestros objetivos.</p>
 <section id="taxonomía-de-gráficos" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="taxonomía-de-gráficos"><span class="header-section-number">3.1</span> Taxonomía de gráficos</h2>
+<p>A continuación, presentamos una taxonomía tentativa para clasificar diferentes tipos de gráficos en función del tipo de datos y atributos que queremos representar <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.</p>
+<section id="análisis-exploratorio-de-datos" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="análisis-exploratorio-de-datos"><span class="header-section-number">3.1.1</span> Análisis exploratorio de datos</h3>
+<p>El primer conjunto de tipos de gráficos corresponden a herramientas que podemos utilizar para representar distribuciones de valores. Estos gráficos se suelen emplear para resumir propiedades de conjuntos de datos en la fase de análisis exploratorio.</p>
+<p>La <a href="#fig-graphs-distrib-i" class="quarto-xref">Figura&nbsp;<span>3.1</span></a> muestra un primer conjunto de gráficos para este propósito, que representa distribuciones de valores univariantes.</p>
+<div id="fig-graphs-distrib-i" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-distrib-i-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-distribution-i.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-distrib-i-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.1: Algunos gráficos para representar distribuciones univariantes de valores numéricos. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
 <ul>
-<li>Storytelling with Data.</li>
+<li><p><strong>Histograma</strong>: El histograma nos permite representar mediante un diagrama de barras verticales el número de ocurrencias o la frecuencia de aparición respecto al total de un intervalo de valores de un atributo numérico. Lo más usual es que los intervalos se representen en el eje horizontal y tengan todos la misma longitud, pero esto no siempre se cumple. Existen diferentes algoritmos y criterios para determinar el número de intervalos generados y el ancho de los mismos.</p></li>
+<li><p><strong>Diagrama de densidad de probabilidad</strong> (KDE): Se puede ver como una aproximación continua del histograma, que muestra la frecuencia de aparición de los diferentes valores numéricos de la distribución descrita, es decir, la su <em>función de densidad de probabilidad</em> (o f.d.p.). Para su estimación se emplea el Estimador de Densidad del Kernel (KDE por sus siglas en inglés). Nuevamente, existen diferentes algoritmos y métodos para calcular dicho estimador. Este tipo de función tiene la ventaja de que permite comparar en el mismo gráfico varias f.d.p. simultáneamente, si no rellenamos el área bajo las curvas.</p></li>
+<li><p><strong>Diagrama de densidad acumulada</strong> (CDF): Otra visión alternativa sobre cómo está repartida la distribución de valores de un atributo numérico. En este caso se representa la funcisió de densidad de probabilidad acumulada (o CDF, por sus siglas en inglés). Suele ser una herramienta muy versátil, tanto para interpretar mejor una distribución como para identificar qué posible función de distribución de probabilidad teórica se podría ajustar a un conjunto de valores.</p></li>
+<li><p><strong>Gráfico cuantil-cuantil</strong> (<em>qqplot</em>): Herramienta gráfica comumnmente empleada para comprobar la bondad del ajuste de una distribución de valores empírica respecto de una distribución teórica. Por ejemplo, un uso frecuente es el de contrastar si los residuos de un modelo de regresión se ajustan de forma creíble a una distribución Normal.</p></li>
 </ul>
+<p>El segundo conjunto de gráficos que muestra la <a href="#fig-graphs-distrib-ii" class="quarto-xref">Figura&nbsp;<span>3.2</span></a> recoge herramientas para representar distribuciones de valores de un atributo en función de los valores de otro atributo categórico (factor en R).</p>
+<div id="fig-graphs-distrib-ii" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-distrib-ii-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-distribution-ii.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-distrib-ii-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.2: Algunos gráficos para representar distribuciones de valores en función de otro atributo categórico. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p><strong>Boxplot</strong>: Su creación se debe al insigne estadístico John W. Tukey <span class="citation" data-cites="tukey1977">(<a href="references.html#ref-tukey1977" role="doc-biblioref">Tukey, 1977</a>)</span>, que lo propuso como herramienta básica para el EDA. Originalmente también se denominó <em>box-and-whiskers</em> plot, ya que consiste en la combinación de una caja con líneas o “bigotes” a ambos lados. Se trata de un gráfico que muestra un resumen simplificado de la distribución de valores de un atributo numérico, centrándose en cinco estadísticos de resumen claves que se muestran en la <a href="#fig-boxplot-annotated" class="quarto-xref">Figura&nbsp;<span>3.3</span></a>:</p>
+<ul>
+<li><em>Mediana</em>: se representa mediante una línea dentro de la caja.</li>
+<li><em>Rango intercuartílico</em> (IQR): determina las dimensiones de la caja o <em>box</em> en el gráfico. El IQR se calcula como la diferencia entre el percentil 25 (primer cuartil o <span class="math inline">\(Q_1\)</span>) y el percentil 75 (tercer cuartil o <span class="math inline">\(Q_3\)</span>) de la distribución de valores.</li>
+<li><em>Valores dentro del “cuerpo principal” de la distribución</em>: los “bigotes” o líneas a ambos lados de la caja se extienden en cada sentido hasta <span class="math inline">\(Q_1 - 1.5*IQR\)</span> y <span class="math inline">\(Q_3 + 1.5*IQR\)</span>. Los valores que caen más allá de estos dos puntos a cada lado de la distribución se pueden considerar como valores <strong>atípicos</strong> (en inglés <em>outliers</em>).</li>
+<li><em>Valores atípicos</em>: se representan como puntos o símbolos individuales en el gráfico, a ambos lados del cuerpo principal de la distribución (si es que existen).</li>
+</ul></li>
+</ul>
+<div id="fig-boxplot-annotated" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-annotated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/boxplot-annotated.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-annotated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.3: Explicación anotada de los elementos que componen un <em>boxplot</em>. Fuente: <a href="https://www.data-to-viz.com/caveat/boxplot.html" class="uri">https://www.data-to-viz.com/caveat/boxplot.html</a>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Violín</strong>: Una importante limitación del <em>boxplot</em> es que al resumir el aspecto de la distribución de valores mediante un gráfico esquemático en forma de caja perdemos información sobre la <em>forma</em> de la distribución real de valores subyancente (la f.d.p.). En consecuencia, se han propuesto alternativas como, por ejemplo, el gráfico de violín (en inglés <em>violing plot</em>), que representa la estimación de la f.d.p. en ambos laterales de lo que sería la caja del boxplot, añadiendo más información al gráfico. Sin embargo, esta alternativa es, de igual modo, más difícil de interpretar.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Añadir <em>jitter</em> o puntos con desplazamiento aleatorio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Otra alternativa (quizá aún más confusa, depende de la situación) para añadir más información sobre la distribución de valores subyacente en el boxplot consiste en representar los elementos reales como puntos o símbolos superpuestos a la caja, como se representa en la <a href="#fig-boxplot-jitter" class="quarto-xref">Figura&nbsp;<span>3.4</span></a>. Para poder ver todos los puntos se añade horizontalmente un pequeño desplazamiento aleatorio o <em>jitter</em>, de forma que se repartan por todo el área de la caja pero respetando su ubicación en la distribución de valores.</p>
+</div>
+</div>
+<div id="fig-boxplot-jitter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/boxplot-jitter.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.4: Cómo añadir puntos con <em>jitter</em> sobrepuestos al <em>boxplot</em> original. Fuente: <a href="https://r-graph-gallery.com/89-box-and-scatter-plot-with-ggplot2.html" class="uri">https://r-graph-gallery.com/89-box-and-scatter-plot-with-ggplot2.html</a>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p><em>Strip charts</em>: semejantes a los gráficos de boxplot con puntos sobrepuestos utilizando <em>jitter</em>, pero eliminando la representació esquemática de la caja y las líneas del cuerpo principal de la distribución. En ocasiones, la forma del gráfico de violín se combina con el <em>strip chart</em> para crear un <em>swarm plot</em> o <em>beeswarm plot</em>, que también se puede crear fácilmente en R con el paquete []<code>ggbeeswarm</code>](https://r-charts.com/distribution/ggbeeswarm/).</p></li>
+<li><p>Histogramas apilados:</p></li>
+<li><p>Diagramas de densidad solapados:</p></li>
+<li><p><em>Ridgeline plot</em>:</p></li>
+</ul>
+</section>
+<section id="relaciones-cuantiativo-cuantitativo-gráficos-x-y" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="relaciones-cuantiativo-cuantitativo-gráficos-x-y"><span class="header-section-number">3.1.2</span> Relaciones cuantiativo-cuantitativo (gráficos X-Y)</h3>
+<p>En esta sección resumimos algunos gráficos para representación de relaciones entre variables cuantitativas en ambos ejes (suponiendo un gráfico 2D). Empezamos por los tipos báiscos que se muestran en la <a href="#fig-graphs-xy" class="quarto-xref">Figura&nbsp;<span>3.5</span></a>.</p>
+<div id="fig-graphs-xy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-xy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-scatter-i.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-xy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.5: Algunos gráficos para representar relaciones entre valores de dos atributos numéricos. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Gráfico de dispersión o <em>scatterplot</em>: es el típico gráfico de coordenadas cartesianas, representando cada elemento por un punto o un símbolo. En el caso de que, además, se quieran representar puntos pertenecientes a varias categorías se puede emplear un canal adicional (color, símbolo) con una leyenda para facilitar la interpretación del gráfico.</p></li>
+<li><p>Gráfico de burbujas: permite representar simultáneamente tres atributos cuantitativos, utilizando el tamaño del círculo o burbuja para representar la tercera dimensión de los atributos.</p></li>
+<li><p><em>Scatterplot</em> emparejado: es un caso especial en el que se comparan dos medidas del mismo atributo o de atributos diferentes pero medidos en las mismas unidades y con la misma escala. En ese caso, suele ser útil representar la línea <span class="math inline">\(x=y\)</span>. Un ejemplo de este tipo de gráficos que hemos mencionado antes es el <em>qqplot</em>.</p></li>
+<li><p><em>Slopegraph</em>: otro tipo de gráfico para representar parejas de datos. Cada pareja de puntos se une mediante una línea horizontal, que nos da una idea de la variación que se ha producido entre los valores de esa pareja.</p></li>
+</ul>
+<p>Continuamos con otro conjunto de gráficos que permiten resumir los datos usando curvas de nivel o contorno, intervalos o <em>bins</em> o correlogramas, que se muestran en la <a href="#fig-graphs-xy-binning" class="quarto-xref">Figura&nbsp;<span>3.6</span></a>.</p>
+<div id="fig-graphs-xy-binning" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-xy-binning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-xy-binning.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-xy-binning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.6: Algunos gráficos para resumir relaciones entre valores de dos atributos numéricos. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Curvas de nivel: Las curvas de nivel permiten representar valores cuantitativos repartidos en una superficie continua, de forma que puedan ser interpretables.</p></li>
+<li><p>Celdas o intervalos en 2D y hexagonales: Otra variante para representar datos cuantitativos repartidos en una superficie continua consiste en establecer primero una malla de celdas (cuadradas o hexagonales) representando mediante un canal (normalmente color) el valor promedio de la variable cuantitativa dentro de esa celda.</p>
+<ul>
+<li>Una variante de los <em>bins</em> cuadrados en 2D es el gráfico de actividad que muestra número de acciones en cada periodo de tiempo (días, semanas, etc.). Un buen ejemplo son los gráficos de actividad para los perfiles de usuario de GitHub, como se muestra en la <a href="#fig-wickham-github-contribs" class="quarto-xref">Figura&nbsp;<span>3.7</span></a>.</li>
+</ul></li>
+</ul>
+<div id="fig-wickham-github-contribs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wickham-github-contribs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/wickham-github-contribs.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wickham-github-contribs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.7: Gráfico de actividad con bins en 2D que muestra el número de contribuciones diarias del usuario H. Wickham en GitHub. Fuente: <a href="https://github.com/hadley" class="uri">https://github.com/hadley</a>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Correlograma: es un gráfico en el que se representa gráficamente el grado de correlación entre los valores de varios atributos. La representación concreta de cada correlograma puede variar mucho. Algunos utilizan el canal de color y una paleta divergente para distinguir claramente las correlaciones positivas o negativas. En otros casos se añaden más canales (cambios de forma, formas incompletas representando correlación parcial). La <a href="#fig-correlogram" class="quarto-xref">Figura&nbsp;<span>3.8</span></a> presenta un ejemplo de correlograma creado con el paquete <code>ggcorrplot</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Cargando paquete requerido: ggplot2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>corr <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cor</span>(mtcars), <span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>my_palette <span class="ot">&lt;-</span> <span class="fu">diverging_hcl</span>(<span class="dv">3</span>, <span class="at">palette =</span> <span class="st">"Blue-Red"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="st">"lower"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">outline.col =</span> <span class="st">"white"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">ggtheme =</span> ggplot2<span class="sc">::</span>theme_gray,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> my_palette)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-correlogram" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-correlogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-chart-types_files/figure-html/fig-correlogram-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-correlogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.8: Correlograma para las variables cuantitativas del <em>dataset</em> <code>mtcars</code> producido con el paquete <code>ggcorrplot</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Por último, existe un subconjunto de gráficos en esta categoría para representar datos con estricta dependencia temporal, o bien con dependencia de una variable con ordenación (por ejemplo, cantidad de dosis administrada de un fertilizante o un fungicida). También se encuentran en este subconjunto las líneas de estimación de tendencia o <em>smooth line</em>. Todos ellos se muestran en la <a href="#fig-graphs-xy-lines" class="quarto-xref">Figura&nbsp;<span>3.9</span></a>.</p>
+<div id="fig-graphs-xy-lines" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-xy-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-xy-lines.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-xy-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.9: Algunos gráficos para representar valores numéricos con dependencia temporal, relacionados con variables ordenadas o para estimar tendencias. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Gráfico de línea: los puntos o símbolos del gráfico se enlazan mediante una línea que remarca la secuencialidad entre las muestras. Un ejemplo de este tipo son los gráficos de series temporales, como el que se muestra en la</li>
+</ul>
+<ol class="example" type="1">
+<li></li>
+</ol>
+<div id="fig-timeseries-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-timeseries-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/time-series-example.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeseries-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.10: Series temporales del número total de envíos mensuales de artículos de investigación a tres servidores de <em>preprints</em> en investigación biomédica. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>; fuente de datos: Jordan Anaya, <a href="http://www.prepubmed.org/" class="uri">http://www.prepubmed.org/</a>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Scatterplot conectado: es un gráfico en el que se representan valores de un diagrama de dispersión conectados por lineas que denotan una secuencialidad temporal entre los elementos. Hay que usarlos con cuidado, sobre todo al construirlos, para que el resultado no sea difícil de intrepretar.</p></li>
+<li><p>Línea suavizada de tendencia (<em>smooth line</em>): se trata de funciones suavizadas que resumen tendencias globales de los valores en gráficos de dispersión. Existen diversos algoritmos para generarlas, como por ejemplo el LOESS <span class="citation" data-cites="cleveland1992">(<a href="references.html#ref-cleveland1992" role="doc-biblioref">Cleveland et&nbsp;al., 1992</a>)</span> o LOWESS <span class="citation" data-cites="cleveland1981lowess">(<a href="references.html#ref-cleveland1981lowess" role="doc-biblioref">Cleveland, 1981</a>)</span>. Veamos un ejemplo con el paquete <code>ggplot2</code> y la función integrada <code>geom_smooth()</code>, ilustrado en la <a href="#fig-geom-smooth" class="quarto-xref">Figura&nbsp;<span>3.11</span></a>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">formula =</span> <span class="st">'y ~ x'</span>) <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-geom-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-geom-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-chart-types_files/figure-html/fig-geom-smooth-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-geom-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.11: Diagramas de dispersión comparando el cubicaje y la autonomía de diferentes modelos de automóviles en 1999 y 2008.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relaciones-cuantitativo-cualitativo" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="relaciones-cuantitativo-cualitativo"><span class="header-section-number">3.1.3</span> Relaciones cuantitativo-cualitativo</h3>
+<p>En la <a href="#fig-graphs-amounts" class="quarto-xref">Figura&nbsp;<span>3.12</span></a> se muestran los tipos básicos de gráficos para representación de valores numéricos frente a valores de una variable categórica.</p>
+<div id="fig-graphs-amounts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-amounts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-amounts-i.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-amounts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.12: Gráficos para representar relaciones entre un atributo cuantitativo y otro categórico. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Diagrama de barras:</p></li>
+<li><p><em>Dotplot</em> (diagrama de puntos): propuesto por W. Cleveland para simplificar la representación de la información en un diagrama de barras.</p></li>
+</ul>
+<p>La <a href="#fig-graphs-amounts-multi" class="quarto-xref">Figura&nbsp;<span>3.13</span></a> muestra gráficos que permiten representar relaciones entre una variable cuantitativa y varias categorías de manera simultánea en la misma imagen.</p>
+<div id="fig-graphs-amounts-multi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-amounts-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-amounts-multi.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-amounts-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.13: Gráficos para representar relaciones entre un atributo cuantitativo y varias categorías simultáneamente. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Diagrama de barras agrupado:</p></li>
+<li><p>Diagrama de barras apiladas (<em>stacked bars</em>):</p></li>
+<li><p>Mapa de calor (<em>heatmap</em>):</p></li>
+</ul>
+</section>
+<section id="proporciones" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="proporciones"><span class="header-section-number">3.1.4</span> Proporciones</h3>
+<p>Los gráficos básicos para representación de proporciones están resumidos en la <a href="#fig-graphs-props" class="quarto-xref">Figura&nbsp;<span>3.14</span></a>.</p>
+<div id="fig-graphs-props" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-props-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-proportions.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-props-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.14: Gráficos básicos para representación de proporciones. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Diagrama de sectores (<em>pie chart</em>):</p></li>
+<li><p>Diagrama de barras (porcentual):</p></li>
+</ul>
+<p>A su vez, la <a href="#fig-graphs-props-multi" class="quarto-xref">Figura&nbsp;<span>3.15</span></a> muestra distintos tipos de diagramas para representar mútiples conjuntos de proporciones.</p>
+<div id="fig-graphs-props-multi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-props-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-proportions-multi.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-props-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.15: Gráficos básicos para representación de múltiples conjuntos de proporciones. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Diagramas de sectores múltiples:</p></li>
+<li><p>Diagramas de barras agrupados y apilados:</p></li>
+<li><p>Diagramas de densidades apiladas:</p></li>
+</ul>
+<p>Por último, la <a href="#fig-graphs-props-comp" class="quarto-xref">Figura&nbsp;<span>3.16</span></a> muestra gráficos para desglosar proporciones en función de más de una variable categórica a la vez en la misma figura.</p>
+<div id="fig-graphs-props-comp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-props-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-proportions-comp.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-props-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.16: Gráficos para representación de proporciones en función de más de una categoría de forma simultánea. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Gráfico de mosaico (<em>mosaic plot</em>):</p></li>
+<li><p><em>Treemap</em>:</p></li>
+<li><p>Conjuntos paralelos (<em>parallel sets</em> o <em>alluvial plot</em>):</p></li>
+</ul>
+</section>
+<section id="datos-espaciales" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="datos-espaciales"><span class="header-section-number">3.1.5</span> Datos espaciales</h3>
+<p>La <a href="#fig-graphs-geo" class="quarto-xref">Figura&nbsp;<span>3.17</span></a> muestra algunos gráficos básicos para representación de datos con dependencias espaciales.</p>
+<div id="fig-graphs-geo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-geo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-geospatial.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-geo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.17: Gráficos básicos para representación de datos espaciales. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Mapa:</p></li>
+<li><p><em>Choropleth</em>:</p></li>
+<li><p>Cartograma:</p></li>
+<li><p>Cartograma de calor (<em>cartogram heatmap</em>):</p></li>
+</ul>
+</section>
+<section id="representación-de-la-incertidumbre" class="level3" data-number="3.1.6">
+<h3 data-number="3.1.6" class="anchored" data-anchor-id="representación-de-la-incertidumbre"><span class="header-section-number">3.1.6</span> Representación de la incertidumbre</h3>
+<p>La <a href="#fig-graphs-error-bars" class="quarto-xref">Figura&nbsp;<span>3.18</span></a> muestra varios ejemplos de gráficos que representan márgenes de error en medidas o estimaciones estadísticas.</p>
+<div id="fig-graphs-error-bars" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-error-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-errorbars.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-error-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.18: Gráficos básicos para representación de barras de estimaciones de error. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Barras de error:</p></li>
+<li><p>Barras de error en 2D:</p></li>
+<li><p>Barras de error con gradación:</p></li>
+</ul>
+<p>A su vez, la <a href="#fig-conf-dist" class="quarto-xref">Figura&nbsp;<span>3.19</span></a> muestra varios ejemplos de gráficos para visualización de la distribución de probabilidad en intervalos de confianza o en modelos (<em>a priori</em> y <em>a posteriori</em>).</p>
+<div id="fig-conf-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-conf-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-confidence-dists.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-conf-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.19: Gráficos básicos para representación de estimaciones estadísticas. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Bandas de confianza:</p></li>
+<li><p>Ojos y medios ojos (<em>half-eyes</em>):</p></li>
+<li><p>Diagrama de puntos de cuantiles:</p></li>
+</ul>
+<p>Por último, tenemos algunas modalidades para representar bandas de intervalos de confianza en estimaciones gráficas (curvas resultado de ajustes y modelos), que suelen incluir diferentes anchos o gradaciones para indicar diferentes intervalos en el mismo gráfico (c.i. 90%; c.i. 95%, etc.). Varios ejemplos aparecen esquematizados en la <a href="#fig-graphs-conf-bands" class="quarto-xref">Figura&nbsp;<span>3.20</span></a>.</p>
+<div id="fig-graphs-conf-bands" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs-conf-bands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-confidence-bands.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-conf-bands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.20: Gráficos básicos para representación de intervalos de confianza en estimaciones. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="arbol-de-decisión-qué-grafico-escojo" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="arbol-de-decisión-qué-grafico-escojo"><span class="header-section-number">3.2</span> Arbol de decisión: ¿qué grafico escojo?</h2>
+<p><a href="https://www.data-to-viz.com/" class="uri">https://www.data-to-viz.com/</a></p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-cleveland1981lowess" class="csl-entry" role="listitem">
+Cleveland, W. S. (1981). <span>LOWESS</span>: <span>A</span> program for smoothing scatterplots by robust locally weighted regression. <em>American Statistician</em>, <em>35</em>(1), 54.
+</div>
+<div id="ref-cleveland1992" class="csl-entry" role="listitem">
+Cleveland, W. S., Grosse, E., &amp; Shyu, W. M. (1992). Local regression models. En J. M. Chambers &amp; T. J. Hastie (Eds.), <em>Statistical Models in S</em>. Wadsworth &amp; Brooks/Cole.
+</div>
+<div id="ref-tukey1977" class="csl-entry" role="listitem">
+Tukey, J. W. (1977). <em>Exploratory Data Analysis</em> (1.ª ed.). Addison-Wesley Pub.
+</div>
+<div id="ref-wilke2019" class="csl-entry" role="listitem">
+Wilke, C. O. (2019). <em>Fundamentals of Data Visualization</em>. O’Reilly Media. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
