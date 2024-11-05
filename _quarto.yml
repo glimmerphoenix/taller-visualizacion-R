@@ -31,7 +31,7 @@ book:
     - A-command-ref.qmd
     - B-packages.qmd
     - app-refs.qmd
-  downloads: [pdf]
+  
   repo-url: https://github.com/glimmerphoenix/taller-reprod-R
   repo-actions: [source, edit, issue]
 
@@ -43,30 +43,7 @@ format:
   html:
     theme: cosmo
     css: styles.css
-  pdf:
-    documentclass: scrbook
-    classoption:
-      - a4paper 
-      - oneside
-      - parskip=half+
-      - numbers=noenddot
-      - cleardoublepage=empty
-      - DIV=15
-    hyperrefoptions: 
-      - linktocpage=true
-    include-in-header: 
-       text: |
-        % Line and page breaking
-        \sloppy
-        \clubpenalty = 10000
-        \widowpenalty = 10000
-        \brokenpenalty = 10000
-
-        \usepackage{fvextra}
-        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
-          commandchars=\\\{\},
-          breaklines, breaknonspaceingroup, breakanywhere
-        }
+  
 
 
 
