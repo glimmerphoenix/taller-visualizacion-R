@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -100,7 +120,6 @@ ul.task-list li input[type="checkbox"] {
       <a href="./">Visualización de datos con R</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/glimmerphoenix/taller-reprod-R" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
-    <a href="./Visualización-de-datos-con-R.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -238,8 +257,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#principios-de-e.-tufte" id="toc-principios-de-e.-tufte" class="nav-link active" data-scroll-target="#principios-de-e.-tufte"><span class="header-section-number">2.1</span> Principios de E. Tufte</a></li>
-  <li><a href="#buenas-prácticas-y-recomendaciones" id="toc-buenas-prácticas-y-recomendaciones" class="nav-link" data-scroll-target="#buenas-prácticas-y-recomendaciones"><span class="header-section-number">2.2</span> Buenas prácticas y recomendaciones</a></li>
+  <li><a href="#reglas-básicas" id="toc-reglas-básicas" class="nav-link active" data-scroll-target="#reglas-básicas"><span class="header-section-number">2.1</span> Reglas básicas</a></li>
+  <li><a href="#principios-de-e.-tufte" id="toc-principios-de-e.-tufte" class="nav-link" data-scroll-target="#principios-de-e.-tufte"><span class="header-section-number">2.2</span> Principios de E. Tufte</a></li>
+  <li><a href="#buenas-prácticas-y-recomendaciones" id="toc-buenas-prácticas-y-recomendaciones" class="nav-link" data-scroll-target="#buenas-prácticas-y-recomendaciones"><span class="header-section-number">2.3</span> Buenas prácticas y recomendaciones</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/02-principles.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/02-principles.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
@@ -265,17 +285,159 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="principios-de-e.-tufte" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="principios-de-e.-tufte"><span class="header-section-number">2.1</span> Principios de E. Tufte</h2>
-</section>
-<section id="buenas-prácticas-y-recomendaciones" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="buenas-prácticas-y-recomendaciones"><span class="header-section-number">2.2</span> Buenas prácticas y recomendaciones</h2>
+<p>En este capítulo se recogen algunos principios básicos y recomendaciones para crear buenas visualizaciones de datos.</p>
+<section id="reglas-básicas" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="reglas-básicas"><span class="header-section-number">2.1</span> Reglas básicas</h2>
+<p>Comencemos por algunas reglas básicas de creación de gráficos <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015, Capítulo 6</a>)</span>.</p>
 <ul>
-<li>K. Healy</li>
-<li>C. Wilke</li>
+<li>Se debe evitar un uso no justificado de elementos y gráficos en 3D. En este sentido se debería puntualizar que nos referimos a una representanción 3D en una superficie o área de visualización bidimensional, como puede ser un papel, un póster o una pantalla. Esta recomendación se basa en la dificultad que entrañan los artefactos visuales empleados para dar una sensación 3D en gráficos representados en un área 2D, que pueden engañar a nuestra percepción y dificultad comparaciones y apreciación de elementos relevantes en el gráfico.</li>
 </ul>
+<p>Un caso muy diferente y que no tratamos en este taller es la visualización de datos 3D <em>inmersiva</em>, es decir, utilizando dispositivos como gafas de realidad virtual y otros medios que permitan al espectador interpretar la visualización 3D en un espacio de representación también en 3D. Esta es un área de investigación muy activa en la actualidad y con resultados muy prometedores.</p>
+<ul>
+<li><p>También se debe evitar el uso no justificado de una representación gráfica en 2D si, por ejemplo, es suficiente con una tabla o una lista de valores para representar los resultados.</p></li>
+<li><p>Se deben favorecer elementos y canales que impongan poca carga cognitiva en el espectador para interpretar el gráfico. Por ejemplo, si tenemos un gráfico que permite girar la figura en varias direcciones, nuestra mente tiene que recordar qué vio en las perspectivas anteriores para interpretar el gráfico por completo. Por contra, si presentamos una visualización estática con planta, alzado y perfil se pueden extraer conclusiones más fácilmente, al acceder a todas las perspectivas de forma simultánea.</p></li>
+<li><p>El uso de animaciones puede ser muy potente, pero igualmente impone una elevada carga cognitiva para nuestro cerebro. Considera el caso anterior con el <a href="https://anderfernandez.com/blog/como-crear-animaciones-en-r-con-gganimate/">paquete <code>gganimate</code></a> y observa como tu cerebro debe recordar la posición de partida de algunos países de interés para interpretar correctamente la evolución del gráfico. Un ejemplo sería el mostrado en la <a href="#fig-crime-Milwaukee-animated" class="quarto-xref">Figura&nbsp;<span>2.1</span></a>. No es de extrañar que, en contraste, muchos diseñadores prefieran las parrillas de gráficos (en inglés <em>lattice</em> o <em>facets</em>) para la representación de información en varios paneles de forma simultánea, como muestra la <a href="#fig-crime-Milwaukee" class="quarto-xref">Figura&nbsp;<span>2.2</span></a>.</p></li>
+</ul>
+<div id="fig-crime-Milwaukee-animated" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-crime-Milwaukee-animated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/crime-Milwaukee-animated.gif" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-Milwaukee-animated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.1: Gráfico que muestra la evolución temporal de los crímenes relacionados con vehículos cometidos en la ciudad de Milwaukee (EE.UU.), entre 2016 y 2019 mediante una animación. Fuente: <a href="https://jtr13.github.io/cc19/plotting-maps-with-r-an-example-based-tutorial.html">enlace</a>.
+</figcaption>
+</figure>
+</div>
+<div id="fig-crime-Milwaukee" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-crime-Milwaukee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/crime-Milwaukee.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-Milwaukee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.2: Gráfico que muestra la evolución temporal de los crímenes relacionados con vehículos cometidos en la ciudad de Milwaukee (EE.UU.), entre 2016 y 2019 utilizando <em>facets</em>. Fuente: <a href="https://jtr13.github.io/cc19/plotting-maps-with-r-an-example-based-tutorial.html">enlace</a>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Una importante recomendación que popularizó el profesor <span class="citation" data-cites="shneiderman96">Shneiderman (<a href="references.html#ref-shneiderman96" role="doc-biblioref">1996</a>)</span> es la de construir los gráficos de forma que presenten un resumen global en primer lugar y luego permitan obtener más detalles o incluso (si añadimos interactividad) se pueda hacer zoom o filtrar información para fijarnos en aspectos concretos del gráfico.</p></li>
+<li><p>Es importante que el gráfico responda con <strong>agilidad</strong> y que no se introduzcan latencias innecesarias en la representación de algunos elementos como, por ejemplo, cuando desplazamos el gráfico, seleccionamos un grupo de elementos, hacemos zoom, etc. En este sentido, algunas bibliotecas para desarrollo de gráficos interactivos muy potentes son también conocidas por introducir notables retardos en la renderización de la visualización. Esto estropea la experiencia de usuario y entorpece la interpretación del contenido del gráfico.</p></li>
+<li><p>Es fundamental, incluso actualmente (con menores costes de impresión a color y pantallas con gran profundidad de color y una resolución envidiable), que nuestros gráficos puedan ser directamente representados en B/N (más exactamente, en una paleta de tonos grises) si fuese necesario.</p></li>
+<li><p>Los mejores gráficos destacan, además de por su funcionalidad, por su belleza. Sin embargo, este segundo aspecto es difícil de conseguir en muchos casos y es más un arte que una ciencia. Por tanto, es importante que primero nos concentremos en crear un <strong>gráfico funcional</strong> que, por lo menos, cumpla el objetivo de diseño que nos hemos planteado.</p></li>
+</ul>
+</section>
+<section id="principios-de-e.-tufte" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="principios-de-e.-tufte"><span class="header-section-number">2.2</span> Principios de E. Tufte</h2>
+<p>Otro de los grandes exponentes del diseño de gráficos para visualización de datos es Edward R. Tufte. En una de sus obras más conocidas <span class="citation" data-cites="tufte2001">(<a href="references.html#ref-tufte2001" role="doc-biblioref">Tufte, 2001</a>)</span> expone algunos principios y recomendaciones útiles.</p>
+<ul>
+<li>Maximizar el <strong>ratio datos-tinta</strong> (<em>data-to-ink ratio</em>): No debemos sobrecargar el gráfico con muchos datos o elementos. Por ejemplo, un gráfico en el que tengamos una gran cantidad de puntos superpuestos hará que no veamos nada o dificultará la identificación de patrones de interés. Vemos algunos ejemplos que proporciona H. Wickham es su nueva edición del libro sobre <code>ggplot2</code> (<a href="https://ggplot2-book.org/" class="uri">https://ggplot2-book.org/</a>), utilizando el término <a href="https://ggplot2-book.org/statistical-summaries.html#sec-overplotting">overplotting</a> para denotar este problema. La <a href="#fig-overplotting" class="quarto-xref">Figura&nbsp;<span>2.3</span></a> muestra cómo utilizar la transparencia (parámetro <code>alpha</code>) para permitir interpretar mejor el gráfico reduciendo la cantidad de “tinta” empleada.</li>
+</ul>
+<div id="fig-overplotting" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overplotting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/overplotting.png" height="400" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overplotting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.3: Ejemplo de uso del argumento <code>alpha</code> apara añadir transaprencia al color en un gráfico creado con <code>ggplot2</code>. Fuente: <a href="https://ggplot2-book.org/statistical-summaries.html#sec-overplotting" class="uri">https://ggplot2-book.org/statistical-summaries.html#sec-overplotting</a>.
+</figcaption>
+</figure>
+</div>
+<p>Otro buen ejemplo de cómo maximizar el ratio datos-tinta aparece en la <a href="#fig-six-boxplots" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>. En este caso, tanto la versión clásica del gráfico (a) como las dos versiones siguientes (b) y (c) emplean una cantidad de tinta comedida. La versión (d) comienza a presentar problemas, porque es difícil interpretar las “rugosidades” a ambos lados de la caja en el centro de la figura. Por último, las opciones (e) y (f) intentan presentar una excesiva cantidad de información, saturando el gráfico y dificultando en gran medida su correcta interpretación, puesto que muchos detalles son accesorios (lo que realmente importa en un <em>boxplot</em> son los estadísticos resumen de centralidad y dispersión de la distribución de valores representada).</p>
+<div id="fig-six-boxplots" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-six-boxplots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/six-boxplots.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-six-boxplots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.4: Seis diseños para gráfico de tipo <em>boxplot</em>. El tipo (c) corresponde a Tufte. Fuente: <span class="citation" data-cites="healy2019">(<a href="references.html#ref-healy2019" role="doc-biblioref">Healy, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Minimizar la porquería (<em>chartjunk</em>): Debemos utilizar una plantilla o tema de gráfico lo más sencillo y espartano posible, que evite el uso de adornos y aditamentos innecesarios para lo que debería ser la exclusiva interpretación de la información que recoge el gráfico.</p></li>
+<li><p>Priorizar los datos sobre variaciones de diseño: Cualquier elemento de diseño que se introduzca debe estar siempre supeditado a cumplir una función en la representación e interpretación de los datos, sin que la única razón para utilizarlo sea puramente estética.</p></li>
+<li><p>Uso de <strong>facetas</strong> (<em>small multiples</em>) para representar evolución y facilitar las comparativas en varias dimensiones, tal y como hemos presentado en el ejemplo de la <a href="#fig-crime-Milwaukee" class="quarto-xref">Figura&nbsp;<span>2.2</span></a>.</p></li>
+<li><p>Proporcionar siempre <strong>contexto adicional</strong> (leyenda, comentarios, anotaciones junto al gráfico o sobre el gráfico) que faciliten al máximo la <strong>interpretación</strong> de su contenido. Esta ha sido siempre una máxima distintiva de los trabajos de E. R. Tufte, llegando al extremo de inventar un formato muy personal para sus libros que se ha hecho muy popular para trabajos y publicaciones científicas (véase <a href="https://glimmerphoenix.github.io/taller-reprod-R/06-class-notes.html">Cap. 6</a> del Taller sobre investigación reproducible con Quarto y R).</p></li>
+</ul>
+</section>
+<section id="buenas-prácticas-y-recomendaciones" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="buenas-prácticas-y-recomendaciones"><span class="header-section-number">2.3</span> Buenas prácticas y recomendaciones</h2>
+<p>Podemos extraer también otras prácticas y recomendaciones <span class="citation" data-cites="healy2019">(<a href="references.html#ref-healy2019" role="doc-biblioref">Healy, 2019</a>)</span>.</p>
+<ul>
+<li>Por más que estén bien diseñadas siguiendo buenos principios de visualización de datos, no debemos confiar ciegamente en las bibliotecas y herramientas de visualización, así como en las configuraciones por defecto de dichas herramientas. La <a href="#fig-bad-barplot" class="quarto-xref">Figura&nbsp;<span>2.5</span></a> muestra un ejemplo de un gráfico de barras que utiliza un diseño por defecto de <code>ggplot2</code> para representar un gráfico de barras apiladas. Sin embargo, por más que el gráfico no esté saturado de información y la presentación sea simple y directa, la interpretación del mismo no es ni mucho menos evidente. Resulta muy dificultoso poder comparar la evolución entre las diferentes categorías, y más aún cuando las barras están en disposición vertical en lugar de horizontal.</li>
+</ul>
+<div id="fig-bad-barplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bad-barplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/bad-stacked-barplot.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bad-barplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.5: Gráfico de barras apiladas que muestra un ejemplo de configuración por defecto en <code>ggplot2</code> que no ayuda en la interpretación de los datos representados. Fuente: <span class="citation" data-cites="healy2019">(<a href="references.html#ref-healy2019" role="doc-biblioref">Healy, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Debemos tener también precaución con el uso de los ratios de aspecto de nuestros gráficos. El mismo gráfico representando los mismos datos con los mismos elementos pero usando diferentes ratios de aspecto puede sugerir una interpretación muy distinta, tal y como muestra la <a href="#fig-aspect-ratios" class="quarto-xref">Figura&nbsp;<span>2.6</span></a>.</li>
+</ul>
+<div id="fig-aspect-ratios" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-aspect-ratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/aspect-ratios.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-aspect-ratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.6: Comparativa de utilización de dos ratios de aspecto diferentes en el mismo gráfico con los mismos datos. Fuente: <span class="citation" data-cites="healy2019">(<a href="references.html#ref-healy2019" role="doc-biblioref">Healy, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Las leyes de la Teoría de la Gestalt (<em>gestalt rules</em>) relacionan los estímulos visuales con lo que estos generan en la mente que los mira. La <a href="#fig-gestalt-inferences" class="quarto-xref">Figura&nbsp;<span>2.7</span></a> muestra algunas de estas reglas en acción.</li>
+</ul>
+<div id="fig-gestalt-inferences" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gestalt-inferences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gestalt-inferences-horizontal.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gestalt-inferences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.7: Aplicación de algunas reglas de la Gestalt para evidenciar relaciones entre los elementos representados. Fuente: <span class="citation" data-cites="healy2019">(<a href="references.html#ref-healy2019" role="doc-biblioref">Healy, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>En particular, podemos usar algunas de estas reglas para evidenciar agrupamientos, clasificaciones o entidades que pueden se tratadas como la misma cosa o como parte de la misma cosa.</p>
+<ul>
+<li><p><em>Proximidad</em>: los elementos que están espacialmente cerca unos de otros tienden a ser relacionados.</p></li>
+<li><p><em>Similaridad</em>: los elementos de aspecto parecido tienden a estar relacionados.</p></li>
+<li><p><em>Conexión</em>: los elementos que están visualmente ligados unos a otros parecen estar relacionados.</p></li>
+<li><p><em>Continuidad</em>: los objetos parcialmente ocultos tienden a completarse con formas conocidas.</p></li>
+<li><p><em>Cierre</em> (closure): formas incompletas se perciben como completas.</p></li>
+<li><p><em>Figura y fondo</em>: los elementos visuales se consideran en primer plano o en segundo plano.</p></li>
+<li><p><em>Destino común</em>: los elementos que comparten una dirección de movimiento se perciben como una unidad.</p></li>
+<li><p>Atención aL correcto uso de las escalas. Muchos creadores de gráficos de visualización de datos están advertidos de la regla de evitar comparar gráficos que utilicen diferentes escalas de representación. No obstante, otra advertencia se refiere a un aspecto más sutil pero de gran impacto: un uso inadecuado de la escala de representación. La <a href="#fig-misleading-scale" class="quarto-xref">Figura&nbsp;<span>2.8</span></a> muestra dos gráficas con los mismos elementos y el mismo ratio de aspecto, pero que usan escalas verticales diferentes para representar la misma evolución temporal de los datos. A pesar de que las conclusiones deberían ser idénticas, en la gráfica de la izquierda nos da la sensación de que la caída vertical es mucho mayor y más pronunciada que en el gráfico de la derecha.</p></li>
+</ul>
+<div id="fig-misleading-scale" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-misleading-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/misleading-scale.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-misleading-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.8: Ejemplo de usuo incorrecto de la escala de representación en un gráfico de evolución temporal. Fuente: <span class="citation" data-cites="healy2019">(<a href="references.html#ref-healy2019" role="doc-biblioref">Healy, 2019</a>)</span>.
+</figcaption>
+</figure>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-healy2019" class="csl-entry" role="listitem">
+Healy, K. (2019). <em>Data Visualization. A Practical Introduction</em>. Princeton University Press. <a href="https://socviz.co/">https://socviz.co/</a>
+</div>
+<div id="ref-munzner2016" class="csl-entry" role="listitem">
+Munzner, T. (2015). <em>Visualization Analysis and Design</em>. A <span>K</span> Peters. <a href="http://www.cs.ubc.ca/\%7Etmm/vadbook/">http://www.cs.ubc.ca/\%7Etmm/vadbook/</a>
+</div>
+<div id="ref-shneiderman96" class="csl-entry" role="listitem">
+Shneiderman, B. (1996). The Eyes Have It: <span>A</span> Task by Data Type Taxonomy for Information Visualizations. <em>Proceedings of the 1996 <span>IEEE</span> Symposium on Visual Languages, Boulder, Colorado, USA, September 3-6, 1996</em>, 336-343. <a href="https://doi.org/10.1109/VL.1996.545307">https://doi.org/10.1109/VL.1996.545307</a>
+</div>
+<div id="ref-tufte2001" class="csl-entry" role="listitem">
+Tufte, E. R. (2001). <em>The Visual Display of Quantitative Information</em>. Graphics Press LLC.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
