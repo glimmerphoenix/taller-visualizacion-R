@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="418.952"
+   height="139.23067"
+   viewBox="0 0 418.952 139.23067"
+   sodipodi:docname="data-dataset-types.pdf"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath44">
+      <path
+         d="M 0,0 H 314.214 V 104.423 H 0 Z"
+         id="path42" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="data-dataset-types"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,139.23067)">
+    <path
+       d="m 310.766,4.164 h -54 v 75 h 54 z"
+       style="fill:#f4f4f4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path10" />
+    <path
+       d="m 251.746,4.164 h -54 v 75 h 54 z"
+       style="fill:#f4f4f4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path12" />
+    <path
+       d="m 192.726,4.164 h -54 v 75 h 54 z"
+       style="fill:#f4f4f4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path14" />
+    <path
+       d="M 134.603,4.164 H 78.838 v 75 h 55.765 z"
+       style="fill:#f4f4f4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path16" />
+    <path
+       d="m 73.85,4.164 h -54 v 75 h 54 z"
+       style="fill:#f4f4f4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path18" />
+    <path
+       d="m 189.717,22.311 h -48.053 v 26.333 h 48.053 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path20" />
+    <path
+       d="m 185.411,24.246 h -40.792 v 10.841 h 40.792 z"
+       style="fill:#d3d2d2;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path22" />
+    <path
+       d="M 131.712,9.527 H 81.507 v 11.246 h 50.205 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path24" />
+    <path
+       d="M 131.712,23.462 H 81.507 v 11.246 h 50.205 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path26" />
+    <path
+       d="M 131.712,37.398 H 81.045 v 11.245 h 50.667 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path28" />
+    <path
+       d="M 71.143,23.462 H 23.09 v 11.246 h 48.053 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path30" />
+    <path
+       d="M 70.752,37.398 H 22.699 v 11.245 h 48.053 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path32" />
+    <text
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,20.9795,86.3887)"
+       style="font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10px;font-family:'Myriad Pro Light';-inkscape-font-specification:MyriadPro-Semibold;writing-mode:lr-tb;fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text36"><tspan
+         x="0 6.8299999 11.85 15.36 20.440001 22.51 27.59 33.310001 39.119999 41.189999 48.02 53.049999 56.560001 61.639999 65.809998 70.970001 74.480003 76.160004 80.959999 85.959999 91.809998 96.970001"
+         y="0"
+         sodipodi:role="line"
+         id="tspan34">Data and Dataset Types</tspan></text>
+    <g
+       id="g38">
+      <g
+         id="g40"
+         clip-path="url(#clipPath44)">
+        <g
+           id="g46"
+           transform="translate(11.9683,87.2339)">
+          <path
+             d="M 0,0 H -1.847 L 0.098,1.977 H -4.117 V 3.343 H 0.098 L -1.847,5.328 H 0 L 2.537,2.672 V 2.648 Z M 4.57,2.672 C 4.57,3.167 4.505,3.647 4.376,4.109 4.247,4.571 4.062,5.005 3.825,5.41 3.586,5.813 3.301,6.183 2.97,6.512 2.638,6.84 2.271,7.123 1.869,7.36 1.466,7.597 1.034,7.782 0.573,7.91 0.11,8.04 -0.37,8.104 -0.867,8.104 -1.363,8.104 -1.844,8.04 -2.305,7.91 -2.766,7.782 -3.2,7.597 -3.604,7.36 -4.011,7.123 -4.379,6.84 -4.711,6.506 -5.043,6.175 -5.328,5.81 -5.566,5.404 -5.804,5.003 -5.989,4.571 -6.121,4.109 -6.253,3.647 -6.32,3.167 -6.32,2.672 c 0,-0.495 0.067,-0.974 0.199,-1.438 0.132,-0.46 0.317,-0.894 0.555,-1.297 0.238,-0.407 0.524,-0.776 0.859,-1.106 0.335,-0.334 0.705,-0.617 1.11,-0.856 0.405,-0.235 0.838,-0.422 1.301,-0.554 0.462,-0.13 0.938,-0.197 1.429,-0.197 0.745,0 1.448,0.142 2.106,0.432 0.66,0.289 1.236,0.68 1.731,1.175 0.493,0.493 0.885,1.072 1.169,1.732 C 4.427,1.224 4.57,1.927 4.57,2.672 M 5.122,2.683 C 5.122,2.135 5.047,1.607 4.903,1.098 4.756,0.588 4.553,0.109 4.291,-0.336 4.028,-0.778 3.714,-1.186 3.352,-1.555 2.985,-1.92 2.58,-2.235 2.135,-2.497 1.689,-2.758 1.213,-2.963 0.705,-3.108 c -0.507,-0.147 -1.034,-0.22 -1.58,-0.22 -0.546,0 -1.071,0.073 -1.58,0.22 -0.507,0.145 -0.984,0.35 -1.43,0.615 -0.446,0.264 -0.853,0.581 -1.219,0.946 -0.367,0.37 -0.682,0.775 -0.943,1.22 -0.263,0.445 -0.467,0.921 -0.613,1.429 -0.146,0.505 -0.218,1.033 -0.218,1.581 0,0.548 0.072,1.078 0.218,1.584 0.146,0.509 0.35,0.984 0.613,1.429 0.261,0.445 0.576,0.852 0.943,1.215 0.366,0.365 0.773,0.678 1.219,0.94 0.446,0.26 0.923,0.462 1.43,0.607 0.509,0.143 1.034,0.214 1.58,0.214 0.546,0 1.073,-0.073 1.58,-0.219 C 1.213,8.309 1.689,8.104 2.135,7.843 2.58,7.58 2.985,7.266 3.352,6.9 3.714,6.531 4.028,6.128 4.291,5.684 4.553,5.24 4.756,4.769 4.903,4.261 5.047,3.753 5.122,3.226 5.122,2.683"
+             style="fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path48" />
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,23.6289,67.9688)"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Myriad Pro';-inkscape-font-specification:MyriadPro-Regular;writing-mode:lr-tb;fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text58"><tspan
+         x="0 4.3299999 9.1499996 14.84 17.200001 22.209999 59.139999 65.720001 70.730003 74.129997 81.389999 86.879997 90.190002 94.879997 98.839996 100.96 107.01"
+         y="0"
+         sodipodi:role="line"
+         id="tspan50">TablesNetworks &amp; </tspan><tspan
+         x="59.139999 63.669998 66.839996 71.849998 76.860001"
+         y="12"
+         sodipodi:role="line"
+         id="tspan52">Trees</tspan><tspan
+         x="117.91 122.53 124.87 129.88 132.24001 137.88 177.31 183.82001 188.83 194.32001 202.66 207.67 210.98 214.5 237.31 243.11 245.47 250.98 254.94 258.20001 263.20999 266.48001 270.32999 272.39999"
+         y="0"
+         sodipodi:role="line"
+         id="tspan54">FieldsGeometryClusters, </tspan><tspan
+         x="237.31 242.24001 247.25 250.56 254.42 256.48999 258.60999 263.32999 265.67001 269.63 272.94"
+         y="12"
+         sodipodi:role="line"
+         id="tspan56">Sets, Lists</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,26.7075,40.2451)"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:'Myriad Pro';-inkscape-font-specification:MyriadPro-Regular;writing-mode:lr-tb;fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text74"><tspan
+         x="0 2.04 4.6399999 8.6479998 15.32"
+         y="0"
+         sodipodi:role="line"
+         id="tspan60">Items</tspan><tspan
+         x="-0.736 4.0879998 6.7360001 9.3839998 12.024 13.896 18.448 22.856001 25.455999 29.464001"
+         y="14.56"
+         sodipodi:role="line"
+         id="tspan62">Attributes</tspan><tspan
+         x="57.296001 59.327999 61.936001 65.944 72.615997 75.783997 77.480003 79.751999 84.192001 88.584 93.096001 97.103996 100.272"
+         y="0"
+         sodipodi:role="line"
+         id="tspan64">Items (nodes)</tspan><tspan
+         x="57.296001 61.071999 62.944 67.384003 71.136002"
+         y="14.56"
+         sodipodi:role="line"
+         id="tspan66">Links</tspan><tspan
+         x="57.296001 62.112 64.760002 67.407997 70.056 71.928001 76.480003 80.888 83.487999 87.496002"
+         y="27.768"
+         sodipodi:role="line"
+         id="tspan68">Attributes</tspan><tspan
+         x="117.456 122.624 125.264 127.136 131.64799"
+         y="3.5527137e-15"
+         sodipodi:role="line"
+         id="tspan70">Grids</tspan><tspan
+         x="120.288 124.352 128.744 131.912 133.784 136.43201 138.304 142.696 147.136"
+         y="13.56"
+         sodipodi:role="line"
+         id="tspan72">Positions</tspan></text>
+    <path
+       d="m 189.717,9.527 h -48.053 v 11.246 h 48.053 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path76" />
+    <text
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,144.1611,12.4814)"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:'Myriad Pro';-inkscape-font-specification:MyriadPro-Regular;writing-mode:lr-tb;fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text80"><tspan
+         x="0 4.816 7.4640002 10.112 12.752 14.624 19.176001 23.584 26.184 30.191999"
+         y="0"
+         sodipodi:role="line"
+         id="tspan78">Attributes</tspan></text>
+    <path
+       d="m 248.836,37.398 h -48.053 v 11.245 h 48.053 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path82" />
+    <text
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,203.1924,40.248)"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:'Myriad Pro';-inkscape-font-specification:MyriadPro-Regular;writing-mode:lr-tb;fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text86"><tspan
+         x="0 2.04 4.6399999 8.6479998 15.32"
+         y="0"
+         sodipodi:role="line"
+         id="tspan84">Items</tspan></text>
+    <path
+       d="m 248.836,23.462 h -48.053 v 10.841 h 48.053 z"
+       style="fill:#d3d2d2;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path88" />
+    <text
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,203.1924,25.6885)"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:'Myriad Pro';-inkscape-font-specification:MyriadPro-Regular;writing-mode:lr-tb;fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text92"><tspan
+         x="0 4.0640001 8.4560003 11.624 13.496 16.143999 18.016001 22.408001 26.848"
+         y="0"
+         sodipodi:role="line"
+         id="tspan90">Positions</tspan></text>
+    <path
+       d="m 307.922,37.398 h -48.053 v 11.245 h 48.053 z"
+       style="fill:#e9e9e9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path94" />
+    <text
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,262.1709,40.248)"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:'Myriad Pro';-inkscape-font-specification:MyriadPro-Regular;writing-mode:lr-tb;fill:#393536;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text98"><tspan
+         x="0 2.0320001 4.632 8.6400003 15.312"
+         y="0"
+         sodipodi:role="line"
+         id="tspan96">Items</tspan></text>
+  </g>
+</svg>
