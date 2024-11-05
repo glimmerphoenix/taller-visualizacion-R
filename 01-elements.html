@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -41,6 +95,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -238,11 +294,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#canales" id="toc-canales" class="nav-link active" data-scroll-target="#canales"><span class="header-section-number">1.1</span> Canales</a></li>
-  <li><a href="#selección-de-gráficos" id="toc-selección-de-gráficos" class="nav-link" data-scroll-target="#selección-de-gráficos"><span class="header-section-number">1.2</span> Selección de gráficos</a></li>
-  <li><a href="#paletas-de-colores" id="toc-paletas-de-colores" class="nav-link" data-scroll-target="#paletas-de-colores"><span class="header-section-number">1.3</span> Paletas de colores</a></li>
-  <li><a href="#gráficos-dinámicos" id="toc-gráficos-dinámicos" class="nav-link" data-scroll-target="#gráficos-dinámicos"><span class="header-section-number">1.4</span> Gráficos dinámicos</a></li>
-  <li><a href="#interactividad" id="toc-interactividad" class="nav-link" data-scroll-target="#interactividad"><span class="header-section-number">1.5</span> Interactividad</a></li>
+  <li><a href="#importancia-de-la-visualización-de-datos" id="toc-importancia-de-la-visualización-de-datos" class="nav-link active" data-scroll-target="#importancia-de-la-visualización-de-datos"><span class="header-section-number">1.1</span> Importancia de la visualización de datos</a></li>
+  <li><a href="#estrategia-de-diseño-y-selección-de-gráficos" id="toc-estrategia-de-diseño-y-selección-de-gráficos" class="nav-link" data-scroll-target="#estrategia-de-diseño-y-selección-de-gráficos"><span class="header-section-number">1.2</span> Estrategia de diseño y selección de gráficos</a></li>
+  <li><a href="#tipos-de-datos-y-datasets" id="toc-tipos-de-datos-y-datasets" class="nav-link" data-scroll-target="#tipos-de-datos-y-datasets"><span class="header-section-number">1.3</span> Tipos de datos y <em>datasets</em></a>
+  <ul class="collapse">
+  <li><a href="#gráficos-dinámicos-e-interactivos" id="toc-gráficos-dinámicos-e-interactivos" class="nav-link" data-scroll-target="#gráficos-dinámicos-e-interactivos"><span class="header-section-number">1.3.1</span> Gráficos dinámicos e interactivos</a></li>
+  </ul></li>
+  <li><a href="#tipos-de-atributos" id="toc-tipos-de-atributos" class="nav-link" data-scroll-target="#tipos-de-atributos"><span class="header-section-number">1.4</span> Tipos de atributos</a></li>
+  <li><a href="#marcas-y-canales" id="toc-marcas-y-canales" class="nav-link" data-scroll-target="#marcas-y-canales"><span class="header-section-number">1.5</span> Marcas y canales</a></li>
+  <li><a href="#paletas-de-colores" id="toc-paletas-de-colores" class="nav-link" data-scroll-target="#paletas-de-colores"><span class="header-section-number">1.6</span> Paletas de colores</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/01-elements.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/01-elements.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
@@ -268,32 +328,223 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="canales" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="canales"><span class="header-section-number">1.1</span> Canales</h2>
+<p>En este primer tema se introducen muchos de los conceptos básicos y elementos constructivos que debemos emplear cuando diseñamos e implementamos una visualización de datos. La referencia básica que vamos a seguir en esta exposición es <span class="citation" data-cites="munzner2016">Munzner (<a href="references.html#ref-munzner2016" role="doc-biblioref">2015</a>)</span>.</p>
+<section id="importancia-de-la-visualización-de-datos" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="importancia-de-la-visualización-de-datos"><span class="header-section-number">1.1</span> Importancia de la visualización de datos</h2>
+<p>Nunca se podrá insistir lo suficiente en la extrema importancia que la visualización de datos tiene dentro del proceso de preparación y análisis de datos. Un ejemplo sencillo pero muy convincente es el llamado <em>Cuarteto de Anscombe</em>, introducido por dicho autor hace ya más de 50 años <span class="citation" data-cites="anscombe1973">(<a href="references.html#ref-anscombe1973" role="doc-biblioref">Anscombe, 1973</a>)</span>. Se trata de 4 <em>datasets</em> que tienen identicas propiedas estadística de resumen básico de datos: media, varianza, correlación y recta de regresión simple ajustada por el método de mínimos cuadrados. Sin embargo, una inspección gráfica revela rápidamente estructuras claramente diferentes en cada conjunto de datos, tal y como podemos ver en la <a href="#fig-anscombe-quartet" class="quarto-xref">Figura&nbsp;<span>1.1</span></a>.</p>
+<div id="fig-anscombe-quartet" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anscombe-quartet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/anscombe-quartet.svg" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anscombe-quartet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.1: Valores, estadísticos resumen y representación gŕafica de los cuatro <em>datasets</em> del llamado <em>Cuarteto de Anscombe</em>. La representación gráfica muestra las rectas de regresión simple que se ajustan a cada <em>dataset</em>, todas ellas idénticas entre sí. Fuente: <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>En consecuencia, queda demostrado que es <strong>imprescindible representar gráficamente</strong> nuestros datos si queremos evitar sorpresas durante el proceso de preparación y análisis.</p>
+</section>
+<section id="estrategia-de-diseño-y-selección-de-gráficos" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="estrategia-de-diseño-y-selección-de-gráficos"><span class="header-section-number">1.2</span> Estrategia de diseño y selección de gráficos</h2>
+<p>A poco que repasemos algunos sitios web, libros de referencia, artículos y tutoriales sobre visualización de datos, rápidamente nos daremos cuenta de la ingente cantidad de material y el vasto catálogo de opciones, elementos de diseño y oportunidades de personalización que se abren ante nosotros. En esta situación, resulta complicado decidir qué diseño o qué combinación de elementos son los más adecuados para nuestro caso particular. Para guiarnos en esta tarea, <span class="citation" data-cites="munzner2016">Munzner (<a href="references.html#ref-munzner2016" role="doc-biblioref">2015</a>)</span> propone un método sencillo que se basa en tres preguntas clave:</p>
 <ul>
-<li>T. Munzner</li>
+<li><p><strong><em>What?</em></strong>: Identificar qué datos queremos representar, cuál es su naturaleza o modalidad (cuantitativos, cualitativos, ordenados/ranking, grafo, serie temporal, datos espaciales, etc.). Dependiendo de la modalidad de los datos, su tamaño y otras propiedades relevantes podremos considerar o descartar unos elementos o diseños de visualización u otros.</p></li>
+<li><p><strong><em>Why?</em></strong>: Reflexionar sobre el propósito de nuestro gráfico, qué queremos mostrar o resaltar y cómo queremos dirigir la atención del espectador hacia los aspectos más importantes del mismo.</p></li>
+<li><p><strong><em>How?</em></strong>: Una vez que hemos filtrado los posibles elementos y diseños compatibles con nuestros datos, pensamos en cuáles de ellos ofrecen la combinación más adecuada para conseguir el propósito inicial que hemos establecido.</p></li>
 </ul>
+<p>Si seguimos este método de toma de decisiones conseguiremos que nuestros gráficos sean más informativos, más sencillos de interpretar y capten mejor la atención de la audiencia.</p>
 </section>
-<section id="selección-de-gráficos" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="selección-de-gráficos"><span class="header-section-number">1.2</span> Selección de gráficos</h2>
+<section id="tipos-de-datos-y-datasets" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="tipos-de-datos-y-datasets"><span class="header-section-number">1.3</span> Tipos de datos y <em>datasets</em></h2>
+<p>Los datos que son objetos de análisis están caracterizados por un cierto tipo (a veces también nos referimos a su modalidad) y una semántica. El <strong>tipo</strong> nos indica su estructura o su interpretación matemática, mientras que la <strong>semántica</strong> de los datos es su significado en el mundo real.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipos de datos y formato de representación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El tipo de los datos está directamente relacionado con el <em>formato</em> de representación que utilizamos para almacenar su valor. Por ejemplo, datos de tipo numérico se pueden almacenar como números enteros, en coma flotante, números de doble precisión, etc. Los datos categóricos tienen valores que corresponden a etiquetas o identificadores de cada categoría o grupo.</p>
+<p>Debemos tener cuidado con interpretaciones equívocas del tipo y formato de los datos al representarlos gráficamente. Por ejemplo, si una variable representa el código postal, sus valores serán números pero su tipo de datos debería ser <em>categórico</em> (factor, en R), no una cantidad (no es una variable cuantitativa).</p>
+</div>
+</div>
+<p>La <a href="#fig-data-types" class="quarto-xref">Figura&nbsp;<span>1.2</span></a> muestra cinco tipos de datos básicos:</p>
+<div id="fig-data-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/data-types.svg" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.2: Los cinco tipos básicos de datos que consideramos en este taller. Fuente: <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015</a>.)</span>
+</figcaption>
+</figure>
+</div>
 <ul>
-<li>Según el tipo de variables.</li>
+<li><p>Un <em>ítem</em> es una entidad individual discreta, una unidad de nuestro análisis, como por ejemplo una fila en una tabla (con <em>tidy data</em>) o un nodo de un grafo.</p></li>
+<li><p>Un <em>atributo</em> es una propiedad o característica específica que se puede medir, observar o registrar. También se usan los nombres <em>variable</em>, <em>dimensión</em>, <em>feature</em> o <em>campo</em>.</p></li>
+<li><p>Un <em>enlace</em> (<em>link</em> en inglés) es una relación o conexión explícita entre dos ítems, típicamente cuando estamos representando un grafo.</p></li>
+<li><p>Una <em>malla</em> (<em>grid</em>) representa una estrategia para muestrear datos teniendo en cuenta las relaciones geométricas y topológicas entre las celdas.</p></li>
+<li><p>Finalmente, la <em>posición</em> o <em>ubicación</em> en datos espaciales nos proporciona coordenadas en un espacio de representación 2D o 3D en el espacio como, por ejemplo, un par <code>(latitud, longitud)</code>.</p></li>
 </ul>
-</section>
-<section id="paletas-de-colores" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="paletas-de-colores"><span class="header-section-number">1.3</span> Paletas de colores</h2>
-</section>
-<section id="gráficos-dinámicos" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="gráficos-dinámicos"><span class="header-section-number">1.4</span> Gráficos dinámicos</h2>
-</section>
-<section id="interactividad" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="interactividad"><span class="header-section-number">1.5</span> Interactividad</h2>
+<p>Debemos remarcar que, en ocasiones, algunos atributos tienen significados especiales, como es el caso ya mencionado de la ubicación. Por ejemplo, en datos que representan series temporales uno de los atributos de nuestros ítems será una marca de tiempo (fecha, hora o ambas) que caracteriza a dicho ìtem. A la hora de representar estos datos tenemos que tener en cuenta la <strong>dependencia estricta</strong> que tienen respecto a ese atributo. De lo contrario, estaríamos rompiendo la estructura de los datos y degradando su calidad.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Correlación y datos con dependencias
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si un <em>dataset</em> contiene valores tomados en diferentes instantes de tiempo, es necesario tener en cuenta ese atributo al representarlos gráficamente y analizarlos. Los valores de datos tomados en instantes de tiempo cercanos entre sí tienden a ser más parecidos entre ellos (alta correlación) que los datos tomados en instantes de tiempo más alejados (baja correlación).</p>
+<p>En general, podemos hablar del concepto de <strong>datos con dependencias</strong> estrictas para reflejar el hecho de que uno o más atributos (marca de tiempo, ubicación o ambos simultáneamente) determinan fuertemente la estructura interna de ese <em>dataset</em> y la organizació de sus valores.</p>
+</div>
+</div>
+<p>La forma en la que organizamos los datos para su almacenamiento y procesamiento determina el <em>tipo de dataset</em> con el que vamos a trabajar. La <a href="#fig-dataset-types" class="quarto-xref">Figura&nbsp;<span>1.3</span></a> representa los cuatro tipos básicos de <em>datasets</em>, junto con algunos tipos adicionales.</p>
+<div id="fig-dataset-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataset-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/dataset-types.svg" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataset-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.3: Los cuatro tipos básicos de <em>datasets</em> (tablas, grafos y árboles, cuerpos (o campos) y geometrías) junto con otros tipos adicionales (<em>clusters</em>, conjuntos y listas). Fuente: <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015</a>.)</span>
+</figcaption>
+</figure>
+</div>
 <ul>
-<li><p>Interfaces interactivas</p></li>
-<li><p>Componentes reactivos</p></li>
+<li><p><em>Tablas</em>: Los datos se pueden representar como filas y columnas de una tabla, donde cada fila representa un ítem y cada columna representa un atributo o <em>feature</em> (concepto <em>tidy data</em> <span class="citation" data-cites="WickhamJSS2014">(<a href="references.html#ref-WickhamJSS2014" role="doc-biblioref">Wickham, 2014</a>)</span>). Estas tablas se suelen representar en memoria mediante un objeto <em>Data Frame</em>.</p></li>
+<li><p>Una <em>red</em> o <em>grafo</em> es un <em>dataset</em> orientado a consignar y representar las relaciones entre dos o más ítems. En este caso el <em>enlace</em> representa una relación entre dos ítems. A veces, los enlaces pueden tener también atributos que los describan (por ejemplo, un grado de importancia, tipo de relación, etc.). Los árboles son grafos jerárquicos que no tienen ciclos y representan relaciones multinivel entre los ítems.</p></li>
+<li><p>Un <em>cuerpo</em> (en inglés <em>field</em>, a veces traducido como <em>campo</em>) en un dataset que contiene valores de atributos asociados con celdas o regiones. Cada <em>celda</em> contiene valores medidos o calculados a partir de un dominio <em>continuo</em>. Un ejemplo sería la división de una imagen satelital mediante una malla de celdas hexagonales, para después medir y asignar un valor promedio del Índice de Vegetación de Diferencia Normalizada (NDVI) o del Índice de Humedad de diferencia normalizada (NDWI) en esa celda. La <em>malla</em> que empleamos para subdividir el dominio continuo en celdas discretas puede ser también rectilínea o seguir otro tipo de geometría. También puede ser uniforme (división a intervalos regulares) o no uniforme.</p></li>
+<li><p>Una <em>geometría</em> es un dataset específico que contiene información para respresentar formas de ítems en ubicaciones espaciales específicas. Es un tipo de dataset intrínsecamente relacionado con las representaciones de datos espaciales, como por ejemplo los polígonos que delimitan las fronteras de municipios, provincias o países en un mapa político.</p></li>
+</ul>
+<p>Otros tipos específicos de datasets incluyen los <em>conjuntos</em> (<em>sets</em>), que son grupos no ordenados de ítems (usualmente sin posibilidad de que se repitan); las <em>listas</em> (conjuntos <em>ordenados</em> de ítems); y los <em>clusters</em>, que agrupan los elementos de acuerdo con el grado de similaridad entre ellos.</p>
+<section id="gráficos-dinámicos-e-interactivos" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="gráficos-dinámicos-e-interactivos"><span class="header-section-number">1.3.1</span> Gráficos dinámicos e interactivos</h3>
+<p>En este taller, la mayoría de gráficos que vamos a construir son <strong>estáticos</strong>, es decir, la representación visual de los datos permanece fija e inalterada. Sin embargo, en ciertas situaciones puede ser beneficioso construir representaciones <strong>dinámicas</strong> de nuestros datos, como representa la <a href="#fig-dataset-availability" class="quarto-xref">Figura&nbsp;<span>1.4</span></a>. Un ejemplo suelen ser los gráficos de evolución en los que representamos más de un atributo simultáneamente, como los que podemos representar con el <a href="https://anderfernandez.com/blog/como-crear-animaciones-en-r-con-gganimate/">paquete <code>gganimate</code></a> en R.</p>
+<div id="fig-dataset-availability" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataset-availability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/dataset-availability.svg" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataset-availability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.4: Dos tipos de disponibilidad de resultados gráficos. Los gráficos dinámicos, a su vez, pueden admitir cierto grado de interactividad o no. Fuente: <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>A su vez, los gráficos dinámicos pueden ser también <strong>interactivos</strong>, es decir, además de añadir dinamismo pueden permitir al espectador interactuar con el gráfico para explorar aspectos concretos de los datos. Un ejemplo muy claro de este tipo de gráficos interactivos son los paneles de seguimiento o <em>dashboards</em> que podemos construir con la herramienta <a href="https://shinylive.io/py/examples/#selecting-data">Shiny</a>, tal y como se muestra en la <a href="#fig-shiny-interactive" class="quarto-xref">Figura&nbsp;<span>1.5</span></a>.</p>
+<div id="fig-shiny-interactive" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shiny-interactive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/shiny-interactive.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shiny-interactive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.5: Ejemplo de gráfico interactivo para selección de datos en un diagrama de dispersión
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="tipos-de-atributos" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="tipos-de-atributos"><span class="header-section-number">1.4</span> Tipos de atributos</h2>
+<p>La <a href="#fig-attribute-types" class="quarto-xref">Figura&nbsp;<span>1.6</span></a> muestra diferentes tipos de atributos que caracterizan los ìtems de un dataset.</p>
+<ul>
+<li><p>Un atributo <em>categórico</em> consta de un conjunto de etiquetas de identificación, que no tienen ningún tipo de ordenación interna. Un ejemplo serían nombres de países o regiones, colores, etc.</p></li>
+<li><p>Un atributo <em>ordenado</em> contiene valores que están ordenados entre sí, es decir, se pueden aplicar operaciones de comparación lógica entre dichos valores. Un ejemplo sería los tamaños de una camiseta (S, M, L, XL, etc.), los resultados de valoración (<i class="fa-solid fa-star" aria-label="star"></i>, <i class="fa-solid fa-star" aria-label="star"></i><i class="fa-solid fa-star" aria-label="star"></i>, <i class="fa-solid fa-star" aria-label="star"></i><i class="fa-solid fa-star" aria-label="star"></i><i class="fa-solid fa-star" aria-label="star"></i>, etc. ). Un caso particular son las variables cuantitativas, en las que los valores se referencian respecto a un mismo origen.</p></li>
+<li><p>Según la <em>dirección</em> de su ordenación, podemos encontrar atributos <em>secuenciales</em>, <em>divergentes</em> o <em>cíclicos</em>.</p></li>
+</ul>
+<div id="fig-attribute-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-attribute-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/attribute-types.svg" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-attribute-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.6: Tipos de atributos que describen los ítems de un <em>dataset</em>. Fuente: <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015</a>)</span>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="marcas-y-canales" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="marcas-y-canales"><span class="header-section-number">1.5</span> Marcas y canales</h2>
+<p>Unos de los principios fundamentales para la construcción de gráficos efectivos para visualización de datos es ser conscientes de la elección de las <strong>marcas</strong> o símbolos que empleamos para representar la información así como los <strong>canales</strong> de percepción de los espectadores que pretendemos emplear. La <a href="#fig-marks-channels" class="quarto-xref">Figura&nbsp;<span>1.7</span></a> muestra un resumen de las principales marcas y canales como elementos constructivos que podemos emplear para diseñar nuestros gráficos <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015</a>)</span>.</p>
+<div id="fig-marks-channels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-marks-channels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/marks-channels.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-marks-channels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.7: Catálogo de algunas marcas y canales que podemos utilizar en nuestras visualizaciones para representar información. Fuente: <span class="citation" data-cites="munzner2016">(<a href="references.html#ref-munzner2016" role="doc-biblioref">Munzner, 2015</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>Debemos prestar atención a la clasificación que muestra la <a href="#fig-marks-channels" class="quarto-xref">Figura&nbsp;<span>1.7</span></a>, puesto que no todas las marcas ni todos los canales tienen la misma <em>efectividad</em> al representar la información para que el espectador la reciba e interprete. Por ejemplo, a pesar de que se usa con mucha frecuencia el canal de luminancia o saturación de la paleta de colores es mucho menos efectivo para codificar la información y que el espectador la inteprete que la longitud o el área 2D. A su vez, la representación de datos en volúmenes 3D debe ser un recurso que no se utilice a la ligera y su empleo debe estar muy bien justificado puesto que, en general, es un canal de información mucho más difícil de intepretar (sobre todo para ciertas tareas, como comparaciones).</p>
+</section>
+<section id="paletas-de-colores" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="paletas-de-colores"><span class="header-section-number">1.6</span> Paletas de colores</h2>
+<p>Existen multitud <a href="https://r-charts.com/color-palettes/">paletas de colores</a> que podemos usar en R para la representación gráfica de nuestros datos. Tanta variedad puede, ciertamente, abrumar al usuario poco experimentado, que no sabe bien qué opción es la mejor para determinada aplicación. Por si eso no fuera suficiente, es posible personalizar cualquier paleta o construir nuestra propia paleta de colores para una visualización.</p>
+<p>Sin embargo, se pueden encontrar <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf">algunas recomendaciones</a> interesantes que nos pueden servir de guía:</p>
+<ul>
+<li><p>El principal consejo es <strong>no escoger a mano colores individuales</strong> que no estén agrupados ya en una paleta. La construcción de las paletas de colores que ofrecen varios paquetes de R e incluso R base ya ha tenido en cuenta, en su diseño, factores sobre teoría de color, interpretación y otros usos específicos.</p></li>
+<li><p>Dedica un poco de tiempo a revisar la documentación de alguno de estos paquetes para buscar paletas que estén diseñadas para tu caso particular. Por ejemplo, si quieres representar información de la orografía de un terreno (curvas de nivel), temperatura de ciertas áreas o valores que describen campos en un mapa geopolítico, es casi seguro que uno de estos paquetes ofrece <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">soluciones adaptadas</a> a cada caso particular.</p></li>
+<li><p>El número máximo de colores que incluye cada paleta oscila entre 7 y 10. En muy raras ocasiones se pueden encontrar paletas de más de 10 colores y por una buena razón. Un <strong>excesivo número de colores</strong> generará <strong>confusión</strong> en nuestro gráfico, ya que nuestro cerebro tendrá más problemas para identificar cada color individual.</p></li>
+<li><p>Recuerda pensar en el <em>propósito</em> del gráfico que quieres construir y elige una paleta que se adecúe a ese objetivo. Hay paletas con gradaciones de saturación o luminancia del mismo color para indicar subidas o bajadas graduales de atributos con valores cuatitativos, mientras que otras paletas combinan colores que se distingan perfectamente los unos de los otros para identificar cada caso (por ejemplo, el gráficos con múltiples líneas que representan la evolución de varias variables). La <a href="#fig-palettes-RColorBrewer" class="quarto-xref">Figura&nbsp;<span>1.8</span></a> muestra un ejemplo de los dos tipos de paletas mencionados para el caso del paquete <code>RColorBrewer</code>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-palettes-RColorBrewer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-palettes-RColorBrewer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-elements_files/figure-html/fig-palettes-RColorBrewer-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-palettes-RColorBrewer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.8: Catálogo de paletas de colores incluidas en el paquete <code>RColorBrewer</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Algunos de los paquetes R más conocidos que ofrecen paletas de colores para representación gráfica de datos son:</p>
+<ul>
+<li><p>El paquete <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a> y su versión reducida <code>viridisLite</code> (enlazado por defecto en el conocido paquete <code>ggplot2</code>) presenta paletas de colores diseñadas para mejorar su legibilidad en espectadores con formas habituales de ceguera a algún color u otros tipos de deficiencias visuales. Los mapas de color que ofrecen tienen una escala de percepción uniforme y todos ellos son directamente convertibles a formato B/N para impresión en escala de grises.</p></li>
+<li><p>El paquete <a href="https://cran.r-project.org/web/packages/colorspace/vignettes/colorspace.html"><code>colorspace</code></a> proporciona paletas específicamente diseñadas dependiendo del tipo de atributo que queremos representar, incluyendo valores categóricos, secuenciales, divergentes, etc. La <a href="#fig-hcl-palettes" class="quarto-xref">Figura&nbsp;<span>1.9</span></a> muestra un ejemplo de paletas diseñadas en base a los valores de tonalidad, crominancia y luminancia para varios tipos de atributos.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hcl_palettes</span>(<span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-hcl-palettes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hcl-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-elements_files/figure-html/fig-hcl-palettes-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hcl-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.9: Paletas incluidas en el paquete <code>colorspace</code> para diferentes tipos de atributos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Otro paquete muy conocido es <code>RColorBrewer</code>, muy popular en cartografía puesto que ofrece una <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">herramienta interactiva de selección de paletas</a> en función de los objetivos de nuestro mapa.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-anscombe1973" class="csl-entry" role="listitem">
+Anscombe, F. J. (1973). Graphs in Statistical Analysis. <em>American Statistician</em>, <em>27</em>(1), 17-21.
+</div>
+<div id="ref-munzner2016" class="csl-entry" role="listitem">
+Munzner, T. (2015). <em>Visualization Analysis and Design</em>. A <span>K</span> Peters. <a href="http://www.cs.ubc.ca/\%7Etmm/vadbook/">http://www.cs.ubc.ca/\%7Etmm/vadbook/</a>
+</div>
+<div id="ref-WickhamJSS2014" class="csl-entry" role="listitem">
+Wickham, H. (2014). <span>Tidy Data</span>. <em>Journal of Statistical Software, Articles</em>, <em>59</em>(10), 1-23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
