@@ -1,9 +1,146 @@
 # Principios de visualización de datos
 
+En este capítulo se recogen algunos principios básicos y recomendaciones para crear buenas
+visualizaciones de datos.
+
+## Reglas básicas
+
+Comencemos por algunas reglas básicas de creación de gráficos [@munzner2016, cap. 6].
+
+- Se debe evitar un uso no justificado de elementos y gráficos en 3D. En este sentido se debería
+puntualizar que nos referimos a una representanción 3D en una superficie o área de visualización
+bidimensional, como puede ser un papel, un póster o una pantalla. Esta recomendación se basa
+en la dificultad que entrañan los artefactos visuales empleados para dar una sensación 3D en
+gráficos representados en un área 2D, que pueden engañar a nuestra percepción y dificultad comparaciones
+y apreciación de elementos relevantes en el gráfico.
+
+Un caso muy diferente y que no tratamos en este taller es la visualización de datos 3D *inmersiva*,
+es decir, utilizando dispositivos como gafas de realidad virtual y otros medios que permitan al
+espectador interpretar la visualización 3D en un espacio de representación también en 3D. Esta es
+un área de investigación muy activa en la actualidad y con resultados muy prometedores.
+
+- También se debe evitar el uso no justificado de una representación gráfica en 2D si, por ejemplo,
+es suficiente con una tabla o una lista de valores para representar los resultados.
+
+- Se deben favorecer elementos y canales que impongan poca carga cognitiva en el espectador para
+interpretar el gráfico. Por ejemplo, si tenemos un gráfico que permite girar la figura en varias
+direcciones, nuestra mente tiene que recordar qué vio en las perspectivas anteriores para interpretar
+el gráfico por completo. Por contra, si presentamos una visualización estática con planta, alzado y perfil
+se pueden extraer conclusiones más fácilmente, al acceder a todas las perspectivas de forma simultánea.
+
+- El uso de animaciones puede ser muy potente, pero igualmente impone una elevada carga cognitiva
+para nuestro cerebro. Considera el caso anterior con el [paquete `gganimate`](https://anderfernandez.com/blog/como-crear-animaciones-en-r-con-gganimate/) y observa como tu cerebro debe recordar la posición de partida
+de algunos países de interés para interpretar correctamente la evolución del gráfico. Un ejemplo sería el
+mostrado en la @fig-crime-Milwaukee-animated. No es de extrañar
+que, en contraste, muchos diseñadores prefieran las parrillas de gráficos (en inglés *lattice* o *facets*) para
+la representación de información en varios paneles de forma simultánea, como muestra la @fig-crime-Milwaukee.
+
+![Gráfico que muestra la evolución temporal de los crímenes relacionados con vehículos cometidos en la ciudad de Milwaukee (EE.UU.), entre 2016 y 2019 mediante una animación. Fuente: [enlace](https://jtr13.github.io/cc19/plotting-maps-with-r-an-example-based-tutorial.html).](img/crime-Milwaukee-animated.gif){#fig-crime-Milwaukee-animated width=50%}
+
+![Gráfico que muestra la evolución temporal de los crímenes relacionados con vehículos cometidos en la ciudad de Milwaukee (EE.UU.), entre 2016 y 2019 utilizando *facets*. Fuente: [enlace](https://jtr13.github.io/cc19/plotting-maps-with-r-an-example-based-tutorial.html).](img/crime-Milwaukee.png){#fig-crime-Milwaukee width=95%}
+
+- Una importante recomendación que popularizó el profesor @shneiderman96 es la de construir los gráficos de forma
+que presenten un resumen global en primer lugar y luego permitan obtener más detalles o incluso (si añadimos
+interactividad) se pueda hacer zoom o filtrar información para fijarnos en aspectos concretos del gráfico.
+
+- Es importante que el gráfico responda con **agilidad** y que no se introduzcan latencias innecesarias en la representación
+de algunos elementos como, por ejemplo, cuando desplazamos el gráfico, seleccionamos un grupo de elementos, hacemos zoom,
+etc. En este sentido, algunas bibliotecas para desarrollo de gráficos interactivos muy potentes son también conocidas
+por introducir notables retardos en la renderización de la visualización. Esto estropea la experiencia de usuario y
+entorpece la interpretación del contenido del gráfico.
+
+- Es fundamental, incluso actualmente (con menores costes de impresión a color y pantallas con gran profundidad de color
+y una resolución envidiable), que nuestros gráficos puedan ser directamente representados en B/N (más exactamente, en una
+paleta de tonos grises) si fuese necesario.
+
+- Los mejores gráficos destacan, además de por su funcionalidad, por su belleza. Sin embargo, este segundo aspecto
+es difícil de conseguir en muchos casos y es más un arte que una ciencia. Por tanto, es importante que primero nos
+concentremos en crear un **gráfico funcional** que, por lo menos, cumpla el objetivo de diseño que nos hemos planteado.
 
 ## Principios de E. Tufte
 
+Otro de los grandes exponentes del diseño de gráficos para visualización de datos es Edward R. Tufte. En una de sus
+obras más conocidas [@tufte2001] expone algunos principios y recomendaciones útiles.
+
+- Maximizar el **ratio datos-tinta** (*data-to-ink ratio*): No debemos sobrecargar el gráfico con muchos datos o elementos. Por ejemplo, un
+gráfico en el que tengamos una gran cantidad de puntos superpuestos hará que no veamos nada o dificultará la
+identificación de patrones de interés. Vemos algunos ejemplos que proporciona H. Wickham es su nueva edición
+del libro sobre `ggplot2` (<https://ggplot2-book.org/>), utilizando el término [overplotting](https://ggplot2-book.org/statistical-summaries.html#sec-overplotting)
+para denotar este problema. La @fig-overplotting muestra cómo utilizar la transparencia (parámetro `alpha`) para
+permitir interpretar mejor el gráfico reduciendo la cantidad de "tinta" empleada.
+
+![Ejemplo de uso del argumento `alpha` apara añadir transaprencia al color en un gráfico creado con `ggplot2`. Fuente: <https://ggplot2-book.org/statistical-summaries.html#sec-overplotting>.](img/overplotting.png){#fig-overplotting height=400}
+
+  Otro buen ejemplo de cómo maximizar el ratio datos-tinta aparece en la @fig-six-boxplots [@healy2019]. En este caso, tanto
+  la versión clásica del gráfico (a) como las dos versiones siguientes (b) y (c) emplean una cantidad de tinta comedida.
+  La versión (d) comienza a presentar problemas, porque es difícil interpretar las "rugosidades" a ambos lados de la
+  caja en el centro de la figura. Por último, las opciones (e) y (f) intentan presentar una excesiva cantidad de información,
+  saturando el gráfico y dificultando en gran medida su correcta interpretación, puesto que muchos detalles son accesorios
+  (lo que realmente importa en un *boxplot* son los estadísticos resumen de centralidad y dispersión de la distribución
+  de valores representada). 
+
+  ![Seis diseños para gráfico de tipo *boxplot*. El tipo (c) corresponde a Tufte. Fuente: [@healy2019].](img/six-boxplots.png){#fig-six-boxplots width=75%}
+
+- Minimizar la porquería (*chartjunk*): Debemos utilizar una plantilla o tema de gráfico lo más sencillo y espartano
+posible, que evite el uso de adornos y aditamentos innecesarios para lo que debería ser la exclusiva interpretación de
+la información que recoge el gráfico.
+
+- Priorizar los datos sobre variaciones de diseño: Cualquier elemento de diseño que se introduzca debe estar siempre
+supeditado a cumplir una función en la representación e interpretación de los datos, sin que la única razón para
+utilizarlo sea puramente estética.
+
+- Uso de **facetas** (*small multiples*) para representar evolución y facilitar las comparativas en varias dimensiones, tal
+y como hemos presentado en el ejemplo de la @fig-crime-Milwaukee.
+
+- Proporcionar siempre **contexto adicional** (leyenda, comentarios, anotaciones junto al gráfico o sobre el gráfico) que
+faciliten al máximo la **interpretación** de su contenido. Esta ha sido siempre una máxima distintiva de los trabajos de 
+E. R. Tufte, llegando al extremo de inventar un formato muy personal para sus libros que se ha hecho muy popular para
+trabajos y publicaciones científicas (véase [Cap. 6](https://glimmerphoenix.github.io/taller-reprod-R/06-class-notes.html) del
+Taller sobre investigación reproducible con Quarto y R).
+
 ## Buenas prácticas y recomendaciones
 
-- K. Healy
-- C. Wilke
+Podemos extraer también otras prácticas y recomendaciones [@healy2019].
+
+- Por más que estén bien diseñadas siguiendo buenos principios de visualización de datos, no debemos confiar
+ciegamente en las bibliotecas y herramientas de visualización, así como en las configuraciones por defecto
+de dichas herramientas. La @fig-bad-barplot muestra un ejemplo de un gráfico de barras que utiliza un diseño
+por defecto de `ggplot2` para representar un gráfico de barras apiladas. Sin embargo, por más que el gráfico
+no esté saturado de información y la presentación sea simple y directa, la interpretación del mismo no es
+ni mucho menos evidente. Resulta muy dificultoso poder comparar la evolución entre las diferentes categorías,
+y más aún cuando las barras están en disposición vertical en lugar de horizontal.
+
+![Gráfico de barras apiladas que muestra un ejemplo de configuración por defecto en `ggplot2` que no ayuda en la interpretación de los datos representados. Fuente: [@healy2019].](img/bad-stacked-barplot.png){#fig-bad-barplot width=95%}
+
+- Debemos tener también precaución con el uso de los ratios de aspecto de nuestros gráficos. El mismo
+gráfico representando los mismos datos con los mismos elementos pero usando diferentes ratios de aspecto
+puede sugerir una interpretación muy distinta, tal y como muestra la @fig-aspect-ratios.
+
+![Comparativa de utilización de dos ratios de aspecto diferentes en el mismo gráfico con los mismos datos. Fuente: [@healy2019].](img/aspect-ratios.png){#fig-aspect-ratios width=95%}
+
+- Las leyes de la Teoría de la Gestalt (*gestalt rules*) relacionan los estímulos visuales con lo que estos
+generan en la mente que los mira. La @fig-gestalt-inferences muestra algunas de estas reglas en acción.
+
+![Aplicación de algunas reglas de la Gestalt para evidenciar relaciones entre los elementos representados. Fuente: [@healy2019].](img/gestalt-inferences-horizontal.png){#fig-gestalt-inferences width=95%}
+
+  En particular, podemos usar algunas de estas reglas para evidenciar agrupamientos, clasificaciones o entidades
+  que pueden se tratadas como la misma cosa o como parte de la misma cosa.
+
+  - *Proximidad*: los elementos que están espacialmente cerca unos de otros tienden a ser relacionados.
+  - *Similaridad*: los elementos de aspecto parecido tienden a estar relacionados.
+  - *Conexión*: los elementos que están visualmente ligados unos a otros parecen estar relacionados.
+  - *Continuidad*: los objetos parcialmente ocultos tienden a completarse con formas conocidas.
+  - *Cierre* (closure): formas incompletas se perciben como completas.
+  - *Figura y fondo*: los elementos visuales se consideran en primer plano o en segundo plano.
+  - *Destino común*: los elementos que comparten una dirección de movimiento se perciben como una unidad.
+
+- Atención aL correcto uso de las escalas. Muchos creadores de gráficos de visualización de datos
+están advertidos de la regla de evitar comparar gráficos que utilicen diferentes escalas de representación.
+No obstante, otra advertencia se refiere a un aspecto más sutil pero de gran impacto: un uso inadecuado
+de la escala de representación. La @fig-misleading-scale muestra dos gráficas con los mismos elementos
+y el mismo ratio de aspecto, pero que usan escalas verticales diferentes para representar la misma
+evolución temporal de los datos. A pesar de que las conclusiones deberían ser idénticas, en la
+gráfica de la izquierda nos da la sensación de que la caída vertical es mucho mayor y más pronunciada
+que en el gráfico de la derecha.
+
+![Ejemplo de usuo incorrecto de la escala de representación en un gráfico de evolución temporal. Fuente: [@healy2019].](img/misleading-scale.png){#fig-misleading-scale width=95%}
