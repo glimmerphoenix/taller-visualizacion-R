@@ -241,11 +241,33 @@ a los valores de tonalidad, crominancia y luminancia para varios tipos de atribu
 #| label: fig-hcl-palettes
 #| fig-cap: "Paletas incluidas en el paquete `colorspace` para diferentes tipos de atributos."
 #| fig-height: 10
+#| fig-width: 12
+#| fig-column: page-right
 
 library(colorspace)
 hcl_palettes(plot = TRUE)
 ```
 
-- Otro paquete muy conocido es `RColorBrewer`, muy popular en cartografía puesto que
+Además, este paquete incluye funciones muy potentes para evaluar la paleta de colores escogida,
+mostrando gráficos que describen sus características más destacadas para ponderar si la elección
+es adecuada para nuestros intereses.
+
+```{r}
+#| label: fig-eval-hcl-palette
+#| fig-height: 4
+#| fig-cap: "Gráficos de evaluación de una paleta de color incluida en el paquete `colorspace`."
+#| fig-subcap: 
+#|   - "Gráfico de de barras para comprobar el efecto de la paleta escogida."
+#|   - "Valores HCL de la paleta."
+#|   - "Los valores de luminancia son constantes en toda la paleta; la tonalidad cambia linealmente."
+#| layout-ncol: 1
+
+q4 <- qualitative_hcl(4, palette = "Dark 3")
+demoplot(q4, "bar")
+hclplot(q4)
+specplot(q4, type = "o")
+```
+
+- Otro paquete muy conocido es `RColorBrewer`, utilizado con frecuencia en cartografía puesto que
 ofrece una [herramienta interactiva de selección de paletas](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)
 en función de los objetivos de nuestro mapa.
