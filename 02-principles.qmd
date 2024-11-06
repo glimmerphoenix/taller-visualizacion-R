@@ -62,24 +62,25 @@ concentremos en crear un **gráfico funcional** que, por lo menos, cumpla el obj
 Otro de los grandes exponentes del diseño de gráficos para visualización de datos es Edward R. Tufte. En una de sus
 obras más conocidas [@tufte2001] expone algunos principios y recomendaciones útiles.
 
-- Maximizar el **ratio datos-tinta** (*data-to-ink ratio*): No debemos sobrecargar el gráfico con muchos datos o elementos. Por ejemplo, un
-gráfico en el que tengamos una gran cantidad de puntos superpuestos hará que no veamos nada o dificultará la
-identificación de patrones de interés. Vemos algunos ejemplos que proporciona H. Wickham es su nueva edición
-del libro sobre `ggplot2` (<https://ggplot2-book.org/>), utilizando el término [overplotting](https://ggplot2-book.org/statistical-summaries.html#sec-overplotting)
-para denotar este problema. La @fig-overplotting muestra cómo utilizar la transparencia (parámetro `alpha`) para
-permitir interpretar mejor el gráfico reduciendo la cantidad de "tinta" empleada.
+-   Maximizar el **ratio datos-tinta** (*data-to-ink ratio*): No debemos sobrecargar el gráfico con muchos datos 
+    o elementos. Por ejemplo, un gráfico en el que tengamos una gran cantidad de puntos superpuestos hará que no 
+    veamos nada o dificultará la identificación de patrones de interés. Vemos algunos ejemplos que proporciona 
+    H. Wickham es su nueva edición del libro sobre `ggplot2` (<https://ggplot2-book.org/>), utilizando el término 
+    [overplotting](https://ggplot2-book.org/statistical-summaries.html#sec-overplotting)
+    para denotar este problema. La @fig-overplotting muestra cómo utilizar la transparencia (parámetro `alpha`) para
+    permitir interpretar mejor el gráfico reduciendo la cantidad de "tinta" empleada.
 
-![Ejemplo de uso del argumento `alpha` apara añadir transaprencia al color en un gráfico creado con `ggplot2`. Fuente: <https://ggplot2-book.org/statistical-summaries.html#sec-overplotting>.](img/overplotting.png){#fig-overplotting height=400}
+    ![Ejemplo de uso del argumento `alpha` apara añadir transaprencia al color en un gráfico creado con `ggplot2`. Fuente: [ggplot2: overplotting]<https://ggplot2-book.org/statistical-summaries.html#sec-overplotting>.](img/overplotting.png){#fig-overplotting height=400}
 
-  Otro buen ejemplo de cómo maximizar el ratio datos-tinta aparece en la @fig-six-boxplots [@healy2019]. En este caso, tanto
-  la versión clásica del gráfico (a) como las dos versiones siguientes (b) y (c) emplean una cantidad de tinta comedida.
-  La versión (d) comienza a presentar problemas, porque es difícil interpretar las "rugosidades" a ambos lados de la
-  caja en el centro de la figura. Por último, las opciones (e) y (f) intentan presentar una excesiva cantidad de información,
-  saturando el gráfico y dificultando en gran medida su correcta interpretación, puesto que muchos detalles son accesorios
-  (lo que realmente importa en un *boxplot* son los estadísticos resumen de centralidad y dispersión de la distribución
-  de valores representada). 
+    Otro buen ejemplo de cómo maximizar el ratio datos-tinta aparece en la @fig-six-boxplots [@healy2019]. En este caso, tanto
+    la versión clásica del gráfico (a) como las dos versiones siguientes (b) y (c) emplean una cantidad de tinta comedida.
+    La versión (d) comienza a presentar problemas, porque es difícil interpretar las "rugosidades" a ambos lados de la
+    caja en el centro de la figura. Por último, las opciones (e) y (f) intentan presentar una excesiva cantidad de información,
+    saturando el gráfico y dificultando en gran medida su correcta interpretación, puesto que muchos detalles son accesorios
+    (lo que realmente importa en un *boxplot* son los estadísticos resumen de centralidad y dispersión de la distribución
+    de valores representada). 
 
-  ![Seis diseños para gráfico de tipo *boxplot*. El tipo (c) corresponde a Tufte. Fuente: [@healy2019].](img/six-boxplots.png){#fig-six-boxplots width=75%}
+    ![Seis diseños para gráfico de tipo *boxplot*. El tipo (c) corresponde a Tufte. Fuente: [@healy2019].](img/six-boxplots.png){#fig-six-boxplots width=75%}
 
 - Minimizar la porquería (*chartjunk*): Debemos utilizar una plantilla o tema de gráfico lo más sencillo y espartano
 posible, que evite el uso de adornos y aditamentos innecesarios para lo que debería ser la exclusiva interpretación de
@@ -121,18 +122,18 @@ puede sugerir una interpretación muy distinta, tal y como muestra la @fig-aspec
 - Las leyes de la Teoría de la Gestalt (*gestalt rules*) relacionan los estímulos visuales con lo que estos
 generan en la mente que los mira. La @fig-gestalt-inferences muestra algunas de estas reglas en acción.
 
-![Aplicación de algunas reglas de la Gestalt para evidenciar relaciones entre los elementos representados. Fuente: [@healy2019].](img/gestalt-inferences-horizontal.png){#fig-gestalt-inferences width=95%}
+    ![Aplicación de algunas reglas de la Gestalt para evidenciar relaciones entre los elementos representados. Fuente: [@healy2019].](img/gestalt-inferences-horizontal.png){#fig-gestalt-inferences width=95%}
 
-  En particular, podemos usar algunas de estas reglas para evidenciar agrupamientos, clasificaciones o entidades
-  que pueden se tratadas como la misma cosa o como parte de la misma cosa.
+    En particular, podemos usar algunas de estas reglas para evidenciar agrupamientos, clasificaciones o entidades
+    que pueden se tratadas como la misma cosa o como parte de la misma cosa.
 
-  - *Proximidad*: los elementos que están espacialmente cerca unos de otros tienden a ser relacionados.
-  - *Similaridad*: los elementos de aspecto parecido tienden a estar relacionados.
-  - *Conexión*: los elementos que están visualmente ligados unos a otros parecen estar relacionados.
-  - *Continuidad*: los objetos parcialmente ocultos tienden a completarse con formas conocidas.
-  - *Cierre* (closure): formas incompletas se perciben como completas.
-  - *Figura y fondo*: los elementos visuales se consideran en primer plano o en segundo plano.
-  - *Destino común*: los elementos que comparten una dirección de movimiento se perciben como una unidad.
+    - *Proximidad*: los elementos que están espacialmente cerca unos de otros tienden a ser relacionados.
+    - *Similaridad*: los elementos de aspecto parecido tienden a estar relacionados.
+    - *Conexión*: los elementos que están visualmente ligados unos a otros parecen estar relacionados.
+    - *Continuidad*: los objetos parcialmente ocultos tienden a completarse con formas conocidas.
+    - *Cierre* (closure): formas incompletas se perciben como completas.
+    - *Figura y fondo*: los elementos visuales se consideran en primer plano o en segundo plano.
+    - *Destino común*: los elementos que comparten una dirección de movimiento se perciben como una unidad.
 
 - Atención aL correcto uso de las escalas. Muchos creadores de gráficos de visualización de datos
 están advertidos de la regla de evitar comparar gráficos que utilicen diferentes escalas de representación.
