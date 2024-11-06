@@ -1,3 +1,5 @@
 # Recursos adicionales
 
 - Manual de `ggplot2`: <https://ggplot2-book.org> (3ª ed. en progreso).
+
+- Galería de gráficos en R: <https://r-graph-gallery.com>.
