@@ -64,7 +64,7 @@ obras más conocidas [@tufte2001] expone algunos principios y recomendaciones ú
 
 - Maximizar el **ratio datos-tinta** (*data-to-ink ratio*): No debemos sobrecargar el gráfico con muchos datos o elementos. Por ejemplo, un
 gráfico en el que tengamos una gran cantidad de puntos superpuestos hará que no veamos nada o dificultará la
-identificación de patrones de interés. Vemos algunos ejemplos que proporciona H. Wickham es su nueva edición
+identificación de patrones de interés. Vemos algunos ejemplos que proporciona H. Wickham en su nueva edición
 del libro sobre `ggplot2` (<https://ggplot2-book.org/>), utilizando el término [overplotting](https://ggplot2-book.org/statistical-summaries.html#sec-overplotting)
 para denotar este problema. La @fig-overplotting muestra cómo utilizar la transparencia (parámetro `alpha`) para
 permitir interpretar mejor el gráfico reduciendo la cantidad de "tinta" empleada.
