@@ -329,15 +329,14 @@ Figura&nbsp;2.2: Gráfico que muestra la evolución temporal de los crímenes re
 <h2 data-number="2.2" class="anchored" data-anchor-id="principios-de-e.-tufte"><span class="header-section-number">2.2</span> Principios de E. Tufte</h2>
 <p>Otro de los grandes exponentes del diseño de gráficos para visualización de datos es Edward R. Tufte. En una de sus obras más conocidas <span class="citation" data-cites="tufte2001">(<a href="references.html#ref-tufte2001" role="doc-biblioref">Tufte, 2001</a>)</span> expone algunos principios y recomendaciones útiles.</p>
 <ul>
-<li>Maximizar el <strong>ratio datos-tinta</strong> (<em>data-to-ink ratio</em>): No debemos sobrecargar el gráfico con muchos datos o elementos. Por ejemplo, un gráfico en el que tengamos una gran cantidad de puntos superpuestos hará que no veamos nada o dificultará la identificación de patrones de interés. Vemos algunos ejemplos que proporciona H. Wickham es su nueva edición del libro sobre <code>ggplot2</code> (<a href="https://ggplot2-book.org/" class="uri">https://ggplot2-book.org/</a>), utilizando el término <a href="https://ggplot2-book.org/statistical-summaries.html#sec-overplotting">overplotting</a> para denotar este problema. La <a href="#fig-overplotting" class="quarto-xref">Figura&nbsp;<span>2.3</span></a> muestra cómo utilizar la transparencia (parámetro <code>alpha</code>) para permitir interpretar mejor el gráfico reduciendo la cantidad de “tinta” empleada.</li>
-</ul>
+<li><p>Maximizar el <strong>ratio datos-tinta</strong> (<em>data-to-ink ratio</em>): No debemos sobrecargar el gráfico con muchos datos o elementos. Por ejemplo, un gráfico en el que tengamos una gran cantidad de puntos superpuestos hará que no veamos nada o dificultará la identificación de patrones de interés. Vemos algunos ejemplos que proporciona H. Wickham en su nueva edición del libro sobre <code>ggplot2</code> (<a href="https://ggplot2-book.org/" class="uri">https://ggplot2-book.org/</a>), utilizando el término <a href="https://ggplot2-book.org/statistical-summaries.html#sec-overplotting">overplotting</a> para denotar este problema. La <a href="#fig-overplotting" class="quarto-xref">Figura&nbsp;<span>2.3</span></a> muestra cómo utilizar la transparencia (parámetro <code>alpha</code>) para permitir interpretar mejor el gráfico reduciendo la cantidad de “tinta” empleada.</p>
 <div id="fig-overplotting" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-overplotting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="img/overplotting.png" height="400" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overplotting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;2.3: Ejemplo de uso del argumento <code>alpha</code> apara añadir transaprencia al color en un gráfico creado con <code>ggplot2</code>. Fuente: <a href="https://ggplot2-book.org/statistical-summaries.html#sec-overplotting" class="uri">https://ggplot2-book.org/statistical-summaries.html#sec-overplotting</a>.
+Figura&nbsp;2.3: Ejemplo de uso del argumento <code>alpha</code> apara añadir transaprencia al color en un gráfico creado con <code>ggplot2</code>. Fuente: [ggplot2: overplotting]<a href="https://ggplot2-book.org/statistical-summaries.html#sec-overplotting" class="uri">https://ggplot2-book.org/statistical-summaries.html#sec-overplotting</a>.
 </figcaption>
 </figure>
 </div>
@@ -351,8 +350,7 @@ Figura&nbsp;2.3: Ejemplo de uso del argumento <code>alpha</code> apara añadir t
 Figura&nbsp;2.4: Seis diseños para gráfico de tipo <em>boxplot</em>. El tipo (c) corresponde a Tufte. Fuente: <span class="citation" data-cites="healy2019">(<a href="references.html#ref-healy2019" role="doc-biblioref">Healy, 2019</a>)</span>.
 </figcaption>
 </figure>
-</div>
-<ul>
+</div></li>
 <li><p>Minimizar la porquería (<em>chartjunk</em>): Debemos utilizar una plantilla o tema de gráfico lo más sencillo y espartano posible, que evite el uso de adornos y aditamentos innecesarios para lo que debería ser la exclusiva interpretación de la información que recoge el gráfico.</p></li>
 <li><p>Priorizar los datos sobre variaciones de diseño: Cualquier elemento de diseño que se introduzca debe estar siempre supeditado a cumplir una función en la representación e interpretación de los datos, sin que la única razón para utilizarlo sea puramente estética.</p></li>
 <li><p>Uso de <strong>facetas</strong> (<em>small multiples</em>) para representar evolución y facilitar las comparativas en varias dimensiones, tal y como hemos presentado en el ejemplo de la <a href="#fig-crime-Milwaukee" class="quarto-xref">Figura&nbsp;<span>2.2</span></a>.</p></li>
@@ -389,8 +387,7 @@ Figura&nbsp;2.6: Comparativa de utilización de dos ratios de aspecto diferentes
 </figure>
 </div>
 <ul>
-<li>Las leyes de la Teoría de la Gestalt (<em>gestalt rules</em>) relacionan los estímulos visuales con lo que estos generan en la mente que los mira. La <a href="#fig-gestalt-inferences" class="quarto-xref">Figura&nbsp;<span>2.7</span></a> muestra algunas de estas reglas en acción.</li>
-</ul>
+<li><p>Las leyes de la Teoría de la Gestalt (<em>gestalt rules</em>) relacionan los estímulos visuales con lo que estos generan en la mente que los mira. La <a href="#fig-gestalt-inferences" class="quarto-xref">Figura&nbsp;<span>2.7</span></a> muestra algunas de estas reglas en acción.</p>
 <div id="fig-gestalt-inferences" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gestalt-inferences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -403,13 +400,14 @@ Figura&nbsp;2.7: Aplicación de algunas reglas de la Gestalt para evidenciar rel
 </div>
 <p>En particular, podemos usar algunas de estas reglas para evidenciar agrupamientos, clasificaciones o entidades que pueden se tratadas como la misma cosa o como parte de la misma cosa.</p>
 <ul>
-<li><p><em>Proximidad</em>: los elementos que están espacialmente cerca unos de otros tienden a ser relacionados.</p></li>
-<li><p><em>Similaridad</em>: los elementos de aspecto parecido tienden a estar relacionados.</p></li>
-<li><p><em>Conexión</em>: los elementos que están visualmente ligados unos a otros parecen estar relacionados.</p></li>
-<li><p><em>Continuidad</em>: los objetos parcialmente ocultos tienden a completarse con formas conocidas.</p></li>
-<li><p><em>Cierre</em> (closure): formas incompletas se perciben como completas.</p></li>
-<li><p><em>Figura y fondo</em>: los elementos visuales se consideran en primer plano o en segundo plano.</p></li>
-<li><p><em>Destino común</em>: los elementos que comparten una dirección de movimiento se perciben como una unidad.</p></li>
+<li><em>Proximidad</em>: los elementos que están espacialmente cerca unos de otros tienden a ser relacionados.</li>
+<li><em>Similaridad</em>: los elementos de aspecto parecido tienden a estar relacionados.</li>
+<li><em>Conexión</em>: los elementos que están visualmente ligados unos a otros parecen estar relacionados.</li>
+<li><em>Continuidad</em>: los objetos parcialmente ocultos tienden a completarse con formas conocidas.</li>
+<li><em>Cierre</em> (closure): formas incompletas se perciben como completas.</li>
+<li><em>Figura y fondo</em>: los elementos visuales se consideran en primer plano o en segundo plano.</li>
+<li><em>Destino común</em>: los elementos que comparten una dirección de movimiento se perciben como una unidad.</li>
+</ul></li>
 <li><p>Atención aL correcto uso de las escalas. Muchos creadores de gráficos de visualización de datos están advertidos de la regla de evitar comparar gráficos que utilicen diferentes escalas de representación. No obstante, otra advertencia se refiere a un aspecto más sutil pero de gran impacto: un uso inadecuado de la escala de representación. La <a href="#fig-misleading-scale" class="quarto-xref">Figura&nbsp;<span>2.8</span></a> muestra dos gráficas con los mismos elementos y el mismo ratio de aspecto, pero que usan escalas verticales diferentes para representar la misma evolución temporal de los datos. A pesar de que las conclusiones deberían ser idénticas, en la gráfica de la izquierda nos da la sensación de que la caída vertical es mucho mayor y más pronunciada que en el gráfico de la derecha.</p></li>
 </ul>
 <div id="fig-misleading-scale" class="quarto-float quarto-figure quarto-figure-center anchored">
