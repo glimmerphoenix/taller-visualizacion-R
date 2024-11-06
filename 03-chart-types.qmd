@@ -96,11 +96,46 @@ la representació esquemática de la caja y las líneas del cuerpo principal de 
 del gráfico de violín se combina con el *strip chart* para crear un *swarm plot* o *beeswarm plot*, que también se puede crear
 fácilmente en R con el paquete []`ggbeeswarm`](https://r-charts.com/distribution/ggbeeswarm/).
 
-- Histogramas apilados:
+- Histogramas apilados: se pueden apilar las barras de los histogramas para comparar diferentes distribuciones,
+aunque el gráfico resultante no es sencillo de interpretar para las distribuciones que no quedan en la parte inferior
+del gráfico (sólo se muestran con claridad diferencias acusadas entre grupos para el mismo intervalo).
 
-- Diagramas de densidad solapados:
+- Diagramas de densidad solapados: una ventaja de los diagramas de densidad de probabilidad es que permiten
+representar varios de ellos en el mismo gráfico sobrepuestos unos a otros, siempre que utilicemos transparencia
+en el color de relleno del área bajo cada curva o bien que sólo coloreemos las líneas de la distribución correspondiente
+a cada grupo. Un ejemplo se muestra en la @fig-density-plots-overlap.
 
-- *Ridgeline plot*:
+```{r}
+#| label: fig-density-plots-overlap
+#| fig-cap: "Diagramas de densidad de probabilidad solapados para comparar las distribuciones correspondientes a varios grupos. Fuente: <https://r-graph-gallery.com/135-stacked-density-graph.html>."
+#| message: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(viridisLite)
+
+ggplot(data=diamonds, aes(x=price, group=cut, fill=cut)) +
+    geom_density(adjust=1.5, alpha=.4)
+```
+
+- *Ridgeline plot*: es una variante más organizada de los gráficos de densidad de probabilidad solapados. En este tipo
+de gráfico, se garantiza que todas las f.d.p. estimadas tienen la misma escala de representación horizontal, los mismos parámetros
+de configuración para el KDE y los gráficos para cada grupo se separan lo justo para permitir una comparación rápida y
+más precisa de las diferentes funciones de densidad estimadas.
+
+```{r}
+#| label: fig-ggridges
+#| fig-cap: "Ejemplo de un gráfido *ridgeline* creado mediante el paquete `ggridges`, extensión de `ggplot2`."
+
+library(ggridges)
+library(ggplot2)
+ 
+# Ejemplo básico de *ridgeplot*
+ggplot(diamonds, aes(x = price, y = cut, fill = cut)) +
+  geom_density_ridges() +
+  theme_ridges()
+```
 
 ### Relaciones cuantiativo-cuantitativo (gráficos X-Y)
 
@@ -141,7 +176,7 @@ color) el valor promedio de la variable cuantitativa dentro de esa celda.
 
 ![Gráfico de actividad con bins en 2D que muestra el número de contribuciones diarias del usuario H. Wickham en GitHub. Fuente: <https://github.com/hadley>.](img/wickham-github-contribs.png){#fig-wickham-github-contribs width=95%}
 
-- Correlograma: es un gráfico en el que se representa gráficamente el grado de correlación entre los valores
+- **Correlograma**: es un gráfico en el que se representa gráficamente el grado de correlación entre los valores
 de varios atributos. La representación concreta de cada correlograma puede variar mucho. Algunos utilizan el canal
 de color y una paleta divergente para distinguir claramente las correlaciones positivas o negativas. En otros casos
 se añaden más canales (cambios de forma, formas incompletas representando correlación parcial). La 
@@ -202,21 +237,71 @@ a valores de una variable categórica.
 
 ![Gráficos para representar relaciones entre un atributo cuantitativo y otro categórico. Fuente: [@wilke2019].](img/graphs-amounts-i.png){#fig-graphs-amounts width=95%}
 
-- Diagrama de barras:
+- Diagrama de barras: este tipo de gráfico es sobradamente conocido. Permite representar cifras correspondientes
+a varias categorías para compararlas entre sí. No obstante, hay algunos aspectos que pueden facilitar su interpretación:
 
-- *Dotplot* (diagrama de puntos): propuesto por W. Cleveland para simplificar la representación de la información
-en un diagrama de barras.
+    - Barras horizontales: cambiar la orientación de las barras puede ser una buena estrategia si estamos comparando
+    muchas categorías y las diferencias entre ellas no son muy grandes. Esto se debe a que nuestra percepción visual
+    de las diferencias entre objetos horizontales es más precisa que cuando los objetos se orientan verticalmente.
 
-La @fig-graphs-amounts-multi muestra gráficos que permiten representar relaciones entre una variable cuantitativa y
+    - Ordenación de las barras: podemos ordenar las barras en sentido creciente o decreciente para ayudar a nuestra
+    audiencia a identificar rápidamente los casos extremos, siempre y cuando no estemos obligados a ordenar las categorías
+    por algún otro criterio específico.
+
+- *Dotplot* (diagrama de puntos): propuesto por W. S. Cleveland [@cleveland1984dot] para simplificar la representación 
+de la información en un diagrama de barras. Es compatible con la representación de intervalos de confianza y
+barras de error. Además, permite también comparar resultados entre grupos para cada categoría, tal y como muestra
+la @fig-dotplot-comparison, lo que aumenta aún más si cabe su utilidad.
+
+![Ejemplo de un Cleveland *dotplot* que compara los ingresos de mujeres y hombres en varias ciudades
+de EE.UU. Fuente: <https://uc-r.github.io/cleveland-dot-plots>](img/dotplot-comparison.png){#fig-dotplot-comparison height=600}
+
+En este ejemplo, podemos observar que las ciudades se han ordenado de mayor a menor cantidad de ingresos. También
+se ha utilizado el canal *color* para distinguir los puntos correspondientes a los ingresos de los hombres respecto
+a los de las mujeres y se ha añadido una anotación que cuantifica su diferencia positiva o negativa. El subtítulo
+del gráfico muestra algunas conclusiones principales, con lo que podemos interpretar el gráfico con mayor rapidez.
+
+::: {.callout-warning}
+## Confusión con el término *dotplot*
+
+Aunque el término *dotplot* fue propuesto inicialmente por W. S. Cleveland en 1984 y tiene un claro significado
+para gran parte de la comunidad de visualización de datos (remarcado, en ocasiones, anteponiendo el apellido de
+su creador), herramientas actuales como `ggplot2` incluyen una función `geom_dotplot()` que no tiene nada que
+ver con este tipo de gráfico, como podemos comprobar en los [ejemplos de la documentación oficial](https://ggplot2.tidyverse.org/reference/geom_dotplot.html).
+
+Esta desafortunada ambigüedad no se va a poder corregir fácilmente, puesto que la API de `ggplot2` ya está
+muy consolidada. Para agravar aún más si cabe esta confusión, podemos encontrar el tipo de gráfico *dotplot* original
+de Cleveland bajo otros seudónimos, como [*lollipop plot*](https://r-graph-gallery.com/lollipop-plot.html).
+
+Como siempre, lo importante es entender bien el concepto y el tipo de gráfico que queremos construir.
+:::
+
+La @fig-graphs-amounts-multi muestra gráficos para representar relaciones entre una variable cuantitativa y
 varias categorías de manera simultánea en la misma imagen.
 
 ![Gráficos para representar relaciones entre un atributo cuantitativo y varias categorías simultáneamente. Fuente: [@wilke2019].](img/graphs-amounts-multi.png){#fig-graphs-amounts-multi width=95%}
 
-- Diagrama de barras agrupado:
+- Diagrama de barras agrupado: como el diagrama de barras tradicional, pero añadiendo dentro de cada categoría
+principal una barra por cada categoría de la segunda variable cualitativa que estamos comparando. Para evitar
+repetir la etiqueta de los valores de la segunda categoría en cada grupo, normalmente se usa otro canal (color)
+para distinguirlas, indicando en una leyenda en nombre de la categoría de la segunda variable que corresponde a
+cada valor del canal.
 
-- Diagrama de barras apiladas (*stacked bars*):
+- Diagrama de barras apiladas (*stacked bars*): cuando el objetivo es comparar los valores de una subcategoría con
+los de esa misma subcategoría en otras categorías principales del gráfico, podemos crear un diagrama de barras apilado
+para comprar más directamente los segmentos de cada subcategoría.
 
-- Mapa de calor (*heatmap*):
+- Mapa de calor (*heatmap*): permite comparar diferentes ítems según los valores de una variable cuantitativa 
+obtenidos para dos variables categóricas simultáneamente. En R se pueden [construir un heatmap](https://r-graph-gallery.com/heatmap.html)
+utilizando varios paquetes, obteniendo tanto gráficos estáticos como interactivos (dinámicos). Un ejemplo se
+muestra en la @fig-heatmaply, con una captura estática de un *heatmap* interactivo para comparar varios países
+en función de los valores obtenidos en varios índices de medición de nivel de bienestar y desarrollo en cada país.
+Este *heatmap* también incorpora un dendongrama en cada margen, ofreciendo pistas adicionales sobre los países más
+similares entre sí (consulta la referencia para ver el código fuente que genera este gráfico).
+
+::: {.column-page-inset-right}
+![Mapa de calor (*heatmap*) para comparar varios países según los valores de diferentes índices de bienestar y desarrollo en cada uno de ellos. Fuente: <https://www.data-to-viz.com/graph/heatmap.html>.](img/heatmaply.png){#fig-heatmaply height=700 width=95%}
+:::
 
 ### Proporciones
 
@@ -224,30 +309,62 @@ Los gráficos básicos para representación de proporciones están resumidos en 
 
 ![Gráficos básicos para representación de proporciones. Fuente: [@wilke2019].](img/graphs-proportions.png){#fig-graphs-props width=95%}
 
-- Diagrama de sectores (*pie chart*):
+- Diagrama de sectores (*pie chart*): otro tipo de gráfico sobradamente conocido y, dicho sea también, muy
+denostado en la comunidad de visualización de datos por sus dudosas propiedades para reflejar de forma precisa
+la información que queremos comparar, sobre todo si las categorías tienen porcentajes muy semejantes (es decir,
+si los sectores tienen tamaños muy parecidos).
 
-- Diagrama de barras (porcentual):
+- Diagrama de barras (porcentual): en este caso cada barra refleja proporciones (en %) y no valores absolutos de
+un atributo numérico.
 
 A su vez, la @fig-graphs-props-multi muestra distintos tipos de diagramas para representar mútiples conjuntos de proporciones.
 
 ![Gráficos básicos para representación de múltiples conjuntos de proporciones. Fuente: [@wilke2019].](img/graphs-proportions-multi.png){#fig-graphs-props-multi width=95%}
 
-- Diagramas de sectores múltiples:
+- Diagramas de sectores múltiples: cuidado con este tipo de gráfico, puesto que si ya es complicado en ocasiones
+comparar los sectores en un solo diagrama imaginemos cómo se complica la tarea cuando hay que comparar sectores de varios
+diagramas de forma simultánea.
 
-- Diagramas de barras agrupados y apilados:
+- Diagramas de barras agrupados y apilados: son aplicables los mismos comentarios que en el caso de representación de
+valores absolutos. No obstante, en el caso de las proporciones suele ser más preciso y útil para interpretar el gráfico
+usar la modalidad de barras apiladas.
 
-- Diagramas de densidades apiladas:
+- Diagramas de densidades apiladas: ofrecen una solución rápida para comparar proporciones. Sin embargo, tiene dos desventajas.
+La primera es que usamos demasiada "tinta" para el gráfico. La segunda es que es complicado interpretar la distribución
+de valores para cualquier categoría excepto la que está en la base del gráfico. Podemos ver un 
+[ejemplo de este tipo](https://r-graph-gallery.com/135-stacked-density-graph.html#stacked) de gráficos para comprender
+mejor sus ventajas e inconvenientes.
 
 Por último, la @fig-graphs-props-comp muestra gráficos para desglosar proporciones en función de más de una variable categórica
 a la vez en la misma figura.
 
 ![Gráficos para representación de proporciones en función de más de una categoría de forma simultánea. Fuente: [@wilke2019].](img/graphs-proportions-comp.png){#fig-graphs-props-comp width=95%}
 
-- Gráfico de mosaico (*mosaic plot*):
+- Gráfico de mosaico (*mosaic plot*): permite crear áreas coloreadas para comparar proporciones entre dos o más atributos
+categóricos a la vez. Si comparamos más de dos variables cualitativas, tendremos que hacer un *mosaic plot* para cada categoría
+de la tercera variable. En la @fig-mosaic se presenta un ejemplo de gráfico de mosaico para comparar los porcentajes de respuestas
+a dos preguntas de un cuestionario.
 
-- *Treemap*:
+![Ejemplo de un gráfico de mosaico creado con el paquete `ggmosaic` en R. Fuente: <https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html](img/mosaic.png){#fig-mosaic width=90%}
 
-- Conjuntos paralelos (*parallel sets* o *alluvial plot*):
+- *Treemap*: a pesar de su parecido con los gráficos de mosaico, el *treemap* tiene una diferencia importante,
+ que radica en que representamos **datos jerárquicos** como un conjunto de rectángulos *anidados*. Por tanto, sólo
+ es válido para representar proporciones de subcategorías que se unen para formar otra categoría mayor, como vemos
+ en el ejemplo de la @fig-treemap.
+
+![Ejemplo de un *treemap* que representa proporciones de varias subcategorías dentro de tres categorías principales. Fuente: <https://r-graph-gallery.com/235-treemap-with-subgroups.html>.](img/treemap.png){#fig-treemap width=90%}
+
+- Conjuntos paralelos (*parallel sets* o *alluvial plot*): se trata de un gráfico algo más difícil de intrepretar a
+primera vista, pero de enorme utilidad cuando conseguimos entender su mecánica funcional. Representa el porcentaje
+de una categoría que va a parar al resto de categorías de otra u otras variables (se pueden añadir más variables a la
+derecha, pero cada vez es más complicado "seguirle al pista" a los flujos). La @fig-alluvial presenta un ejemplo de este
+tipo de gráficos, mostrando el desglose de pasajeros del viaje inaugural del Titanic en función de diversos factores:
+cubierta donde se alojaban, género y rango de edad. El [paquete `ggalluvial`](https://corybrunson.github.io/ggalluvial/)
+facilita la construcción de este tipo de gráficos en R con `ggplot2` [@ggalluvial-article].
+
+![Ejemplo de un *alluvial plot* para desglosar los pasajeros del viaje inaugural del Titanic según tres posibles factores. Fuente: <https://corybrunson.github.io/ggalluvial/>](img/alluvial.png){#fig-alluvial width=95%}
+
+
 
 ### Datos espaciales
 
@@ -255,13 +372,24 @@ La @fig-graphs-geo muestra algunos gráficos básicos para representación de da
 
 ![Gráficos básicos para representación de datos espaciales. Fuente: [@wilke2019].](img/graphs-geospatial.png){#fig-graphs-geo width=95%}
 
-- Mapa:
+- Mapa: como resulta evidente, la opción más directa es representar datos geolocalizados mediante algún tipo
+de mapa (político, geográfico, etc.), posiblemente enriquecido con información adicional para proporcionar más
+contexto. En el @sec-spatial-data-vis veremos más detalles, aunque este tipo de gráficos no son el objeto principal
+de este taller, debido a que requieren gran cantidad de conceptos y herramientas propias de este dominio. Para más
+información, se recomienda consultar referencias actualizadas y de calidad como <https://r.geocompx.org/> [@lovelace2025]
+o <https://r-spatial.org/book/> [@pebesma2023].
 
-- *Choropleth*:
+- *Choropleth*: es un tipo de mapa en el que se colorean, sombrean o degradan las regiones según los valores 
+de cierto atributo. Tienen un gran poder explicativo, especialmente cuando las unidades espaciales nos resultan
+familiares, como una región o el mápa político de un país. Un ejemplo se muestra en la @fig-election-usa-states
 
-- Cartograma:
+![*Choropleth* que representa los resultados de las elecciones presidenciales en EE.UU. de 2016. Fuente: <https://socviz.co/maps.html>.](img/election-usa-states.png){#fig-election-usa-states width=90%}
 
-- Cartograma de calor (*cartogram heatmap*):
+- Cartograma y artograma de calor (*cartogram heatmap*): Son gráficos en los que se muestra esquemáticamente los
+resultados de variables geolocalizadas, sin utilizar los polígonos correspondientes a las regiones reales. Un ejemplo
+de este tipo de gráficos se muestra en la @fig-election-usa-statebins.
+
+![Cartograma que representa esquemáticamente los resultados de las elecciones presidenciaels en EE.UU. de 2016. Fuente: <https://socviz.co/maps.html>](img/election-usa-statebins.png){#fig-election-usa-statebins width=90%}
 
 ### Representación de la incertidumbre
 
@@ -270,22 +398,27 @@ estadísticas.
 
 ![Gráficos básicos para representación de barras de estimaciones de error. Fuente: [@wilke2019].](img/graphs-errorbars.png){#fig-graphs-error-bars width=95%}
 
-- Barras de error:
+-   Barras de error: cuando los diagramas de barras representan valores estadísticos, como media, mediana, desviación típica,
+    etc. es aconsejable añadir barras de error en sobre la parte superior de cada barra, para indicar la variabilidad en la
+    estimación. Un ejemplo de esta práctica se ilustra en la @fig-error-bars.
 
-- Barras de error en 2D:
+    ![Ejemplo de un gráfico de barras que incluye barras de error. Fuente: <https://www.data-to-viz.com/caveat/error_bar.html>.](img/error-bars.png){#fig-error-bars width=85%}
 
-- Barras de error con gradación:
+    Sin embargo, la utilización de barras de error puede ocultar información valiosa al espectador, como se muestra en la
+    @fig-error-bars-hiding. Vemos que el mismo diagrama de barras con barras de error corresponde con diferentes distribuciones
+    de los datos. Por ese motivo, se desaconseja en muchos casos usar este tipo de diagramas, en favor de la utilización del
+    *boxplot*, *violin plot*, *swarm plot* o alguna otra variante que muestre información adicional sobre la distribución de los
+    datos originales.
+
+    ![Ejemplo de un gráfico de barras que incluye barras de error y corresponde a diferentes distribuciones de datos subyacentes. Fuente: <https://www.data-to-viz.com/caveat/error_bar.html>.](img/error-bars-hiding.png){#fig-error-bars-hiding width=85%}
 
 A su vez, la @fig-conf-dist muestra varios ejemplos de gráficos para visualización de la distribución de probabilidad en intervalos
 de confianza o en modelos (*a priori* y *a posteriori*).
 
 ![Gráficos básicos para representación de estimaciones estadísticas. Fuente: [@wilke2019].](img/graphs-confidence-dists.png){#fig-conf-dist width=95%}
 
-- Bandas de confianza:
-
-- Ojos y medios ojos (*half-eyes*):
-
-- Diagrama de puntos de cuantiles:
+En este caso, conviene destacar que lo más importante es dejar claro a nuestra audiencia qué representan
+las bandas o intervalos de confianza, de forma que los resultados se puedan interpretar sin cometer errores.
 
 Por último, tenemos algunas modalidades para representar bandas de intervalos de confianza en estimaciones gráficas (curvas
 resultado de ajustes y modelos), que suelen incluir diferentes anchos o gradaciones para indicar diferentes intervalos en el
@@ -293,7 +426,30 @@ mismo gráfico (c.i. 90%; c.i. 95%, etc.). Varios ejemplos aparecen esquematizad
 
 ![Gráficos básicos para representación de intervalos de confianza en estimaciones. Fuente: [@wilke2019].](img/graphs-confidence-bands.png){#fig-graphs-conf-bands width=95%}
 
+El caso más habitual es el de mostrar bandas a amobs lados de una recta o curva estimada a partir de un modelo estadístico
+ajustado a nuestros datos. El gráfico de la @fig-lm-confint muestra cómo se puede implementar con el paquete `ggplot2`.
+
+```{r}
+#| label: fig-lm-confint
+#| fig-cap: "Ilustración de un intervalo de confianza del 95% alrededor de una recta de regresión simple ajustada a una nube de puntos"
+
+library(ggplot2)
+
+# Creamos el gráfico de dispersión y añadimos bandas en azul claro
+# marcando el intervalo de confianza al 95% (opción por defecto)
+ggplot(data=mtcars, aes(x=mpg, y=wt)) +
+  geom_point() +
+  geom_smooth(method=lm, color='red', fill='lightblue')
+```
 
 ## Arbol de decisión: ¿qué grafico escojo?
 
-<https://www.data-to-viz.com/>
+Como conclusión de este capítulo, seguramente podremos pensar que el gran número de tipos de gráficos de entre los que
+podemos escoger para nuestro propio trabajo es abrumador. Afortunadamente, existen algunas guías que permiten
+plantearnos unas sencillas preguntas de diseño para orientar nuestra elección, reduciendo al menos el alcance de la
+búsqueda a un subconjunto de tipos de gráficos que mejor se adapte a nuestro problema particular.
+
+El sito web <https://www.data-to-viz.com/> publica una imagen en alta resolución (que se puede recibir por correo-e),
+en la que se resume un sencillo diagrama de decisión para orientar nuestra selección del gráfico más apropiado.
+En todo caso, esperamos que los comentarios y orientaciones que hemos incluido en este capítulo permitan
+a futuros creadores/as de gráficos seleccionar con criterios las herramientas a emplear.
