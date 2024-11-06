@@ -98,7 +98,7 @@ más alejados (baja correlación).
 
 En general, podemos hablar del concepto de **datos con dependencias** estrictas para reflejar el hecho de que
 uno o más atributos (marca de tiempo, ubicación o ambos simultáneamente) determinan fuertemente la estructura interna
-de ese *dataset* y la organizació de sus valores.
+de ese *dataset* y la organización de sus valores.
 :::
 
 La forma en la que organizamos los datos para su almacenamiento y procesamiento determina el *tipo de dataset* con el
