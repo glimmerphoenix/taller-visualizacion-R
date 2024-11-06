@@ -124,7 +124,7 @@ generan en la mente que los mira. La @fig-gestalt-inferences muestra algunas de 
 ![Aplicación de algunas reglas de la Gestalt para evidenciar relaciones entre los elementos representados. Fuente: [@healy2019].](img/gestalt-inferences-horizontal.png){#fig-gestalt-inferences width=95%}
 
   En particular, podemos usar algunas de estas reglas para evidenciar agrupamientos, clasificaciones o entidades
-  que pueden se tratadas como la misma cosa o como parte de la misma cosa.
+  que pueden ser tratadas como la misma cosa o como parte de la misma cosa.
 
   - *Proximidad*: los elementos que están espacialmente cerca unos de otros tienden a ser relacionados.
   - *Similaridad*: los elementos de aspecto parecido tienden a estar relacionados.
