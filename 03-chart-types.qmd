@@ -1,6 +1,6 @@
 # Galería de gráficos
 
-En este capítulo, presentamos los principales tipos gráficos para
+En este capítulo, presentamos los principales tipos de gráficos para
 visualización de datos que se suelen encontrar en proyectos de
 análisis de datos. Es esencial saber con qué opciones contamos
 para después elegir el tipo de gráfico y su modalidad que mejor
@@ -399,13 +399,12 @@ estadísticas.
 ![Gráficos básicos para representación de barras de estimaciones de error. Fuente: [@wilke2019].](img/graphs-errorbars.png){#fig-graphs-error-bars width=95%}
 
 -   Barras de error: cuando los diagramas de barras representan valores estadísticos, como media, mediana, desviación típica,
-    etc. es aconsejable añadir barras de error en sobre la parte superior de cada barra, para indicar la variabilidad en la
+    etc. es aconsejable añadir barras de error sobre la parte superior de cada barra, para indicar la variabilidad en la
     estimación. Un ejemplo de esta práctica se ilustra en la @fig-error-bars.
 
     ![Ejemplo de un gráfico de barras que incluye barras de error. Fuente: <https://www.data-to-viz.com/caveat/error_bar.html>.](img/error-bars.png){#fig-error-bars width=85%}
 
-    Sin embargo, la utilización de barras de error puede ocultar información valiosa al espectador, como se muestra en la
-    @fig-error-bars-hiding. Vemos que el mismo diagrama de barras con barras de error corresponde con diferentes distribuciones
+    Sin embargo, la utilización de barras de error puede ocultar información valiosa al espectador, como se muestra en la @fig-error-bars-hiding. Vemos que el mismo diagrama de barras con barras de error corresponde con diferentes distribuciones
     de los datos. Por ese motivo, se desaconseja en muchos casos usar este tipo de diagramas, en favor de la utilización del
     *boxplot*, *violin plot*, *swarm plot* o alguna otra variante que muestre información adicional sobre la distribución de los
     datos originales.
@@ -442,7 +441,7 @@ ggplot(data=mtcars, aes(x=mpg, y=wt)) +
   geom_smooth(method=lm, color='red', fill='lightblue')
 ```
 
-## Arbol de decisión: ¿qué grafico escojo?
+## Árbol de decisión: ¿qué grafico escojo?
 
 Como conclusión de este capítulo, seguramente podremos pensar que el gran número de tipos de gráficos de entre los que
 podemos escoger para nuestro propio trabajo es abrumador. Afortunadamente, existen algunas guías que permiten
