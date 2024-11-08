@@ -116,7 +116,7 @@ caso el *enlace* representa una relación entre dos ítems. A veces, los enlaces
 describan (por ejemplo, un grado de importancia, tipo de relación, etc.). Los árboles son grafos jerárquicos que no tienen
 ciclos y representan relaciones multinivel entre los ítems.
 
-- Un *cuerpo* (en inglés *field*, a veces traducido como *campo*) en un dataset que contiene valores de atributos asociados
+- Un *cuerpo* (en inglés *field*, a veces traducido como *campo*) es un dataset que contiene valores de atributos asociados
 con celdas o regiones. Cada *celda* contiene valores medidos o calculados a partir de un dominio *continuo*. Un ejemplo
 sería la división de una imagen satelital mediante una malla de celdas hexagonales, para después medir y asignar un valor
 promedio del Índice de Vegetación de Diferencia Normalizada (NDVI) o del Índice de Humedad de diferencia normalizada
