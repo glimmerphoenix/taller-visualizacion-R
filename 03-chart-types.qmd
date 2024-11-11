@@ -317,9 +317,9 @@ si los sectores tienen tamaños muy parecidos).
 - Diagrama de barras (porcentual): en este caso cada barra refleja proporciones (en %) y no valores absolutos de
 un atributo numérico.
 
-A su vez, la @fig-graphs-props-multi muestra distintos tipos de diagramas para representar mútiples conjuntos de proporciones.
+A su vez, la @fig-graphs-props-comp muestra distintos tipos de diagramas para representar mútiples conjuntos de proporciones.
 
-![Gráficos básicos para representación de múltiples conjuntos de proporciones. Fuente: [@wilke2019].](img/graphs-proportions-multi.png){#fig-graphs-props-multi width=95%}
+![Gráficos básicos para representación de múltiples conjuntos de proporciones. Fuente: [@wilke2019].](img/graphs-proportions-comp.png){#fig-graphs-props-comp width=95%}
 
 - Diagramas de sectores múltiples: cuidado con este tipo de gráfico, puesto que si ya es complicado en ocasiones
 comparar los sectores en un solo diagrama imaginemos cómo se complica la tarea cuando hay que comparar sectores de varios
@@ -335,10 +335,10 @@ de valores para cualquier categoría excepto la que está en la base del gráfic
 [ejemplo de este tipo](https://r-graph-gallery.com/135-stacked-density-graph.html#stacked) de gráficos para comprender
 mejor sus ventajas e inconvenientes.
 
-Por último, la @fig-graphs-props-comp muestra gráficos para desglosar proporciones en función de más de una variable categórica
+Por último, la @fig-graphs-props-multi muestra gráficos para desglosar proporciones en función de más de una variable categórica
 a la vez en la misma figura.
 
-![Gráficos para representación de proporciones en función de más de una categoría de forma simultánea. Fuente: [@wilke2019].](img/graphs-proportions-comp.png){#fig-graphs-props-comp width=95%}
+![Gráficos para representación de proporciones en función de más de una categoría de forma simultánea. Fuente: [@wilke2019].](img/graphs-proportions-multi.png){#fig-graphs-props-multi width=95%}
 
 - Gráfico de mosaico (*mosaic plot*): permite crear áreas coloreadas para comparar proporciones entre dos o más atributos
 categóricos a la vez. Si comparamos más de dos variables cualitativas, tendremos que hacer un *mosaic plot* para cada categoría
