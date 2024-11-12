@@ -249,7 +249,7 @@ gráfico para marcar la ubicación de otros tantos casos atípicos sobre el diag
 #| warning: false
 
 label <- data.frame(
-  lycosidae = c(6, 6, 45, 70), 
+  lycosidae = c(5.7, 5.7, 45, 70), 
   weedcover = c(1, 2, 4,69), 
   label = c("outlier 1", "outlier 2", "outlier 3", "outlier 4")
 )
