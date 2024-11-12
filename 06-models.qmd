@@ -1,4 +1,4 @@
-# Gráficos para evaluación de modelos
+# Gráficos para evaluación de modelos {#sec-graphs-model-eval}
 
 ## Evaluación de modelos
 
@@ -8,6 +8,8 @@
 - Gráficos clásicos de resumen de resultados.
 
 - Gráficos clásicos para evaluación de modelos.
+
+<https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html>
 
 ## Ejemplo: explicabilidad de modelos
 

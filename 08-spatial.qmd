@@ -1,4 +1,4 @@
-# Visualización de datos espaciales
+# Visualización de datos espaciales {#sec-spatial-data-vis}
 
 ## Datos espaciales
 

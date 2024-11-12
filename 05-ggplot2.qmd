@@ -1,23 +1,445 @@
-# El paquete `ggplot2`
+# El paquete `ggplot2` {#sec-ggplot2}
 
 En este capítulo se introduce el paquete `ggplot2` de R, una de las
 herramientas de visualización de datos más populares en la actualidad y
 que ha sido incluso exportado a otros lenguajes (como Python).
 
+## Tidy data
+
+```{r}
+#| label: load-tidyverse
+#| message: false
+
+library(tidyverse)
+```
+
+### Datos de ejemplo
+
+
+Utilizaremos ejemplos del paquete `agriTutorial` [@agriTutorial2020], que incluye conjuntos de datos
+y ejemplos de modelos sobre exprimentos en agricultura. También usaremos el paquete R `agridat` [@agridat2024], 
+que contiene conjuntos de datos provenientes de publicaciones relacionadas con la agricultura,
+incluyendo cultivos de campo, cultivos arbóreos o estudios con animales, entre otros.
+
+**Paquete `agriTutorial`**
+
+```{r}
+#| label: load-agriTutorial
+
+library(agriTutorial)
+library(agridat)
+```
+
+- `greenrice`: Datos de un experimento sobre absorción de nitrogeno (N), medido en g/maceta en un
+experimento de doble factor en invernadero [@gomez1984]. Se considera la duración del estrés hídrico (W) y el
+nivel de aplicación de nitrógeno. El experimento se llevó a cabo con cuatro niveles de estrés
+hídrico (0, 10, 20 y 40 días) como tratamientos de parcela principal (*main-plot treatment*) y
+cuatro dosis de nitrógeno (0, 90, 180 y 270 kg/ha) como tratamientos de subparcela (*sub-plot treatment*).
+Las parcelas principales se aleatorizaron en cuatro bloques completos (cada bloque incluye todos
+las posibles combinaciones de tratamientos).
+
+```{r}
+#| label: greenrice-eda
+
+data(greenrice)
+str(greenrice)
+```
+
+- `rice`: Datos de un experimento con tres prácticas de gestión (`minimum`, `optimum`, `intensive`), cinco
+cantidades distintas de fertilizante de nitrógeno (N) (0, 50, 80, 110, 140 kg/ha) y tres variedades de planta
+(`V1`, `V2`, `V3`) [@gomez1984]. El experimento sigue un diseño de parcelas divididas (*split-plot design*), donde la
+variedad de planta y el tipo de gestión son factores de tratamiento cualitativos y la cantidad de fertilizante
+de nitrógeno es un factor de tratamiento cuantitativo.
+
+```{r}
+#| label: rice-eda
+
+data(rice)
+str(rice)
+```
+
+**Paquete `agridat`**
+
+- `holland.arthropods`: Muestreo de diferentes especies de artrópodos presentes en una malla de 30m x 30m de un
+campo de trigo cerca de Wimborne, Dorest (Reino Unido). Los muestreos se realizaron en 6 fechas entre junio/julio
+de 1996. Los conteos para cada especie de artrópodo se agregaron sobre los 6 días totales [@holland1999].
+
+```{r}
+#| label: arthropods-eda
+
+data(holland.arthropods)
+str(holland.arthropods)
+```
+
 ## Anatomía de un gráfico con `ggplot2`
 
-## Elementos estéticos
+El paquete `ggplot2` sigue los principios de la gramática de gráficos que hemos visto en el
+@sec-grammar-of-graphics, de forma que nos permite construir un gráfico paso a paso. Para ello
+se empieza por utilizar la función `ggplot()`:
 
-## Geometrías
+1. Indicamos a la función `ggplot()` los datos que vamos a representar. [El argumento
+`data = ...`.]{.aside}
+
+2. Indicamos a `ggplot()` *qué* relaciones queremos visualizar. [El argumento `mapping = aes(...)`.]{.aside}
+
+3. Elegimos *cómo* queremos representar gráficamente las relaciones en nuestros datos
+que hemos indicado en el paso anterior. [Elegimos una función `geom_...()` que determina
+el tipo de gráfico o elemento gráfico.]{.aside}
+
+4. Si es necesario, superponemos más elementos gráficos (objetos geométricos o *geoms*), añadiéndolas a nuestro
+gráfico una a una.
+
+5. Incluimos funciones adicionales para ajustar transformar los datos, ajustar o cambiar escalas, 
+añadir etiquetas y título, marcas en los ejes, capas adicionales, etc.
+
+Veamos estós datos sobre un esquema para hacernos una idea más clara del aspecto que tendrá nuestro
+código.
+
+```r
+ggplot(data = <DATOS>,                       # <1>
+       mapping = aes(<CONEXIONES>)) +        # <1>
+  geom_...(...) +                            # <2>
+  stat_...(...) +                            # <3>
+  <FUNCIONES DE ESCALA Y GUÍAS> +            # <4>
+  <SISTEMAS COORDENADOS> +                   # <5>
+  <FACETAS> +                                # <6>
+  <TEMA>                                     # <7>
+```
+1. Indicamos qué datos vamos a utilizar y como conectamos esos datos (mapeo) con los elementos estéticos. Esta parte es **obligatoria**.
+2. Añadimos uno o varios objetos geométricos para representar los datos.
+3. Transformamos los datos (funciones `stat_...()`), normalmente resumiéndolos de algún modo. 
+4. Ajustamos el mapeo de los datos a los elementos estéticos, modificando la escala de representación o añadiendo 
+elementos de guía para intepretar el gráfico (marcas en ejes, leyenda, etc.).
+5. Configuramos el sistema coordenado de representación (por defecto se usan coordenadas cartesianas): intercambio de ejes X e Y
+(función `coord_flip()`), uso de coordenadas polares (`coord_polar()`), etc.
+6. Decidimos si queremos desglosar el gráfico en varios paneles (*facets*) para presentar simultáneamente varios subgráficos
+(como hemos visto, útil para comparar entre grupos, evolución temporal y en otros casos).
+7. Por último, podemos elegir un tema preconfigurado que adapta el aspecto de muchos de los elementos del gráfico para conseguir
+un resultado final más armonizado.
+
+## Datos y elementos estéticos
+
+Los dos primeros pasos en nuestro gráfico serán indicar qué datos queremos considerar y
+qué elementos estéticos vamos a enlazar con dichos datos. En el siguiente ejemplo, guardamos
+en la variable `p` el resultado de los dos primeros pasos del proceso.
+
+Cuando los mínimos elementos necesarios para representar el gráfico están ya configurados, 
+la invocación directa de la variable `p` hace aparecer el gráfico.
+
+Vamos con el primer paso: indicar qué *dataset* queremos usar.
+
+```{r}
+#| label: fig-ggplot-first-data
+#| fig-cap: "Cuando sólo indicamos los datos que vamos a usar el gráfico todavía no muestra ningún elemento."
+
+p <- ggplot(data = holland.arthropods)
+p
+```
+
+Ahora, añadimos en el segundo paso las conexiones de los datos con los elementos estéticos.
+
+```{r}
+#| label: fig-ggplot-first-aes
+#| fig-cap: "Tras incorporar el mapeo entre datos y elementos gráficos ahora se muestran las variables asociadas a cada eje."
+
+p <- ggplot(data = holland.arthropods,
+            mapping = aes(x = lycosidae,
+                          y = weedcover))
+p
+```
+
+En la @fig-ggplot-first-aes podemos ver cómo las variables (atributos) asociadas al eje X y al
+eje Y de nuestro gráfico, mediante la función `aes()`, es lo único que se muestra. La zona principal de
+representación todavía no muestra ningún elemento, porque aún no hemos especificado de qué forma queremos
+representar la relación entre la variable en X y la que está en Y.
+
+## Objetos geométricos
+
+El paquete `ggplot2` incluye una larga lista de [funciones de objetos geométricos](https://ggplot2-book.org/layers.html#sec-geom)
+(abreviados como `geom_...()`) para añadir a nuestros gráficos. 
+
+Continuando con nuestro ejemplo, en el paso 3 del
+proceso de construcción añadimos un *geom* sencillo: una nube de puntos para crear un diagrama
+de dispersión básico (*scatterplot*) con la función `geom_point()`. El resultado se muestra en la
+@fig-ggplot-first-points. Observamos que, ahora sí, se muestra un punto en color negro en cada cruce de valores
+de los atributos numéricos representados en los ejes X e Y.
+
+
+```{r}
+#| label: fig-ggplot-first-points
+#| fig-cap: "Añadimos al gráfico un objeto geométrico: una nube de puntos."
+
+p <- p + geom_point()
+p
+```
+
+Es posible agregar más de un objeto geométrico al mismo gráfico, siempre y cuando sean compatibles.
+Continuando con nuestro caso de ejemplo, agregamos sobre el diagrama de dispersión una línea suavizada
+que muestra la tendencia global, junto con una banda en color gris que la rodea, indicando el error
+estándar de la curva estimada. El resultado se ilustra en la @fig-ggplot-first-points-smoothline.
+
+```{r}
+#| label: fig-ggplot-first-points-smoothline
+#| fig-cap: "Añadimos al gráfico otro objeto geométrico: una curva suavizada para ver la tendencia global."
+
+p <- p + geom_smooth(method = 'loess', formula = y ~ x)
+p
+```
 
 ## Escalas
 
+Las funciones de escala nos permiten controlar diversos elementos que controlan aspectos importantes de la
+visualización, como:
+
+- Esclas de representación, por ejemplo, para aplicar [transformaciones](https://ggplot2-book.org/scales-position#sec-scale-transformation)
+a los datos.
+- Límites de representación del gráfico en cada coordenada.
+- Acercamiento de la imagen (*zooming in*).
+- Marcas principales en los ejes (*breaks*).
+- Marcas secundarias en los ejes (*minor breaks*).
+- Etiquetas.
+- Uso de escalas de representación personalizadas para casos especiales (escala de fecha y hora, escala discreta, agrupamiento de
+datos por intervalos o *bins*, unidades monetarias, etc.).
+- Ajuste de las escalas de color (cuando mapeamos los valores de un atributo a una paleta de colores o gradación).
+- Leyendas del gráfico.
+- Forma y tamaño de los símbolos.
+- Tipo y anchura de las líneas.
+
+En nuestro caso de ejemplo, podemos ver el efecto que produce cambiar a una escala logarítmica (transformación `log10` a
+nuestros datos de ambos ejes).
+
+```{r}
+#| label: fig-ggplot-first-log10
+#| fig-cap: "Cambiamos la escala para aplicar a los datos una transformación log10."
+#| warning: false
+
+p <- p + scale_x_log10() + scale_y_log10()
+p
+```
+
 ## Etiquetas y título
+
+```{r}
+#| label: fig-ggplot-first-labels
+#| fig-cap: "Añadimos títulos y personalizamos etiquetas de los ejes."
+#| warning: false
+
+p <- p + labs(x = "Lycosidae (conteo)", y = "Weedcover (conteo)",
+    title = "Artrópodos presentes en campo de trigo",
+    subtitle = "Agregación de 6 fechas; junio/julio 1996", 
+    caption = "Ubicación: Wimborne, Dorest (Reino Unido)\nDiseño: Malla de 30m x 30m"
+    )
+p
+```
 
 ## Anotaciones
 
+En el [capítulo 8](https://ggplot2-book.org/annotations) del libro de referencia sobre `ggplot 2`
+[@wickham2024] se muestran varias funciones de este paquete y varios paquetes adicionales que permiten
+añadir anotaciones de todo tipo en nuestros gráficos: texto, fórmulas, etiquetas, etc. En ocasiones,
+algunos paquetes, como `directlabels`, ofrecen incluso [etiquetado automático](wickham2024) de los
+grupos de datos (según los valores de un atributo categórico).
+
+La @fig-ggplot-first-annotations muestra un ejemplo de cuatro anotaciones añadidas manualmente a nuestro
+gráfico para marcar la ubicación de otros tantos casos atípicos sobre el diagrama de dispersión.
+
+```{r}
+#| label: fig-ggplot-first-annotations
+#| fig-cap: "Añadimos elementos de anotación automáticos."
+#| warning: false
+
+label <- data.frame(
+  lycosidae = c(5, 5, 40, 61), 
+  weedcover = c(1, 2, 4,69), 
+  label = c("outlier 1", "outlier 2", "outlier 3", "outlier 4")
+)
+
+p + geom_label(data = label, aes(label = label))
+```
+
 ## Temas
+
+Por último, los temas nos permiten aplicar un conjunto de parámetros de configuración estéticos
+ya predefinidos y que dotan al gráfico de un aspecto homogéneo y estilo particular. Además,
+se puede utilizar la función `theme()` para crear nuestros propios temas personalizados, combinando
+las configuraciones que nos parezcan más adecuadas, o para modificar los parámetros de muchos
+elementos del gráfico.
+
+```{r}
+#| label: fig-ggplot-first-themes
+#| fig-cap: "Comprobamos cómo cambia la figura al utilizar varios temas predeterminados de `ggplot2`."
+#| fig-subcap: 
+#|     - "`theme_gray()` (opción por defecto)"
+#|     - "`theme_bw()`"
+#|     - "`theme_linedraw()`"
+#|     - "`theme_minimal()`"
+#| layout-ncol: 2
+#| warning: false
+
+p + theme_gray()
+p + theme_bw()
+p + theme_linedraw()
+p + theme_minimal()
+```
+
+Además de los temas estándar ya incluidos en `ggplot2`, existen algunos temas adicionales
+desarrollados por la comunidad o disponibles en otros paquetes. Un ejemplo es el paquete
+de [extensión `ggthemes`](https://exts.ggplot2.tidyverse.org/ggthemes.html), que incluye
+ejemplos de temas inspirados en publicaciones y blogs conocidos como The Economist o
+[FiveThirtyEight](https://projects.fivethirtyeight.com/).
+
+```{r}
+#| label: fig-ggplot-first-economist
+#| fig-cap: "Ejemplo de uso del tema inspirado en los gráficos de The Economist, incluido en el paquete `ggthemes`."
+#| warning: false
+
+library(ggthemes)
+p + theme_economist() + scale_colour_economist()
+```
 
 ## Extensiones de `ggplot2`
 
+El paquete `ggplot2` se ha convertido en una herramienta de visualización de datos tan popular que han surgido
+bastantes paquetes que extienden su funcionalidad de diversas maneras. Algunos de ellos están recogidos en una
+[lista de extensiones oficiales de `ggplot2`](https://exts.ggplot2.tidyverse.org). Un ejemplo de esta lista es
+el paquete `ggthemes` que hemos mencionado en la sección anterior, pero hay más. Algunas de las más útiles son:
+
+- `ggraph`: Incluye diversos *geoms* para dibujar gráficos para datos de redes y grafos, por ejemplo, en combinación
+con el paquete `igraph`.
+
+- `ggspectra`: Incluye *stats*, *geoms* y anotaciones para espectros lumínicos, manejados en el paquete
+`photobiology`.
+
+- `ggradar`: Extensión que permite crear gráficos de tipo radar, integrados con el resto de componentes de
+`ggplot2`.
+
+- `ggtree`: Ofrece herramientas para visualización de árboles filogenéticos.
+
+La @fig-ggplot-extensions muestra ejemplos de gráficos creados con cada uno de estos paquetes de extensión de `ggplot2`.
+Se recomienda revisar la documentación del resto de extensiones para descubrir otras herramientas que puedan ser
+de utilidad (etiquetado de puntos, *geoms* adicionales, etc.).
+
+::: {#fig-ggplot-extensions layout-ncol=2}
+
+![`gggraph`](img/ggraph-example.png){#fig-ggraph-example}
+
+![`ggspectra`](img/gg){#fig-ggspectra-example}
+
+![`ggradar`](img/ggradar-example.png){#fig-ggradar-example}
+
+![`ggtree`](img/ggtree-example.png){#fig-ggtree-example}
+
+Ejemplos de gráficos creados con cuatro paquetes de extensión de `ggplot2`.
+:::
+
+### Extensiones adicionales
+
+Además de las extensiones que figuran en el listado anterior, hay otros paquetes
+que también incluyen funciones interesantes que extienden las herramientas básicas
+de `ggplot2`.
+
+-   `ggstatsplot`: una de las extensiones más populares y potentes para `ggplot2` es esta, que permite
+crear gráficos muy sofisticados y, además, acompañados de detalles y resultados de nuestros
+modelos estadísticos [@patil2021]. Veamos un primer ejemplo en la @fig-ggstatsplot-regression.
+
+```{r}
+#| label: fig-ggstatsplot-regression
+#| fig-cap: "Gráfico de regresión simple con bandas del C.I. (95%), que incluye histogramas marginales de cada atributo, coeficiente de correlación, p-valor y tamaño de la muestra. Fuente: <https://r-graph-gallery.com/package/ggstatsplot.html>."
+
+library(ggstatsplot)
+ggscatterstats(data = mtcars, x = hp, y = mpg)
+```
+
+
+    Otro buen ejemplo de gráfico de calidad listo para publicar con este paquete es el mostrado en la
+    @fig-ggstatsplot-betweenstats, que muestra una representación gráfica y los resultados estadísticos
+    de varios test comparando la diferencia de medias entre grupos.
+
+```{r}
+#| label: fig-ggstatsplot-betweenstats
+#| fig-cap: "Violín plots paralelos, que incluyen distribución de puntos (con jitter), boxplot integrado y resultados adicionales de tests estadísticos de diferencias entre medias de los distintos grupos. Fuente: [Doc. `ggstatsplot`](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/principles.html)."
+
+ggbetweenstats(
+  data = dplyr::filter(
+    movies_long,
+    genre %in% c("Action", "Action Comedy", "Action Drama", "Comedy")
+  ),
+  x = genre,
+  y = rating,
+  title = "IMDB rating by film genre",
+  xlab = "Genre",
+  ylab = "IMDB rating (average)"
+)
+```
+
+    El paquete `ggstatsplot` también incluye muchas funciones para automatizar el resumen de resultados
+    de modelos de regresión, tanto frecuentistas como bayesianos, con un total de 
+    [235 modelos soportados](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html#supported-models).
+    Veremos algunos ejemplos de estas funciones en el @sec-graphs-model-eval.
+
+- `patchwork`: permite componer fácilmente parrillas de gráficos con diferentes configuraciones a partir
+de gráficos individuales creados con `ggplot2`. Además, usa una sintaxis bastante sencilla y
+directa, puesto que el operador `+` coloca un gráfico junto a otro, mientras que los operadores `|` y
+`/` construyen una rejilla en dirección horizontal o vertical, respectivamente. La figura 
+@fig-patchwork-example ilustra con un ejemplo con código cómo funciona este paquete. Se recomienda
+encarecidamente consultar [la página de documentación de `patchwork`](https://patchwork.data-imaginist.com/)
+para conocer más detalles y ejemplos.
+
+```{r}
+#| label: fig-patchwork-example
+#| fig-cap: "Ejemplo de funcionamiento del paquete `patchwork` para componer conjuntos de gráficos creados con `ggplot2`."
+
+library(ggplot2)
+library(patchwork)
+
+p1 <- ggplot(mtcars) + geom_point(aes(mpg, disp))  # Primer gráfico
+p2 <- ggplot(mtcars) + geom_boxplot(aes(gear, disp, group = gear)) # Segundo gráfico
+
+p3 <- ggplot(mtcars) + geom_smooth(aes(disp, qsec),
+                                   method = 'loess',
+                                   formula = 'y ~ x')
+p4 <- ggplot(mtcars) + geom_bar(aes(carb))
+
+(p1 | p2 | p3) /
+      p4
+```
+
+- `GGally`: otro paquete tremendamente potente, que proporciona funciones para creación automática de gráficos
+con distintos fines: exploración de datos, gráficos bivariantes, evaluación de modelos, etc. Veremos algunos
+ejemplos de este paquete en el @sec-graphs-model-eval. Un ejemplo muy habitual y de gran utilidad es la
+función `ggpairs()`, que construye una matriz para comparación de datos multivariantes por parejas, tal y como
+muestra la @fig-ggpairs-example.
+
+```{r}
+#| label: fig-ggmatrix-example
+#| fig-cap: "Ejemplo de una matriz de graficos comparativos entre parejas de atributos en un conjunto de datos multivariante, creada con `ggpairs()`."
+
+library(GGally)
+pm <- ggpairs(tips, mapping = aes(color = sex), columns = c("total_bill", "time", "tip"))
+pm
+```
+
+- `ggpubr`: por último, el paquete `ggpubr` incluye una serie de funciones para facilitar la composición de gráficos
+orientados a publicaciones científicas. La @fig-ggpubr-example muestra un ejemplo con la función `ggboxplot()`, para
+crear boxplots paralelos que, además, muestren información sobre contrastes de hipótesis sobre si las diferencias entre
+las medias de los grupos son estadísticamente significativas.
+
+```{r}
+#| label: fig-ggpubr-example
+#| fig-cap: "Ejemplo de un gráfico con boxplots paralelos y contraste de hipótesis sobre diferencias entre medias de los grupos."
+
+library(ggpubr)
+data("ToothGrowth")
+df <- ToothGrowth
+
+# Especificamos las comparaciones que se mostrarán
+p <- ggboxplot(df, x = "dose", y = "len",
+                color = "dose", palette =c("#00AFBB", "#E7B800", "#FC4E07"),
+                add = "jitter", shape = "dose")
+my_comparisons <- list( c("0.5", "1"), c("1", "2"), c("0.5", "2") )
+p + stat_compare_means(comparisons = my_comparisons)+ # Añadir p-valores de comparaciones
+  stat_compare_means(label.y = 50)  # Añadir contraste global diferencia entre medias
+```
+
 ## Taller práctico 1: construcción de gráficos paso a paso
+
