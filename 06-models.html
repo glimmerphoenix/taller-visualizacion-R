@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -237,9 +291,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#evaluación-de-modelos" id="toc-evaluación-de-modelos" class="nav-link active" data-scroll-target="#evaluación-de-modelos"><span class="header-section-number">6.1</span> Evaluación de modelos</a></li>
-  <li><a href="#ejemplo-modelos-de-regresión" id="toc-ejemplo-modelos-de-regresión" class="nav-link" data-scroll-target="#ejemplo-modelos-de-regresión"><span class="header-section-number">6.2</span> Ejemplo: modelos de regresión</a></li>
-  <li><a href="#ejemplo-explicabilidad-de-modelos" id="toc-ejemplo-explicabilidad-de-modelos" class="nav-link" data-scroll-target="#ejemplo-explicabilidad-de-modelos"><span class="header-section-number">6.3</span> Ejemplo: explicabilidad de modelos</a></li>
+  <li><a href="#evaluación-y-diagnóstico-de-modelos" id="toc-evaluación-y-diagnóstico-de-modelos" class="nav-link active" data-scroll-target="#evaluación-y-diagnóstico-de-modelos"><span class="header-section-number">6.1</span> Evaluación y diagnóstico de modelos</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-diagnóstico-de-modelos-de-regresión" id="toc-ejemplo-diagnóstico-de-modelos-de-regresión" class="nav-link" data-scroll-target="#ejemplo-diagnóstico-de-modelos-de-regresión"><span class="header-section-number">6.1.1</span> Ejemplo: diagnóstico de modelos de regresión</a></li>
+  </ul></li>
+  <li><a href="#xai-explanaible-ai" id="toc-xai-explanaible-ai" class="nav-link" data-scroll-target="#xai-explanaible-ai"><span class="header-section-number">6.2</span> XAI: Explanaible AI</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-explicabilidad-de-algoritmos-ml" id="toc-ejemplo-explicabilidad-de-algoritmos-ml" class="nav-link" data-scroll-target="#ejemplo-explicabilidad-de-algoritmos-ml"><span class="header-section-number">6.2.1</span> Ejemplo: explicabilidad de algoritmos ML</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/06-models.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/06-models.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
@@ -265,23 +324,181 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Una de las aplicaciones principales de la visualización de datos es la de crear gráficos para evaluar nuestros modelos y algoritmos. La representación gráfica de</p>
-<section id="evaluación-de-modelos" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="evaluación-de-modelos"><span class="header-section-number">6.1</span> Evaluación de modelos</h2>
+<p>Una de las aplicaciones principales de la visualización de datos es la de crear gráficos para evaluar nuestros modelos y algoritmos. La representación gráfica de diferentes métricas de evaluación nos permiten comprobar si nuestros modelos están cumpliendo los requisitos previos exigibles para su validez, así como confirmar que el ajuste es suficientemente bueno, que el modelo está correctamente calibrado, detectar una posible dependencia de datos particulares, y muchas otras aplicaciones.</p>
+<p>Por último, también comentaremos el importante aspecto de la explicabilidad de modelos y algoritmos, que intenta aclarar el proceso que siguen para devolver un determinado resultado y que, de esa forma, entendamos mejor su funcionamiento interno. En este apartado, la visualización de datos también juega un papel esencial.</p>
+<section id="evaluación-y-diagnóstico-de-modelos" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="evaluación-y-diagnóstico-de-modelos"><span class="header-section-number">6.1</span> Evaluación y diagnóstico de modelos</h2>
+<p>Existen diversas herramientas que nos permiten generar gráficas de evaluación de modelos estadísticos y algoritmos en R.</p>
+<section id="ejemplo-diagnóstico-de-modelos-de-regresión" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="ejemplo-diagnóstico-de-modelos-de-regresión"><span class="header-section-number">6.1.1</span> Ejemplo: diagnóstico de modelos de regresión</h3>
+<p>El diagnóstico de los modelos de regresión siempre se ha apoyado en la utilización de diagramas y gráficos para su evaluación crítica y la detección de posibles elementos problemáticos o que requieran especial atención.</p>
+<p>Tomemos como ejemplo el conjunto de datos <code>gala</code> de paquete <code>faraway</code>, que contiene datos sobre un estudio sobre la ubicación de diferentes especies vegetales en las islas Galápagos.</p>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(faraway)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gala)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Species <span class="sc">~</span> Area <span class="sc">+</span> Elevation <span class="sc">+</span> Scruz <span class="sc">+</span> Nearest <span class="sc">+</span> Adjacent,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>gala)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lmod)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-lm-gala-eval" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lm-gala-eval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-lm-gala-eval" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-lm-gala-eval-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-lm-gala-eval-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06-models_files/figure-html/fig-lm-gala-eval-1.png" class="img-fluid figure-img" data-ref-parent="fig-lm-gala-eval" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-lm-gala-eval-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Residuos vs.&nbsp;valores ajustados.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-lm-gala-eval" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-lm-gala-eval-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-lm-gala-eval-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06-models_files/figure-html/fig-lm-gala-eval-2.png" class="img-fluid figure-img" data-ref-parent="fig-lm-gala-eval" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-lm-gala-eval-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Q-Q residuos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-lm-gala-eval" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-lm-gala-eval-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-lm-gala-eval-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06-models_files/figure-html/fig-lm-gala-eval-3.png" class="img-fluid figure-img" data-ref-parent="fig-lm-gala-eval" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-lm-gala-eval-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Gráfico de escala-localización.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-lm-gala-eval" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-lm-gala-eval-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-lm-gala-eval-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06-models_files/figure-html/fig-lm-gala-eval-4.png" class="img-fluid figure-img" data-ref-parent="fig-lm-gala-eval" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-lm-gala-eval-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) Residuos vs.&nbsp;puntos palanca (<em>leverage points</em>).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lm-gala-eval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6.1: Gráficos para analizar un modelo de regresión lineal sobre el <em>dataset</em> <code>gala</code>. Fuente: <span class="citation" data-cites="faraway2022">(<a href="references.html#ref-faraway2022" role="doc-biblioref">J. Faraway, 2022</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>Algunos paquetes como <code>ggstatsplot</code> <span class="citation" data-cites="patil2021">(<a href="references.html#ref-patil2021" role="doc-biblioref">Patil, 2021</a>)</span> permiten generar gráficos un poco más sofisticados para resumir el resultado de nuestros modelos y generar gráficos para inspeccionar su ajuste. Por ejemplo, en <span class="citation" data-cites="faraway2014">(<a href="references.html#ref-faraway2014" role="doc-biblioref">J. J. Faraway, 2014</a>)</span> se sugiere que una transformación de tipo raíz cuadrada sobre la variable de conteo de especies permite mejorar el ajuste del modelo. La <a href="#fig-lm-gala-sqrt-coefs" class="quarto-xref">Figura&nbsp;<span>6.2</span></a> muestra un resumen gráfico de los coeficientes y tests asociados a este modelo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>You can cite this package as:
+     Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach.
+     Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lmod_sqrt <span class="ot">&lt;-</span> <span class="fu">lm</span>(Species <span class="sc">~</span> Area <span class="sc">+</span> Elevation <span class="sc">+</span> Scruz <span class="sc">+</span> Nearest <span class="sc">+</span> Adjacent,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>gala)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(lmod_sqrt)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-lm-gala-sqrt-coefs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lm-gala-sqrt-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06-models_files/figure-html/fig-lm-gala-sqrt-coefs-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lm-gala-sqrt-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6.2: Resumen de coeficientes y tests estadísticos asociados a un modelo de regresión.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>El paquete adicional <code>ggfortify</code> nos puede ayudar a representar los gráficos de diagnóstico para este modelo de regresión utilizando <code>ggplot2</code>. La <a href="#fig-ggfortify-lm" class="quarto-xref">Figura&nbsp;<span>6.3</span></a> muestra un ejemplo de gráficos de diagnóstico</p>
+<p><a href="https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_lm.html" class="uri">https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_lm.html</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Cargando paquete requerido: ggplot2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(lmod_sqrt, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggfortify-lm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggfortify-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06-models_files/figure-html/fig-ggfortify-lm-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggfortify-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6.3: Gráficos de diagnóstico del modelo de regresión sobre el <em>dataset</em> <code>gala</code> generados con el paquete <code>ggfortify</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="ejemplo-modelos-de-regresión" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="ejemplo-modelos-de-regresión"><span class="header-section-number">6.2</span> Ejemplo: modelos de regresión</h2>
+</section>
+<section id="xai-explanaible-ai" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="xai-explanaible-ai"><span class="header-section-number">6.2</span> XAI: Explanaible AI</h2>
+<section id="ejemplo-explicabilidad-de-algoritmos-ml" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="ejemplo-explicabilidad-de-algoritmos-ml"><span class="header-section-number">6.2.1</span> Ejemplo: explicabilidad de algoritmos ML</h3>
+<p>Al contrario que los modelos lineales, lineales generalizados o los árboles de decisión y métodos basados en ellos (e.g.&nbsp;Random Forest), muchos modelos de aprendizaje automático (ML) se comportan normalmente como si fuesen modelos opacos (<strong>black-box models</strong>), cuyo funcionamiento interno es dificil de comprender. A pesar de ello, en muchos casos es imprescindible que podamos crear gráficos y resultados que permitan comprender, al menos intuitivamente, las relaciones entre las variables entrantes y las salidas del algoritmo.</p>
+<p>De hecho, tras las reciente aprobación en 2024 de la Ley sobre Inteligencia Artificial del Parlamento y el Consejo Europeo <span class="citation" data-cites="eu-2024-1689">(<a href="references.html#ref-eu-2024-1689" role="doc-biblioref">Council of European Union, 2024</a>)</span>, se considera de vital importancia en el nuevo contexto de aplicación de algoritmos y modelos de IA en el seno de la UE la inclusión de mecanismos que faciliten su explicabilidad e interpretabilidad de los resultados que devuelven. En este contexto, se ha acuñado en inglés el concepto de <em>Explanaible Artificial Intelligence (XAI)</em> como un conjunto de herramientas y métodos para explicar e interpretar modelos de ML.</p>
+<p>En R existen, entre otros, <a href="https://jtr13.github.io/cc21fall2/introduction-to-xai-explainable-ai-in-r.html#introduction-8">dos paquetes principales</a> que implementan métodos y herramientas para XAI:</p>
 <ul>
-<li><p>Gráficos clásicos de resumen de resultados.</p></li>
-<li><p>Gráficos clásicos para evaluación de modelos.</p></li>
+<li><p>El paquete <code>iml</code></p></li>
+<li><p>DALEX (Descriptive mAchine Learning EXplanations) <span class="citation" data-cites="biecek2021">(<a href="references.html#ref-biecek2021" role="doc-biblioref">Biecek &amp; Burzykowski, 2021</a>)</span> propone todo un <em>framework</em> para explicabilidad de modelos ML. Su punto de entrada es la función <code>explain()</code> que envuelve un modelo predictivo posibilitando a partir de ese momento la aplicación de <a href="https://github.com/ModelOriented/DrWhy/blob/master/README.md">diversas herramientas de XAI</a> más sofisticadas. La <a href="#fig-DALEX-workflow" class="quarto-xref">Figura&nbsp;<span>6.4</span></a> resume el flujo de trabajo estándar con el paquete DALEX y muestra la gran diversidad de modelos procedentes de otros paquetes que son compatibles con las herramientas de XAI incluidas en este <em>framework</em>.</p>
+<p>A su vez, la <a href="#fig-DALEX-pyramid" class="quarto-xref">Figura&nbsp;<span>6.5</span></a> muestra la organización y conexiones entre las diferentes herramientas incluidas en el paquete DALEX para XAI.</p></li>
 </ul>
-<p><a href="https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html" class="uri">https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html</a></p>
+<div id="fig-DALEX-workflow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DALEX-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/DALEX-workflow.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DALEX-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6.4: Esquema del flujo de trabajo para XAI en R utilizando el paquete <code>DALEX</code>.
+</figcaption>
+</figure>
+</div>
+<div id="fig-DALEX-pyramid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DALEX-pyramid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/DALEX-pyramid.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DALEX-pyramid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6.5: Organización de las diversas herramientas para XAI incluidas en el paquete <code>DALEX</code>.
+</figcaption>
+</figure>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-biecek2021" class="csl-entry" role="listitem">
+Biecek, P., &amp; Burzykowski, T. (2021). <em>Explanatory Model Analysis</em>. Chapman &amp; Hall/CRC Press. <a href="https://doi.org/10.1201/9780429027192">https://doi.org/10.1201/9780429027192</a>
+</div>
+<div id="ref-eu-2024-1689" class="csl-entry" role="listitem">
+Council of European Union. (2024). <em>Regulation (<span>EU</span>) no. 2024/1689 (<span>A</span>rtificial <span>I</span>ntelligence <span>A</span>ct)</em>.
+</div>
+<div id="ref-faraway2022" class="csl-entry" role="listitem">
+Faraway, J. (2022). <em>’faraway’: Functions and Datasets for Books by Julian Faraway</em>. <a href="https://CRAN.R-project.org/package=faraway">https://CRAN.R-project.org/package=faraway</a>
+</div>
+<div id="ref-faraway2014" class="csl-entry" role="listitem">
+Faraway, J. J. (2014). <em>Linear <span>M</span>odels with <span>R</span></em>. Chapman &amp; Hall/CRC Press. <a href="https://julianfaraway.github.io/faraway/LMR/">https://julianfaraway.github.io/faraway/LMR/</a>
+</div>
+<div id="ref-patil2021" class="csl-entry" role="listitem">
+Patil, I. (2021). <span>Visualizations with statistical details: The <span>’ggstatsplot’</span> approach</span>. <em><span>Journal of Open Source Software</span></em>, <em>6</em>(61), 3167. <a href="https://doi.org/10.21105/joss.03167">https://doi.org/10.21105/joss.03167</a>
+</div>
+</div>
 </section>
-<section id="ejemplo-explicabilidad-de-modelos" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="ejemplo-explicabilidad-de-modelos"><span class="header-section-number">6.3</span> Ejemplo: explicabilidad de modelos</h2>
-<p>Casos sencillos sobre importancia de variables.</p>
-
-
 </section>
 
 </main> <!-- /main -->
