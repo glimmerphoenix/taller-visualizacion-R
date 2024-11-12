@@ -249,7 +249,7 @@ gráfico para marcar la ubicación de otros tantos casos atípicos sobre el diag
 #| warning: false
 
 label <- data.frame(
-  lycosidae = c(5, 5, 40, 61), 
+  lycosidae = c(5.2, 5.2, 43, 65), 
   weedcover = c(1, 2, 4,69), 
   label = c("outlier 1", "outlier 2", "outlier 3", "outlier 4")
 )
@@ -323,7 +323,7 @@ de utilidad (etiquetado de puntos, *geoms* adicionales, etc.).
 
 ![`gggraph`](img/ggraph-example.png){#fig-ggraph-example}
 
-![`ggspectra`](img/gg){#fig-ggspectra-example}
+![`ggspectra`](img/ggspectra-example.png){#fig-ggspectra-example}
 
 ![`ggradar`](img/ggradar-example.png){#fig-ggradar-example}
 
