@@ -60,6 +60,7 @@ gráfico de los coeficientes y tests asociados a este modelo.
 ```{r}
 #| label: fig-lm-gala-sqrt-coefs
 #| fig-cap: "Resumen de coeficientes y tests estadísticos asociados a un modelo de regresión."
+#| message: false
 library(ggstatsplot)
 
 lmod_sqrt <- lm(Species ~ Area + Elevation + Scruz + Nearest + Adjacent,
@@ -70,22 +71,38 @@ ggcoefstats(lmod_sqrt)
 
 El paquete adicional `ggfortify` nos puede ayudar a representar los gráficos de diagnóstico
 para este modelo de regresión utilizando `ggplot2`. La @fig-ggfortify-lm muestra un ejemplo
-de gráficos de diagnóstico
+de gráficos de diagnóstico creados mediante la función `autoplot()`. Esta función
+es compatible con diversos tipos de modelos en R, incluyendo modelos lineales
+generalizados y sus versiones regularizadas (Ridge, Lasso y Elastic-net mediante el paquete
+`glmnet`), series temporales, familias de PCA, *clustering* y análisis de supervivencia.
 
-<https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_lm.html>.
 
 ```{r}
 #| label: fig-ggfortify-lm
 #| fig-cap: "Gráficos de diagnóstico del modelo de regresión sobre el *dataset* `gala` generados con el paquete `ggfortify`."
+#| message: false
 
 library(ggfortify)
 
 autoplot(lmod_sqrt, which = 1:6, ncol = 3, label.size = 3)
 ```
 
+Existen más paquetes que amplían el soporte para creación de gráficos de diagnóstico con otros tipos
+de modelos. Por ejemplo, el [paquete `ggDiagnose`](https://github.com/benjaminleroy/ggDiagnose) puede
+generar con `ggplot2` gráficos de diagnóstico para modelos generalizados aditivos (GAM). Otro 
+paquete similar que puede ser de interés para estudiantes de Ecología y Ciencias
+Ambientales es [`INDperform`](https://saskiaotto.github.io/INDperform/index.html), con
+soporte para modelos GAM y GAMM.
 
 ## XAI: Explanaible AI
 
+Tras las reciente aprobación en 2024
+de la Ley sobre Inteligencia Artificial del Parlamento y el Consejo Europeo [@eu-2024-1689], se
+considera de vital importancia en el nuevo contexto de aplicación de algoritmos y modelos de IA
+en el seno de la UE la inclusión de mecanismos que faciliten su explicabilidad e interpretabilidad
+de los resultados que devuelven. En este contexto, se ha acuñado en inglés el concepto de 
+*Explanaible Artificial Intelligence (XAI)* como un conjunto de herramientas y métodos para
+explicar e interpretar modelos de ML.
 
 ### Ejemplo: explicabilidad de algoritmos ML
 
@@ -96,20 +113,15 @@ es dificil de comprender. A pesar de ello, en muchos casos es imprescindible que
 gráficos y resultados que permitan comprender, al menos intuitivamente, las relaciones entre las
 variables entrantes y las salidas del algoritmo. 
 
-De hecho, tras las reciente aprobación en 2024
-de la Ley sobre Inteligencia Artificial del Parlamento y el Consejo Europeo [@eu-2024-1689], se
-considera de vital importancia en el nuevo contexto de aplicación de algoritmos y modelos de IA
-en el seno de la UE la inclusión de mecanismos que faciliten su explicabilidad e interpretabilidad
-de los resultados que devuelven. En este contexto, se ha acuñado en inglés el concepto de 
-*Explanaible Artificial Intelligence (XAI)* como un conjunto de herramientas y métodos para
-explicar e interpretar modelos de ML.
-
 En R existen, entre otros, [dos paquetes principales](https://jtr13.github.io/cc21fall2/introduction-to-xai-explainable-ai-in-r.html#introduction-8)
 que implementan métodos y herramientas para XAI:
 
--   El paquete `iml`
+-   El paquete `iml` [@molnar2018] incluye un buen número de herramientas agnósticas de modelo
+para AIX (es decir, que son válidas para varios modelos y algoritmos sin particularidades que las hagan
+incompatibles con alguno de ellos). Estas herramientas están explicadas de forma más amplia en un
+excelente libro sobre ML interpretable publicado por uno de los autores del paquete [@molnar2024].
 
--   DALEX (Descriptive mAchine Learning EXplanations) [@biecek2021] propone todo un *framework* para
+-   `DALEX` (Descriptive mAchine Learning EXplanations) [@biecek2021] es un paquete que propone todo un *framework* para
 explicabilidad de modelos ML. Su punto de entrada es la función `explain()` que envuelve un modelo
 predictivo posibilitando a partir de ese momento la aplicación de 
 [diversas herramientas de XAI](https://github.com/ModelOriented/DrWhy/blob/master/README.md) más
@@ -123,3 +135,18 @@ con las herramientas de XAI incluidas en este *framework*.
 ![Esquema del flujo de trabajo para XAI en R utilizando el paquete `DALEX`.](img/DALEX-workflow.png){#fig-DALEX-workflow width=100%}
 
 ![Organización de las diversas herramientas para XAI incluidas en el paquete `DALEX`.](img/DALEX-pyramid.png){#fig-DALEX-pyramid width=100%}
+
+El paquete DALEX es parte del ecosistema [DrWhy.AI](http://drwhy.ai/), un conjunto de 
+paquetes R para abordar la exploración visual, explicación y diagnóstico de modelos
+predictivos: <https://github.com/ModelOriented/DrWhy>. Incluye adaptadores para compatibilidad
+con un gran número de paquetes de modelado y ML en R (y otras tecnologías, como H2O), así como herramientas
+de explicabilidad de modelos y algoritmos, tanto agnósticas del modelo como específicamente
+diseñadas para cierto tipo de modelos. Por último, también incluye herramientas que automatizan
+la exploración y diagnóstico interactivos de modelos y algoritmos: los paquetes
+[`modelStudio`](https://github.com/ModelOriented/modelStudio) (interactivo) y
+[`modelDown`](https://github.com/ModelOriented/modelDown) (resumen explicativo de modelos en HTML).
+La @fig-modelDown-importance muestra un ejemplo de un gráfico de importancia de variables para
+interpretar el papel que juegan en las predicciones devueltas por diferentes modelos estadísticos
+aplicados al mismo conjunto de datos.
+
+![Gráfica de barras que muestra la importancia de diferentes variables en distintos algoritmos de ML aplicados sobre el mismo conjunto de datos, generada con `modelDown`. Fuente: <https://github.com/ModelOriented/modelDown>.](img/modelDown-importance.png){#fig-modelDown-importance}
