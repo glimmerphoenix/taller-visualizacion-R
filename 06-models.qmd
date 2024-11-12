@@ -1,16 +1,125 @@
 # Gráficos para evaluación de modelos {#sec-graphs-model-eval}
 
-## Evaluación de modelos
+Una de las aplicaciones principales de la visualización de datos es la
+de crear gráficos para evaluar nuestros modelos y algoritmos. La
+representación gráfica de diferentes métricas de evaluación nos permiten
+comprobar si nuestros modelos están cumpliendo los requisitos previos
+exigibles para su validez, así como confirmar que el ajuste es suficientemente
+bueno, que el modelo está correctamente calibrado, detectar una posible
+dependencia de datos particulares, y muchas otras aplicaciones.
+
+Por último, también comentaremos el importante aspecto de la explicabilidad
+de modelos y algoritmos, que intenta aclarar el proceso que siguen para
+devolver un determinado resultado y que, de esa forma, entendamos mejor su
+funcionamiento interno. En este apartado, la visualización de datos también juega
+un papel esencial.
+
+## Evaluación y diagnóstico de modelos
+
+Existen diversas herramientas que nos permiten generar gráficas de evaluación de modelos
+estadísticos y algoritmos en R.
+
+### Ejemplo: diagnóstico de modelos de regresión
+
+El diagnóstico de los modelos de regresión siempre se ha apoyado en la utilización de
+diagramas y gráficos para su evaluación crítica y la detección de posibles elementos
+problemáticos o que requieran especial atención.
+
+Tomemos como ejemplo el conjunto de datos `gala` de paquete `faraway`,
+que contiene datos sobre un estudio sobre la ubicación de diferentes
+especies vegetales en las islas Galápagos.
+
+```{r}
+#| label: fig-lm-gala-eval
+#| fig-cap: "Gráficos para analizar un modelo de regresión lineal sobre el *dataset* `gala`. Fuente: [@faraway2022]."
+#| fig-subcap: 
+#|   - "Residuos vs. valores ajustados."
+#|   - "Q-Q residuos."
+#|   - "Gráfico de escala-localización."
+#|   - "Residuos vs. puntos palanca (*leverage points*)."
+#| layout-ncol: 2
+#| warning: false
+
+library(faraway)
+data(gala)
+
+lmod <- lm(Species ~ Area + Elevation + Scruz + Nearest + Adjacent,
+           data=gala)
+plot(lmod)
+```
 
 
-## Ejemplo: modelos de regresión
+Algunos paquetes como `ggstatsplot` [@patil2021] permiten generar
+gráficos un poco más sofisticados para resumir el resultado de nuestros
+modelos y generar gráficos para inspeccionar su ajuste. Por ejemplo,
+en [@faraway2014] se sugiere que una transformación de tipo raíz
+cuadrada sobre la variable de conteo de especies permite mejorar el
+ajuste del modelo. La @fig-lm-gala-sqrt-coefs muestra un resumen
+gráfico de los coeficientes y tests asociados a este modelo.
 
-- Gráficos clásicos de resumen de resultados.
+```{r}
+#| label: fig-lm-gala-sqrt-coefs
+#| fig-cap: "Resumen de coeficientes y tests estadísticos asociados a un modelo de regresión."
+library(ggstatsplot)
 
-- Gráficos clásicos para evaluación de modelos.
+lmod_sqrt <- lm(Species ~ Area + Elevation + Scruz + Nearest + Adjacent,
+           data=gala)
+ggcoefstats(lmod_sqrt)
+```
 
-<https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html>
 
-## Ejemplo: explicabilidad de modelos
+El paquete adicional `ggfortify` nos puede ayudar a representar los gráficos de diagnóstico
+para este modelo de regresión utilizando `ggplot2`. La @fig-ggfortify-lm muestra un ejemplo
+de gráficos de diagnóstico
 
-Casos sencillos sobre importancia de variables.
+<https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_lm.html>.
+
+```{r}
+#| label: fig-ggfortify-lm
+#| fig-cap: "Gráficos de diagnóstico del modelo de regresión sobre el *dataset* `gala` generados con el paquete `ggfortify`."
+
+library(ggfortify)
+
+autoplot(lmod_sqrt, which = 1:6, ncol = 3, label.size = 3)
+```
+
+
+## XAI: Explanaible AI
+
+
+### Ejemplo: explicabilidad de algoritmos ML
+
+Al contrario que los modelos lineales, lineales generalizados o los árboles de decisión y métodos
+basados en ellos (e.g. Random Forest), muchos modelos de aprendizaje automático (ML) se comportan
+normalmente como si fuesen modelos opacos (**black-box models**), cuyo funcionamiento interno
+es dificil de comprender. A pesar de ello, en muchos casos es imprescindible que podamos crear
+gráficos y resultados que permitan comprender, al menos intuitivamente, las relaciones entre las
+variables entrantes y las salidas del algoritmo. 
+
+De hecho, tras las reciente aprobación en 2024
+de la Ley sobre Inteligencia Artificial del Parlamento y el Consejo Europeo [@eu-2024-1689], se
+considera de vital importancia en el nuevo contexto de aplicación de algoritmos y modelos de IA
+en el seno de la UE la inclusión de mecanismos que faciliten su explicabilidad e interpretabilidad
+de los resultados que devuelven. En este contexto, se ha acuñado en inglés el concepto de 
+*Explanaible Artificial Intelligence (XAI)* como un conjunto de herramientas y métodos para
+explicar e interpretar modelos de ML.
+
+En R existen, entre otros, [dos paquetes principales](https://jtr13.github.io/cc21fall2/introduction-to-xai-explainable-ai-in-r.html#introduction-8)
+que implementan métodos y herramientas para XAI:
+
+-   El paquete `iml`
+
+-   DALEX (Descriptive mAchine Learning EXplanations) [@biecek2021] propone todo un *framework* para
+explicabilidad de modelos ML. Su punto de entrada es la función `explain()` que envuelve un modelo
+predictivo posibilitando a partir de ese momento la aplicación de 
+[diversas herramientas de XAI](https://github.com/ModelOriented/DrWhy/blob/master/README.md) más
+sofisticadas. La @fig-DALEX-workflow resume el flujo de trabajo estándar con el paquete
+DALEX y muestra la gran diversidad de modelos procedentes de otros paquetes que son compatibles
+con las herramientas de XAI incluidas en este *framework*.
+
+    A su vez, la @fig-DALEX-pyramid muestra la organización y conexiones entre las diferentes herramientas
+    incluidas en el paquete DALEX para XAI.
+
+![Esquema del flujo de trabajo para XAI en R utilizando el paquete `DALEX`.](img/DALEX-workflow.png){#fig-DALEX-workflow width=100%}
+
+![Organización de las diversas herramientas para XAI incluidas en el paquete `DALEX`.](img/DALEX-pyramid.png){#fig-DALEX-pyramid width=100%}
