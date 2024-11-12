@@ -1,13 +1,161 @@
-# Gramática de gráficos
+# Gramática de gráficos {#sec-grammar-of-graphics}
 
-Breve presentación del paradigma de *grammar of graphics*, adoptado
-por muchas de las principales bibliotecas de visualización de datos.
+Este capítulo presenta brevemente el paradigma de *grammar of graphics*, adoptado
+por varias bibliotecas y paquetes de visualización de datos en diferentes lenguajes
+de programación, incluyendo el paquete `ggplot2` que será el principal protagonista
+en el @sec-ggplot2.
 
 ## Origen y propósito
 
-L. Wilkinson
+@wilkinson2005 introdujo el concepto de **gramática de gráficos** (*grammar of graphics*)
+para organizar y estructurar los elementos de diseño y composición de gráficos para visualización
+de datos. Desde su publicación, este paradigma de referencia ha influenciado el diseño
+e implementación de numerosos paquetes y librerías para visualización de datos, incluyendo
+el paquete `ggplot2` [@wickham2010].
 
-## Librerías y paquetes
+La @tbl-GPL-ggplot2 muestra la correspondencia entre los
+elementos de la gramática de gráficos propuesta por L. Wilkinson
+y la gramática por capas implementada por H. Wickham en
+su paquete `ggplot2`.
 
-Ejemplos de paquetes y librerías en R y otros lenguajes que adoptan el
-paradigma de la *grammar of graphics*.
++--------------------------+----------------------------+
+| GPL [@wilkinson2005]     | `ggplot2` [@wickham2010]   |
++:=========================+:===========================+
+| DATA                     | Defaults                   |
++--------------------------+----------------------------+
+| TRANS                    | Data<br>                   |
+|                          | Mapping                    |
++--------------------------+----------------------------+
+| ELEMENT                  | - Layer                    |
+|                          |   - Data                   |
+|                          |   - Mapping                |
+|                          |   - Geom                   |
+|                          |   - Stat                   |
+|                          |   - Position               |
++--------------------------+----------------------------+
+| SCALE<br>                | Scale                      |
+| GUIDE                    |                            |
++--------------------------+----------------------------+
+| COORD                    | - Coord                    |
++--------------------------+----------------------------+
+| FACET                    | - Facet                    |
++--------------------------+-------------------+--------+
+
+: Example of grid table. {#tbl-GPL-ggplot2}
+
+Veamos primero algunos de los elementos de la gramática de gráficos original que deben ser
+especificados para componer un gráfico [@wilkinson2005]:
+
+- Datos: conjunto de operaciones sobre los datos que generar variables (atributos) de los
+datasets que van a ser representados gráficamente.
+
+- Transformaciones (abreviado como *trans*): operaciones aplicadas sobre las variables antes
+de su inclusión en el gráfico (por ejemplo, cálculo de un ranking, ordenación, etc.).
+
+- Elementos: componentes gráficos (puntos, líneas, ...) y sus atributos estéticos (color, tamaño,...).
+
+- Escala: transformaciones aplicadas a la escala de representación de los datos como, por ejemplo,
+cambiar a escala logarítmica.
+
+- Guías: una o más guías de interpretación (ejes, leyenda, ...).
+
+- Sistema de coordenadas (abreviado como *coord*): elección de un sistema de coordenadas
+(cartesianas, polares, etc.).
+
+- Facetas: son cuadros en los que componemos varios graficos de forma que
+conjuntamente permitan comparar unos con otros.
+
+No obstante, en el libro de Wilkison también se mencionan otros elementos constructivos, tales
+como atributos estéticos, geometrías o estadísticos, que también aparecen en la propuesta
+de H. Wickham.
+
+## Una implementación por capas
+
+La principal novedad introducida por la implementación de H. Wickham de este concepto en su paquete
+`ggplot2` es la organización de los elementos para componer el gráfico en una estructura por capas,
+altamente flexible y versátil. La @fig-layered-grammar-graphics muestra un esquema conceptual de los
+diferentes elementos que veremos en el @sec-ggplot2.
+
+![Representación esquemática de la implementación de una gramática de gráficos estructurada en capas dentro del paquete `ggplot2`.](img/layered-grammar-graphics.png){#fig-layered-grammar-graphics width=85%}
+
+Esta estructura permite construir rápidamente incluso gráficos de elevada complejidad que
+mezclan o sobreponen diferentes componentes para representar la información. El hecho de que el paquete
+`ggplot2` se haya intentando portar o conectar (mediante *wrappers*) al lenguaje Python en múltiples
+ocasiones da buena cuenta de las ventajas de dicho paquete respecto de otras opciones.
+
+## Otras librerías y paquetes
+
+Existen otros paquetes en R para realizar gráficos. Uno de los más destacados y que, en su momento,
+también incorporó avances importantes y potentes (como el soporte para crear facetas) es 
+[`lattice`](https://lattice.r-forge.r-project.org/documentation.php) [@sarkar2008]. Sin embargo,
+desde su aparición `ggplot2` no ha cesado de ganar adeptos y, a día de hoy, es prácticamente la
+opción de referencia en R para creación de gráficos atractivos e informativos.
+
+
+### Otros lenguajes: Python
+
+- Existe un paquete en Python llamado `lets-plot` (<https://lets-plot.org/python/index.html>), 
+que ha portado gran parte de la funcionalidad y la API de `ggplot2` al entorno Python (no hay más que
+echar una rápida ojeada a la documentación para comprobar que el abanico de opciones que ofrece es muy
+amplio).
+
+- Otro proyecto muy interesante y, curiosamente, también bastante desconocido para una parte de los
+programadores en Python es [Vega-Altair](https://altair-viz.github.io/index.html), o simplemente `altair`.
+Es una biblioteca de visualización declarativa para Python que se construye sobre la gramática de gráficos
+del proyecto [Vega-Lite](http://vega.github.io/vega-lite). El objetivo principal de esta gramática es
+simplificar la creación de muchos elementos dinámicos e interactivos pensados, esencialmente, para mostrarse 
+en documentos HTML. De hecho, el proyecto proporciona un editor de gráficos (Vega Editor), neutral a
+cualquier lenguaje de programación, en el que podemos construir nuestro gráfico para luego integrarlo
+en un lenguaje que cuente con un paquete o librería que pueda interpretar esta gramática. El proyecto
+fue creado y está liderado por el [Interactive Data Lab](https://idl.uw.edu/) que dirige el 
+especialista en visualización de datos Jeffrey Heer.
+
+::: {.callout-note}
+## El zoo de las visualizaciones de datos
+
+El profesor Heer es uno de los mayores especialistas en visualización de datos a nivel mundial y una de las
+personas que más ha contribuido al avance de este área de conocimiento en los últimos 15 años. Uno de sus
+mejores artículos, lectura imprescindible para cualquiera que quiera adquirir una idea precisa de la amplitud
+del campo de la visualización de datos, es el artículo "A Tour Through de Visualization Zoo" [@heer2010], disponible en
+este enlace: <https://homes.cs.washington.edu/~jheer/files/zoo/>; o en la [versión oficial](https://dl.acm.org/doi/10.1145/1794514.1805128)
+publicada en ACM Queue.
+:::
+
+::: {.callout-tip}
+## El paquete altair en R
+
+Al igual que ocurre con `ggplot2`, pero en sentido inverso, el proyecto Vega-Altair también se está volviendo
+accesible en R, gracias al [paquete `altair`](https://vegawidget.github.io/altair/), que emplea otro paquete
+R llamado `reticulate` para generar una interfaz a la API de Vega-Altair en Python. El paquete `reticulate`
+no suele introducir grandes retardos para hacer la "traducción automática" entre las dos APIs, por lo que
+esta opción parece bastante atractiva si queremos explorar las posibilidades que ofrece la gramática de
+Vega-Lite en R.
+
+Eso sí, hay que tener cuidado porque, por ahora, la versión de Altair soportada es la 4.2.0, por lo que 
+conviene instalar exactamente dicha versión de Vega-Altair en Python en un entorno virtual y usando un gestor 
+de paquetes como `pip` o `conda`.
+:::
+
+
+```{r}
+#| label: fig-altair-example
+#| fig-cap: "Ejemplo de un gráfico generado con el paquete `altair` en R."
+#| eval: false
+
+library("altair")
+
+vega_data <- import_vega_data()
+
+chart <- 
+  alt$Chart(vega_data$cars())$
+  mark_point()$
+  encode(
+    x = "Horsepower:Q",
+    y = "Miles_per_Gallon:Q",
+    color = "Origin:N"
+  )
+
+chart
+```
+
+![Ejemplo de un gráfico generado con el paquete `altair` en R.](img/altair-example.png){#fig-altair-example width=95%}
