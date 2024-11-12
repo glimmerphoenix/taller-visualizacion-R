@@ -329,7 +329,7 @@ window.Quarto = {
   <li><a href="#datos-espaciales" id="toc-datos-espaciales" class="nav-link" data-scroll-target="#datos-espaciales"><span class="header-section-number">3.1.5</span> Datos espaciales</a></li>
   <li><a href="#representación-de-la-incertidumbre" id="toc-representación-de-la-incertidumbre" class="nav-link" data-scroll-target="#representación-de-la-incertidumbre"><span class="header-section-number">3.1.6</span> Representación de la incertidumbre</a></li>
   </ul></li>
-  <li><a href="#arbol-de-decisión-qué-grafico-escojo" id="toc-arbol-de-decisión-qué-grafico-escojo" class="nav-link" data-scroll-target="#arbol-de-decisión-qué-grafico-escojo"><span class="header-section-number">3.2</span> Arbol de decisión: ¿qué grafico escojo?</a></li>
+  <li><a href="#árbol-de-decisión-qué-grafico-escojo" id="toc-árbol-de-decisión-qué-grafico-escojo" class="nav-link" data-scroll-target="#árbol-de-decisión-qué-grafico-escojo"><span class="header-section-number">3.2</span> Árbol de decisión: ¿qué grafico escojo?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/03-chart-types.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/03-chart-types.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
@@ -355,7 +355,7 @@ window.Quarto = {
 </header>
 
 
-<p>En este capítulo, presentamos los principales tipos gráficos para visualización de datos que se suelen encontrar en proyectos de análisis de datos. Es esencial saber con qué opciones contamos para después elegir el tipo de gráfico y su modalidad que mejor se adapte a nuestros objetivos.</p>
+<p>En este capítulo, presentamos los principales tipos de gráficos para visualización de datos que se suelen encontrar en proyectos de análisis de datos. Es esencial saber con qué opciones contamos para después elegir el tipo de gráfico y su modalidad que mejor se adapte a nuestros objetivos.</p>
 <section id="taxonomía-de-gráficos" class="level2 page-columns page-full" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="taxonomía-de-gráficos"><span class="header-section-number">3.1</span> Taxonomía de gráficos</h2>
 <p>A continuación, presentamos una taxonomía tentativa para clasificar diferentes tipos de gráficos en función del tipo de datos y atributos que queremos representar <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.</p>
@@ -706,13 +706,13 @@ Figura&nbsp;3.18: Gráficos básicos para representación de proporciones. Fuent
 <li><p>Diagrama de sectores (<em>pie chart</em>): otro tipo de gráfico sobradamente conocido y, dicho sea también, muy denostado en la comunidad de visualización de datos por sus dudosas propiedades para reflejar de forma precisa la información que queremos comparar, sobre todo si las categorías tienen porcentajes muy semejantes (es decir, si los sectores tienen tamaños muy parecidos).</p></li>
 <li><p>Diagrama de barras (porcentual): en este caso cada barra refleja proporciones (en %) y no valores absolutos de un atributo numérico.</p></li>
 </ul>
-<p>A su vez, la <a href="#fig-graphs-props-multi" class="quarto-xref">Figura&nbsp;<span>3.19</span></a> muestra distintos tipos de diagramas para representar mútiples conjuntos de proporciones.</p>
-<div id="fig-graphs-props-multi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>A su vez, la <a href="#fig-graphs-props-comp" class="quarto-xref">Figura&nbsp;<span>3.19</span></a> muestra distintos tipos de diagramas para representar mútiples conjuntos de proporciones.</p>
+<div id="fig-graphs-props-comp" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-graphs-props-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="img/graphs-proportions-multi.png" class="img-fluid figure-img" style="width:95.0%">
+<div aria-describedby="fig-graphs-props-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-proportions-comp.png" class="img-fluid figure-img" style="width:95.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-props-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-props-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;3.19: Gráficos básicos para representación de múltiples conjuntos de proporciones. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
 </figcaption>
 </figure>
@@ -722,13 +722,13 @@ Figura&nbsp;3.19: Gráficos básicos para representación de múltiples conjunto
 <li><p>Diagramas de barras agrupados y apilados: son aplicables los mismos comentarios que en el caso de representación de valores absolutos. No obstante, en el caso de las proporciones suele ser más preciso y útil para interpretar el gráfico usar la modalidad de barras apiladas.</p></li>
 <li><p>Diagramas de densidades apiladas: ofrecen una solución rápida para comparar proporciones. Sin embargo, tiene dos desventajas. La primera es que usamos demasiada “tinta” para el gráfico. La segunda es que es complicado interpretar la distribución de valores para cualquier categoría excepto la que está en la base del gráfico. Podemos ver un <a href="https://r-graph-gallery.com/135-stacked-density-graph.html#stacked">ejemplo de este tipo</a> de gráficos para comprender mejor sus ventajas e inconvenientes.</p></li>
 </ul>
-<p>Por último, la <a href="#fig-graphs-props-comp" class="quarto-xref">Figura&nbsp;<span>3.20</span></a> muestra gráficos para desglosar proporciones en función de más de una variable categórica a la vez en la misma figura.</p>
-<div id="fig-graphs-props-comp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>Por último, la <a href="#fig-graphs-props-multi" class="quarto-xref">Figura&nbsp;<span>3.20</span></a> muestra gráficos para desglosar proporciones en función de más de una variable categórica a la vez en la misma figura.</p>
+<div id="fig-graphs-props-multi" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-graphs-props-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="img/graphs-proportions-comp.png" class="img-fluid figure-img" style="width:95.0%">
+<div aria-describedby="fig-graphs-props-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/graphs-proportions-multi.png" class="img-fluid figure-img" style="width:95.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-props-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs-props-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;3.20: Gráficos para representación de proporciones en función de más de una categoría de forma simultánea. Fuente: <span class="citation" data-cites="wilke2019">(<a href="references.html#ref-wilke2019" role="doc-biblioref">Wilke, 2019</a>)</span>.
 </figcaption>
 </figure>
@@ -828,7 +828,7 @@ Figura&nbsp;3.27: Gráficos básicos para representación de barras de estimacio
 </figure>
 </div>
 <ul>
-<li><p>Barras de error: cuando los diagramas de barras representan valores estadísticos, como media, mediana, desviación típica, etc. es aconsejable añadir barras de error en sobre la parte superior de cada barra, para indicar la variabilidad en la estimación. Un ejemplo de esta práctica se ilustra en la <a href="#fig-error-bars" class="quarto-xref">Figura&nbsp;<span>3.28</span></a>.</p>
+<li><p>Barras de error: cuando los diagramas de barras representan valores estadísticos, como media, mediana, desviación típica, etc. es aconsejable añadir barras de error sobre la parte superior de cada barra, para indicar la variabilidad en la estimación. Un ejemplo de esta práctica se ilustra en la <a href="#fig-error-bars" class="quarto-xref">Figura&nbsp;<span>3.28</span></a>.</p>
 <div id="fig-error-bars" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-error-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -839,10 +839,7 @@ Figura&nbsp;3.28: Ejemplo de un gráfico de barras que incluye barras de error. 
 </figcaption>
 </figure>
 </div>
-<p>Sin embargo, la utilización de barras de error puede ocultar información valiosa al espectador, como se muestra en la</p>
-<ol start="2" class="example" type="1">
-<li>Vemos que el mismo diagrama de barras con barras de error corresponde con diferentes distribuciones de los datos. Por ese motivo, se desaconseja en muchos casos usar este tipo de diagramas, en favor de la utilización del <em>boxplot</em>, <em>violin plot</em>, <em>swarm plot</em> o alguna otra variante que muestre información adicional sobre la distribución de los datos originales.</li>
-</ol>
+<p>Sin embargo, la utilización de barras de error puede ocultar información valiosa al espectador, como se muestra en la <a href="#fig-error-bars-hiding" class="quarto-xref">Figura&nbsp;<span>3.29</span></a>. Vemos que el mismo diagrama de barras con barras de error corresponde con diferentes distribuciones de los datos. Por ese motivo, se desaconseja en muchos casos usar este tipo de diagramas, en favor de la utilización del <em>boxplot</em>, <em>violin plot</em>, <em>swarm plot</em> o alguna otra variante que muestre información adicional sobre la distribución de los datos originales.</p>
 <div id="fig-error-bars-hiding" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-error-bars-hiding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -904,8 +901,8 @@ Figura&nbsp;3.32: Ilustración de un intervalo de confianza del 95% alrededor de
 </div>
 </section>
 </section>
-<section id="arbol-de-decisión-qué-grafico-escojo" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="arbol-de-decisión-qué-grafico-escojo"><span class="header-section-number">3.2</span> Arbol de decisión: ¿qué grafico escojo?</h2>
+<section id="árbol-de-decisión-qué-grafico-escojo" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="árbol-de-decisión-qué-grafico-escojo"><span class="header-section-number">3.2</span> Árbol de decisión: ¿qué grafico escojo?</h2>
 <p>Como conclusión de este capítulo, seguramente podremos pensar que el gran número de tipos de gráficos de entre los que podemos escoger para nuestro propio trabajo es abrumador. Afortunadamente, existen algunas guías que permiten plantearnos unas sencillas preguntas de diseño para orientar nuestra elección, reduciendo al menos el alcance de la búsqueda a un subconjunto de tipos de gráficos que mejor se adapte a nuestro problema particular.</p>
 <p>El sito web <a href="https://www.data-to-viz.com/" class="uri">https://www.data-to-viz.com/</a> publica una imagen en alta resolución (que se puede recibir por correo-e), en la que se resume un sencillo diagrama de decisión para orientar nuestra selección del gráfico más apropiado. En todo caso, esperamos que los comentarios y orientaciones que hemos incluido en este capítulo permitan a futuros creadores/as de gráficos seleccionar con criterios las herramientas a emplear.</p>
 

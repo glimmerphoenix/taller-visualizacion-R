@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -73,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -237,24 +291,31 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#anatomía-de-un-gráfico-con-ggplot2" id="toc-anatomía-de-un-gráfico-con-ggplot2" class="nav-link active" data-scroll-target="#anatomía-de-un-gráfico-con-ggplot2"><span class="header-section-number">5.1</span> Anatomía de un gráfico con <code>ggplot2</code></a></li>
-  <li><a href="#elementos-estéticos" id="toc-elementos-estéticos" class="nav-link" data-scroll-target="#elementos-estéticos"><span class="header-section-number">5.2</span> Elementos estéticos</a></li>
-  <li><a href="#geometrías" id="toc-geometrías" class="nav-link" data-scroll-target="#geometrías"><span class="header-section-number">5.3</span> Geometrías</a></li>
-  <li><a href="#escalas" id="toc-escalas" class="nav-link" data-scroll-target="#escalas"><span class="header-section-number">5.4</span> Escalas</a></li>
-  <li><a href="#etiquetas-y-título" id="toc-etiquetas-y-título" class="nav-link" data-scroll-target="#etiquetas-y-título"><span class="header-section-number">5.5</span> Etiquetas y título</a></li>
-  <li><a href="#anotaciones" id="toc-anotaciones" class="nav-link" data-scroll-target="#anotaciones"><span class="header-section-number">5.6</span> Anotaciones</a></li>
-  <li><a href="#temas" id="toc-temas" class="nav-link" data-scroll-target="#temas"><span class="header-section-number">5.7</span> Temas</a></li>
-  <li><a href="#extensiones-de-ggplot2" id="toc-extensiones-de-ggplot2" class="nav-link" data-scroll-target="#extensiones-de-ggplot2"><span class="header-section-number">5.8</span> Extensiones de <code>ggplot2</code></a></li>
-  <li><a href="#taller-práctico-1-construcción-de-gráficos-paso-a-paso" id="toc-taller-práctico-1-construcción-de-gráficos-paso-a-paso" class="nav-link" data-scroll-target="#taller-práctico-1-construcción-de-gráficos-paso-a-paso"><span class="header-section-number">5.9</span> Taller práctico 1: construcción de gráficos paso a paso</a></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link active" data-scroll-target="#tidy-data"><span class="header-section-number">5.1</span> Tidy data</a>
+  <ul class="collapse">
+  <li><a href="#datos-de-ejemplo" id="toc-datos-de-ejemplo" class="nav-link" data-scroll-target="#datos-de-ejemplo"><span class="header-section-number">5.1.1</span> Datos de ejemplo</a></li>
+  </ul></li>
+  <li><a href="#anatomía-de-un-gráfico-con-ggplot2" id="toc-anatomía-de-un-gráfico-con-ggplot2" class="nav-link" data-scroll-target="#anatomía-de-un-gráfico-con-ggplot2"><span class="header-section-number">5.2</span> Anatomía de un gráfico con <code>ggplot2</code></a></li>
+  <li><a href="#datos-y-elementos-estéticos" id="toc-datos-y-elementos-estéticos" class="nav-link" data-scroll-target="#datos-y-elementos-estéticos"><span class="header-section-number">5.3</span> Datos y elementos estéticos</a></li>
+  <li><a href="#objetos-geométricos" id="toc-objetos-geométricos" class="nav-link" data-scroll-target="#objetos-geométricos"><span class="header-section-number">5.4</span> Objetos geométricos</a></li>
+  <li><a href="#escalas" id="toc-escalas" class="nav-link" data-scroll-target="#escalas"><span class="header-section-number">5.5</span> Escalas</a></li>
+  <li><a href="#etiquetas-y-título" id="toc-etiquetas-y-título" class="nav-link" data-scroll-target="#etiquetas-y-título"><span class="header-section-number">5.6</span> Etiquetas y título</a></li>
+  <li><a href="#anotaciones" id="toc-anotaciones" class="nav-link" data-scroll-target="#anotaciones"><span class="header-section-number">5.7</span> Anotaciones</a></li>
+  <li><a href="#temas" id="toc-temas" class="nav-link" data-scroll-target="#temas"><span class="header-section-number">5.8</span> Temas</a></li>
+  <li><a href="#extensiones-de-ggplot2" id="toc-extensiones-de-ggplot2" class="nav-link" data-scroll-target="#extensiones-de-ggplot2"><span class="header-section-number">5.9</span> Extensiones de <code>ggplot2</code></a>
+  <ul class="collapse">
+  <li><a href="#extensiones-adicionales" id="toc-extensiones-adicionales" class="nav-link" data-scroll-target="#extensiones-adicionales"><span class="header-section-number">5.9.1</span> Extensiones adicionales</a></li>
+  </ul></li>
+  <li><a href="#taller-práctico-1-construcción-de-gráficos-paso-a-paso" id="toc-taller-práctico-1-construcción-de-gráficos-paso-a-paso" class="nav-link" data-scroll-target="#taller-práctico-1-construcción-de-gráficos-paso-a-paso"><span class="header-section-number">5.10</span> Taller práctico 1: construcción de gráficos paso a paso</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/05-ggplot2.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/05-ggplot2.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-ggplot2.html">Implementación</a></li><li class="breadcrumb-item"><a href="./05-ggplot2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">El paquete <code>ggplot2</code></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">El paquete <code>ggplot2</code></span></h1>
+<h1 class="title"><span id="sec-ggplot2" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">El paquete <code>ggplot2</code></span></span></h1>
 </div>
 
 
@@ -272,34 +333,638 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>En este capítulo se introduce el paquete <code>ggplot2</code> de R, una de las herramientas de visualización de datos más populares en la actualidad y que ha sido incluso exportado a otros lenguajes (como Python).</p>
-<section id="anatomía-de-un-gráfico-con-ggplot2" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="anatomía-de-un-gráfico-con-ggplot2"><span class="header-section-number">5.1</span> Anatomía de un gráfico con <code>ggplot2</code></h2>
+<section id="tidy-data" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="tidy-data"><span class="header-section-number">5.1</span> Tidy data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="datos-de-ejemplo" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="datos-de-ejemplo"><span class="header-section-number">5.1.1</span> Datos de ejemplo</h3>
+<p>Utilizaremos ejemplos del paquete <code>agriTutorial</code> <span class="citation" data-cites="agriTutorial2020">(<a href="references.html#ref-agriTutorial2020" role="doc-biblioref">Rodney Edmondson et&nbsp;al., 2020</a>)</span>, que incluye conjuntos de datos y ejemplos de modelos sobre exprimentos en agricultura. También usaremos el paquete R <code>agridat</code> <span class="citation" data-cites="agridat2024">(<a href="references.html#ref-agridat2024" role="doc-biblioref">Wright, 2024</a>)</span>, que contiene conjuntos de datos provenientes de publicaciones relacionadas con la agricultura, incluyendo cultivos de campo, cultivos arbóreos o estudios con animales, entre otros.</p>
+<p><strong>Paquete <code>agriTutorial</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agriTutorial)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>greenrice</code>: Datos de un experimento sobre absorción de nitrogeno (N), medido en g/maceta en un experimento de doble factor en invernadero <span class="citation" data-cites="gomez1984">(<a href="references.html#ref-gomez1984" role="doc-biblioref">Gomez &amp; Gomez, 1984</a>)</span>. Se considera la duración del estrés hídrico (W) y el nivel de aplicación de nitrógeno. El experimento se llevó a cabo con cuatro niveles de estrés hídrico (0, 10, 20 y 40 días) como tratamientos de parcela principal (<em>main-plot treatment</em>) y cuatro dosis de nitrógeno (0, 90, 180 y 270 kg/ha) como tratamientos de subparcela (<em>sub-plot treatment</em>). Las parcelas principales se aleatorizaron en cuatro bloques completos (cada bloque incluye todos las posibles combinaciones de tratamientos).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(greenrice)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(greenrice)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   64 obs. of  5 variables:
+ $ uptake   : num  1.033 0.506 0.692 0.254 0.154 ...
+ $ W        : num  10 10 10 10 40 40 40 40 0 0 ...
+ $ N        : num  270 90 180 0 90 180 0 270 0 180 ...
+ $ Replicate: Factor w/ 4 levels "1","2","3","4": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Main     : Factor w/ 4 levels "1","2","3","4": 1 1 1 1 2 2 2 2 3 3 ...</code></pre>
+</div>
+</div>
+<ul>
+<li><code>rice</code>: Datos de un experimento con tres prácticas de gestión (<code>minimum</code>, <code>optimum</code>, <code>intensive</code>), cinco cantidades distintas de fertilizante de nitrógeno (N) (0, 50, 80, 110, 140 kg/ha) y tres variedades de planta (<code>V1</code>, <code>V2</code>, <code>V3</code>) <span class="citation" data-cites="gomez1984">(<a href="references.html#ref-gomez1984" role="doc-biblioref">Gomez &amp; Gomez, 1984</a>)</span>. El experimento sigue un diseño de parcelas divididas (<em>split-plot design</em>), donde la variedad de planta y el tipo de gestión son factores de tratamiento cualitativos y la cantidad de fertilizante de nitrógeno es un factor de tratamiento cuantitativo.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(rice)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rice)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   135 obs. of  8 variables:
+ $ yield     : num  3.32 6.1 5.36 3.77 5.1 ...
+ $ nrate     : num  0 0 0 0 0 0 0 0 0 50 ...
+ $ nitrogen  : Factor w/ 5 levels "0","50","80",..: 1 1 1 1 1 1 1 1 1 2 ...
+ $ Replicate : Factor w/ 3 levels "R1","R2","R3": 1 1 1 1 1 1 1 1 1 1 ...
+ $ management: Factor w/ 3 levels "Minimum","Optimum",..: 1 1 1 2 2 2 3 3 3 1 ...
+ $ variety   : Factor w/ 3 levels "V1","V2","V3": 1 2 3 1 2 3 1 2 3 1 ...
+ $ Main      : Factor w/ 5 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 2 ...
+ $ Sub       : Factor w/ 3 levels "1","2","3": 1 1 1 2 2 2 3 3 3 1 ...</code></pre>
+</div>
+</div>
+<p><strong>Paquete <code>agridat</code></strong></p>
+<ul>
+<li><code>holland.arthropods</code>: Muestreo de diferentes especies de artrópodos presentes en una malla de 30m x 30m de un campo de trigo cerca de Wimborne, Dorest (Reino Unido). Los muestreos se realizaron en 6 fechas entre junio/julio de 1996. Los conteos para cada especie de artrópodo se agregaron sobre los 6 días totales <span class="citation" data-cites="holland1999">(<a href="references.html#ref-holland1999" role="doc-biblioref">Holland et&nbsp;al., 1999</a>)</span>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(holland.arthropods)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(holland.arthropods)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   63 obs. of  8 variables:
+ $ row          : int  1 1 1 1 1 1 1 2 2 2 ...
+ $ col          : int  1 2 3 4 5 6 7 1 2 3 ...
+ $ n.brevicollis: int  6 3 3 2 1 2 1 10 12 1 ...
+ $ linyphiidae  : int  67 114 59 80 102 169 63 106 64 41 ...
+ $ collembola   : int  85 30 56 36 110 38 19 65 38 260 ...
+ $ carabidae    : int  35 24 18 9 13 14 14 18 32 14 ...
+ $ lycosidae    : int  13 22 20 32 28 12 43 28 8 3 ...
+ $ weedcover    : int  42 23 17 21 12 15 13 27 9 10 ...</code></pre>
+</div>
+</div>
 </section>
-<section id="elementos-estéticos" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="elementos-estéticos"><span class="header-section-number">5.2</span> Elementos estéticos</h2>
 </section>
-<section id="geometrías" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="geometrías"><span class="header-section-number">5.3</span> Geometrías</h2>
+<section id="anatomía-de-un-gráfico-con-ggplot2" class="level2 page-columns page-full" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="anatomía-de-un-gráfico-con-ggplot2"><span class="header-section-number">5.2</span> Anatomía de un gráfico con <code>ggplot2</code></h2>
+<p>El paquete <code>ggplot2</code> sigue los principios de la gramática de gráficos que hemos visto en el <a href="04-grammar.html" class="quarto-xref"><span>Capítulo 4</span></a>, de forma que nos permite construir un gráfico paso a paso. Para ello se empieza por utilizar la función <code>ggplot()</code>:</p>
+<ol type="1">
+<li><p>Indicamos a la función <code>ggplot()</code> los datos que vamos a representar. </p></li>
+<li><p>Indicamos a <code>ggplot()</code> <em>qué</em> relaciones queremos visualizar. </p></li>
+<li><p>Elegimos <em>cómo</em> queremos representar gráficamente las relaciones en nuestros datos que hemos indicado en el paso anterior. </p></li>
+<li><p>Si es necesario, superponemos más elementos gráficos (objetos geométricos o <em>geoms</em>), añadiéndolas a nuestro gráfico una a una.</p></li>
+<li><p>Incluimos funciones adicionales para ajustar transformar los datos, ajustar o cambiar escalas, añadir etiquetas y título, marcas en los ejes, capas adicionales, etc.</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><span class="margin-aside">El argumento <code>data = ...</code>.</span><span class="margin-aside">El argumento <code>mapping = aes(...)</code>.</span><span class="margin-aside">Elegimos una función <code>geom_...()</code> que determina el tipo de gráfico o elemento gráfico.</span></div><p>Veamos estós datos sobre un esquema para hacernos una idea más clara del aspecto que tendrá nuestro código.</p>
+<div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATOS<span class="sc">&gt;</span>,</span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>CONEXIONES<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_...</span>(...) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-4" class="code-annotation-target"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_...</span>(...) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FUNCIONES DE ESCALA Y GUÍAS<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-6-6" class="code-annotation-target"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>SISTEMAS COORDENADOS<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-6-7" class="code-annotation-target"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACETAS<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-6-8" class="code-annotation-target"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>TEMA<span class="sc">&gt;</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="1,2" data-code-annotation="1">Indicamos qué datos vamos a utilizar y como conectamos esos datos (mapeo) con los elementos estéticos. Esta parte es <strong>obligatoria</strong>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="2">Añadimos uno o varios objetos geométricos para representar los datos.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="3">Transformamos los datos (funciones <code>stat_...()</code>), normalmente resumiéndolos de algún modo.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="4">Ajustamos el mapeo de los datos a los elementos estéticos, modificando la escala de representación o añadiendo elementos de guía para intepretar el gráfico (marcas en ejes, leyenda, etc.).</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="6" data-code-annotation="5">Configuramos el sistema coordenado de representación (por defecto se usan coordenadas cartesianas): intercambio de ejes X e Y (función <code>coord_flip()</code>), uso de coordenadas polares (<code>coord_polar()</code>), etc.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="7" data-code-annotation="6">Decidimos si queremos desglosar el gráfico en varios paneles (<em>facets</em>) para presentar simultáneamente varios subgráficos (como hemos visto, útil para comparar entre grupos, evolución temporal y en otros casos).</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="8" data-code-annotation="7">Por último, podemos elegir un tema preconfigurado que adapta el aspecto de muchos de los elementos del gráfico para conseguir un resultado final más armonizado.</span>
+</dd>
+</dl>
 </section>
-<section id="escalas" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="escalas"><span class="header-section-number">5.4</span> Escalas</h2>
+<section id="datos-y-elementos-estéticos" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="datos-y-elementos-estéticos"><span class="header-section-number">5.3</span> Datos y elementos estéticos</h2>
+<p>Los dos primeros pasos en nuestro gráfico serán indicar qué datos queremos considerar y qué elementos estéticos vamos a enlazar con dichos datos. En el siguiente ejemplo, guardamos en la variable <code>p</code> el resultado de los dos primeros pasos del proceso.</p>
+<p>Cuando los mínimos elementos necesarios para representar el gráfico están ya configurados, la invocación directa de la variable <code>p</code> hace aparecer el gráfico.</p>
+<p>Vamos con el primer paso: indicar qué <em>dataset</em> queremos usar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> holland.arthropods)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-data-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.1: Cuando sólo indicamos los datos que vamos a usar el gráfico todavía no muestra ningún elemento.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Ahora, añadimos en el segundo paso las conexiones de los datos con los elementos estéticos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> holland.arthropods,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> lycosidae,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> weedcover))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-aes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-aes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-aes-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-aes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.2: Tras incorporar el mapeo entre datos y elementos gráficos ahora se muestran las variables asociadas a cada eje.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>En la <a href="#fig-ggplot-first-aes" class="quarto-xref">Figura&nbsp;<span>5.2</span></a> podemos ver cómo las variables (atributos) asociadas al eje X y al eje Y de nuestro gráfico, mediante la función <code>aes()</code>, es lo único que se muestra. La zona principal de representación todavía no muestra ningún elemento, porque aún no hemos especificado de qué forma queremos representar la relación entre la variable en X y la que está en Y.</p>
 </section>
-<section id="etiquetas-y-título" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="etiquetas-y-título"><span class="header-section-number">5.5</span> Etiquetas y título</h2>
+<section id="objetos-geométricos" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="objetos-geométricos"><span class="header-section-number">5.4</span> Objetos geométricos</h2>
+<p>El paquete <code>ggplot2</code> incluye una larga lista de <a href="https://ggplot2-book.org/layers.html#sec-geom">funciones de objetos geométricos</a> (abreviados como <code>geom_...()</code>) para añadir a nuestros gráficos.</p>
+<p>Continuando con nuestro ejemplo, en el paso 3 del proceso de construcción añadimos un <em>geom</em> sencillo: una nube de puntos para crear un diagrama de dispersión básico (<em>scatterplot</em>) con la función <code>geom_point()</code>. El resultado se muestra en la <a href="#fig-ggplot-first-points" class="quarto-xref">Figura&nbsp;<span>5.3</span></a>. Observamos que, ahora sí, se muestra un punto en color negro en cada cruce de valores de los atributos numéricos representados en los ejes X e Y.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-points" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-points-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.3: Añadimos al gráfico un objeto geométrico: una nube de puntos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Es posible agregar más de un objeto geométrico al mismo gráfico, siempre y cuando sean compatibles. Continuando con nuestro caso de ejemplo, agregamos sobre el diagrama de dispersión una línea suavizada que muestra la tendencia global, junto con una banda en color gris que la rodea, indicando el error estándar de la curva estimada. El resultado se ilustra en la <a href="#fig-ggplot-first-points-smoothline" class="quarto-xref">Figura&nbsp;<span>5.4</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'loess'</span>, <span class="at">formula =</span> y <span class="sc">~</span> x)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-points-smoothline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-points-smoothline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-points-smoothline-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-points-smoothline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.4: Añadimos al gráfico otro objeto geométrico: una curva suavizada para ver la tendencia global.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="anotaciones" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="anotaciones"><span class="header-section-number">5.6</span> Anotaciones</h2>
+<section id="escalas" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="escalas"><span class="header-section-number">5.5</span> Escalas</h2>
+<p>Las funciones de escala nos permiten controlar diversos elementos que controlan aspectos importantes de la visualización, como:</p>
+<ul>
+<li>Esclas de representación, por ejemplo, para aplicar <a href="https://ggplot2-book.org/scales-position#sec-scale-transformation">transformaciones</a> a los datos.</li>
+<li>Límites de representación del gráfico en cada coordenada.</li>
+<li>Acercamiento de la imagen (<em>zooming in</em>).</li>
+<li>Marcas principales en los ejes (<em>breaks</em>).</li>
+<li>Marcas secundarias en los ejes (<em>minor breaks</em>).</li>
+<li>Etiquetas.</li>
+<li>Uso de escalas de representación personalizadas para casos especiales (escala de fecha y hora, escala discreta, agrupamiento de datos por intervalos o <em>bins</em>, unidades monetarias, etc.).</li>
+<li>Ajuste de las escalas de color (cuando mapeamos los valores de un atributo a una paleta de colores o gradación).</li>
+<li>Leyendas del gráfico.</li>
+<li>Forma y tamaño de los símbolos.</li>
+<li>Tipo y anchura de las líneas.</li>
+</ul>
+<p>En nuestro caso de ejemplo, podemos ver el efecto que produce cambiar a una escala logarítmica (transformación <code>log10</code> a nuestros datos de ambos ejes).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">scale_x_log10</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-log10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-log10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-log10-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-log10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.5: Cambiamos la escala para aplicar a los datos una transformación log10.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="temas" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="temas"><span class="header-section-number">5.7</span> Temas</h2>
+<section id="etiquetas-y-título" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="etiquetas-y-título"><span class="header-section-number">5.6</span> Etiquetas y título</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Lycosidae (conteo)"</span>, <span class="at">y =</span> <span class="st">"Weedcover (conteo)"</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Artrópodos presentes en campo de trigo"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Agregación de 6 fechas; junio/julio 1996"</span>, </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Ubicación: Wimborne, Dorest (Reino Unido)</span><span class="sc">\n</span><span class="st">Diseño: Malla de 30m x 30m"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-labels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-labels-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.6: Añadimos títulos y personalizamos etiquetas de los ejes.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="extensiones-de-ggplot2" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="extensiones-de-ggplot2"><span class="header-section-number">5.8</span> Extensiones de <code>ggplot2</code></h2>
+<section id="anotaciones" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="anotaciones"><span class="header-section-number">5.7</span> Anotaciones</h2>
+<p>En el <a href="https://ggplot2-book.org/annotations">capítulo 8</a> del libro de referencia sobre <code>ggplot 2</code> <span class="citation" data-cites="wickham2024">(<a href="references.html#ref-wickham2024" role="doc-biblioref">Wickham et&nbsp;al., 2024</a>)</span> se muestran varias funciones de este paquete y varios paquetes adicionales que permiten añadir anotaciones de todo tipo en nuestros gráficos: texto, fórmulas, etiquetas, etc. En ocasiones, algunos paquetes, como <code>directlabels</code>, ofrecen incluso <a href="wickham2024">etiquetado automático</a> de los grupos de datos (según los valores de un atributo categórico).</p>
+<p>La <a href="#fig-ggplot-first-annotations" class="quarto-xref">Figura&nbsp;<span>5.7</span></a> muestra un ejemplo de cuatro anotaciones añadidas manualmente a nuestro gráfico para marcar la ubicación de otros tantos casos atípicos sobre el diagrama de dispersión.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lycosidae =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">40</span>, <span class="dv">61</span>), </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weedcover =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>,<span class="dv">69</span>), </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">c</span>(<span class="st">"outlier 1"</span>, <span class="st">"outlier 2"</span>, <span class="st">"outlier 3"</span>, <span class="st">"outlier 4"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_label</span>(<span class="at">data =</span> label, <span class="fu">aes</span>(<span class="at">label =</span> label))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-annotations" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-annotations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-annotations-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-annotations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.7: Añadimos elementos de anotación automáticos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="taller-práctico-1-construcción-de-gráficos-paso-a-paso" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="taller-práctico-1-construcción-de-gráficos-paso-a-paso"><span class="header-section-number">5.9</span> Taller práctico 1: construcción de gráficos paso a paso</h2>
+<section id="temas" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="temas"><span class="header-section-number">5.8</span> Temas</h2>
+<p>Por último, los temas nos permiten aplicar un conjunto de parámetros de configuración estéticos ya predefinidos y que dotan al gráfico de un aspecto homogéneo y estilo particular. Además, se puede utilizar la función <code>theme()</code> para crear nuestros propios temas personalizados, combinando las configuraciones que nos parezcan más adecuadas, o para modificar los parámetros de muchos elementos del gráfico.</p>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">theme_gray</span>()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">theme_linedraw</span>()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-ggplot-first-themes" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-themes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-first-themes" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggplot-first-themes-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggplot-first-themes-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-themes-1.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-first-themes" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggplot-first-themes-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <code>theme_gray()</code> (opción por defecto)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-first-themes" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggplot-first-themes-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggplot-first-themes-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-themes-2.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-first-themes" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggplot-first-themes-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <code>theme_bw()</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-first-themes" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggplot-first-themes-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggplot-first-themes-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-themes-3.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-first-themes" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggplot-first-themes-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) <code>theme_linedraw()</code>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-first-themes" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggplot-first-themes-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggplot-first-themes-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-themes-4.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-first-themes" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggplot-first-themes-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) <code>theme_minimal()</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-themes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.8: Comprobamos cómo cambia la figura al utilizar varios temas predeterminados de <code>ggplot2</code>.
+</figcaption>
+</figure>
+</div>
+<p>Además de los temas estándar ya incluidos en <code>ggplot2</code>, existen algunos temas adicionales desarrollados por la comunidad o disponibles en otros paquetes. Un ejemplo es el paquete de <a href="https://exts.ggplot2.tidyverse.org/ggthemes.html">extensión <code>ggthemes</code></a>, que incluye ejemplos de temas inspirados en publicaciones y blogs conocidos como The Economist o <a href="https://projects.fivethirtyeight.com/">FiveThirtyEight</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">theme_economist</span>() <span class="sc">+</span> <span class="fu">scale_colour_economist</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggplot-first-economist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-first-economist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggplot-first-economist-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-first-economist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.9: Ejemplo de uso del tema inspirado en los gráficos de The Economist, incluido en el paquete <code>ggthemes</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="extensiones-de-ggplot2" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="extensiones-de-ggplot2"><span class="header-section-number">5.9</span> Extensiones de <code>ggplot2</code></h2>
+<p>El paquete <code>ggplot2</code> se ha convertido en una herramienta de visualización de datos tan popular que han surgido bastantes paquetes que extienden su funcionalidad de diversas maneras. Algunos de ellos están recogidos en una <a href="https://exts.ggplot2.tidyverse.org">lista de extensiones oficiales de <code>ggplot2</code></a>. Un ejemplo de esta lista es el paquete <code>ggthemes</code> que hemos mencionado en la sección anterior, pero hay más. Algunas de las más útiles son:</p>
+<ul>
+<li><p><code>ggraph</code>: Incluye diversos <em>geoms</em> para dibujar gráficos para datos de redes y grafos, por ejemplo, en combinación con el paquete <code>igraph</code>.</p></li>
+<li><p><code>ggspectra</code>: Incluye <em>stats</em>, <em>geoms</em> y anotaciones para espectros lumínicos, manejados en el paquete <code>photobiology</code>.</p></li>
+<li><p><code>ggradar</code>: Extensión que permite crear gráficos de tipo radar, integrados con el resto de componentes de <code>ggplot2</code>.</p></li>
+<li><p><code>ggtree</code>: Ofrece herramientas para visualización de árboles filogenéticos.</p></li>
+</ul>
+<p>La <a href="#fig-ggplot-extensions" class="quarto-xref">Figura&nbsp;<span>5.10</span></a> muestra ejemplos de gráficos creados con cada uno de estos paquetes de extensión de <code>ggplot2</code>. Se recomienda revisar la documentación del resto de extensiones para descubrir otras herramientas que puedan ser de utilidad (etiquetado de puntos, <em>geoms</em> adicionales, etc.).</p>
+<div id="fig-ggplot-extensions" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggplot-extensions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-extensions" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggraph-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggraph-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ggraph-example.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-extensions">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggraph-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <code>gggraph</code>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-extensions" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggspectra-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggspectra-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gg.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-extensions">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggspectra-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <code>ggspectra</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-extensions" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggradar-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggradar-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ggradar-example.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-extensions">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggradar-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) <code>ggradar</code>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ggplot-extensions" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ggtree-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ggtree-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ggtree-example.png" class="img-fluid figure-img" data-ref-parent="fig-ggplot-extensions">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ggtree-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) <code>ggtree</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-extensions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.10: Ejemplos de gráficos creados con cuatro paquetes de extensión de <code>ggplot2</code>.
+</figcaption>
+</figure>
+</div>
+<section id="extensiones-adicionales" class="level3" data-number="5.9.1">
+<h3 data-number="5.9.1" class="anchored" data-anchor-id="extensiones-adicionales"><span class="header-section-number">5.9.1</span> Extensiones adicionales</h3>
+<p>Además de las extensiones que figuran en el listado anterior, hay otros paquetes que también incluyen funciones interesantes que extienden las herramientas básicas de <code>ggplot2</code>.</p>
+<ul>
+<li><code>ggstatsplot</code>: una de las extensiones más populares y potentes para <code>ggplot2</code> es esta, que permite crear gráficos muy sofisticados y, además, acompañados de detalles y resultados de nuestros modelos estadísticos <span class="citation" data-cites="patil2021">(<a href="references.html#ref-patil2021" role="doc-biblioref">Patil, 2021</a>)</span>. Veamos un primer ejemplo en la <a href="#fig-ggstatsplot-regression" class="quarto-xref">Figura&nbsp;<span>5.11</span></a>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>You can cite this package as:
+     Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach.
+     Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggscatterstats</span>(<span class="at">data =</span> mtcars, <span class="at">x =</span> hp, <span class="at">y =</span> mpg)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'ggside':
+  method from   
+  +.gg   ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_xsidebin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_ysidebin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-ggstatsplot-regression" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggstatsplot-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggstatsplot-regression-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggstatsplot-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.11: Gráfico de regresión simple con bandas del C.I. (95%), que incluye histogramas marginales de cada atributo, coeficiente de correlación, p-valor y tamaño de la muestra. Fuente: <a href="https://r-graph-gallery.com/package/ggstatsplot.html" class="uri">https://r-graph-gallery.com/package/ggstatsplot.html</a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<pre><code>Otro buen ejemplo de gráfico de calidad listo para publicar con este paquete es el mostrado en la
+@fig-ggstatsplot-betweenstats, que muestra una representación gráfica y los resultados estadísticos
+de varios test comparando la diferencia de medias entre grupos.</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    movies_long,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    genre <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Action"</span>, <span class="st">"Action Comedy"</span>, <span class="st">"Action Drama"</span>, <span class="st">"Comedy"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> genre,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> rating,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"IMDB rating by film genre"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Genre"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"IMDB rating (average)"</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ggstatsplot-betweenstats" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggstatsplot-betweenstats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggstatsplot-betweenstats-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggstatsplot-betweenstats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.12: Violín plots paralelos, que incluyen distribución de puntos (con jitter), boxplot integrado y resultados adicionales de tests estadísticos de diferencias entre medias de los distintos grupos. Fuente: <a href="https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/principles.html">Doc. <code>ggstatsplot</code></a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<pre><code>El paquete `ggstatsplot` también incluye muchas funciones para automatizar el resumen de resultados
+de modelos de regresión, tanto frecuentistas como bayesianos, con un total de 
+[235 modelos soportados](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html#supported-models).
+Veremos algunos ejemplos de estas funciones en el @sec-graphs-model-eval.</code></pre>
+<ul>
+<li><code>patchwork</code>: permite componer fácilmente parrillas de gráficos con diferentes configuraciones a partir de gráficos individuales creados con <code>ggplot2</code>. Además, usa una sintaxis bastante sencilla y directa, puesto que el operador <code>+</code> coloca un gráfico junto a otro, mientras que los operadores <code>|</code> y <code>/</code> construyen una rejilla en dirección horizontal o vertical, respectivamente. La figura <a href="#fig-patchwork-example" class="quarto-xref">Figura&nbsp;<span>5.13</span></a> ilustra con un ejemplo con código cómo funciona este paquete. Se recomienda encarecidamente consultar <a href="https://patchwork.data-imaginist.com/">la página de documentación de <code>patchwork</code></a> para conocer más detalles y ejemplos.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp))  <span class="co"># Primer gráfico</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear)) <span class="co"># Segundo gráfico</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(disp, qsec),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">method =</span> <span class="st">'loess'</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">formula =</span> <span class="st">'y ~ x'</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(carb))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3) <span class="sc">/</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>      p4</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-patchwork-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-patchwork-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-patchwork-example-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-patchwork-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.13: Ejemplo de funcionamiento del paquete <code>patchwork</code> para componer conjuntos de gráficos creados con <code>ggplot2</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><code>GGally</code>: otro paquete tremendamente potente, que proporciona funciones para creación automática de gráficos con distintos fines: exploración de datos, gráficos bivariantes, evaluación de modelos, etc. Veremos algunos ejemplos de este paquete en el <a href="06-models.html" class="quarto-xref"><span>Capítulo 6</span></a>. Un ejemplo muy habitual y de gran utilidad es la función <code>ggpairs()</code>, que construye una matriz para comparación de datos multivariantes por parejas, tal y como muestra la <span class="quarto-unresolved-ref">?fig-ggpairs-example</span>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'GGally':
+  method from  
+  +.gg   ggside</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(tips, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> sex), <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pm</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-ggmatrix-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggmatrix-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggmatrix-example-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggmatrix-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.14: Ejemplo de una matriz de graficos comparativos entre parejas de atributos en un conjunto de datos multivariante, creada con <code>ggpairs()</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><code>ggpubr</code>: por último, el paquete <code>ggpubr</code> incluye una serie de funciones para facilitar la composición de gráficos orientados a publicaciones científicas. La <a href="#fig-ggpubr-example" class="quarto-xref">Figura&nbsp;<span>5.15</span></a> muestra un ejemplo con la función <code>ggboxplot()</code>, para crear boxplots paralelos que, además, muestren información sobre contrastes de hipótesis sobre si las diferencias entre las medias de los grupos son estadísticamente significativas.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ToothGrowth"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ToothGrowth</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Especificamos las comparaciones que se mostrarán</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggboxplot</span>(df, <span class="at">x =</span> <span class="st">"dose"</span>, <span class="at">y =</span> <span class="st">"len"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="st">"dose"</span>, <span class="at">palette =</span><span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">add =</span> <span class="st">"jitter"</span>, <span class="at">shape =</span> <span class="st">"dose"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>my_comparisons <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"1"</span>), <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"2"</span>) )</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> my_comparisons)<span class="sc">+</span> <span class="co"># Añadir p-valores de comparaciones</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_compare_means</span>(<span class="at">label.y =</span> <span class="dv">50</span>)  <span class="co"># Añadir contraste global diferencia entre medias</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wilcox.test.default(c(4.2, 11.5, 7.3, 5.8, 6.4, 10, 11.2, 11.2, :
+cannot compute exact p-value with ties</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wilcox.test.default(c(4.2, 11.5, 7.3, 5.8, 6.4, 10, 11.2, 11.2, :
+cannot compute exact p-value with ties</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wilcox.test.default(c(16.5, 16.5, 15.2, 17.3, 22.5, 17.3, 13.6, :
+cannot compute exact p-value with ties</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-ggpubr-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggpubr-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2_files/figure-html/fig-ggpubr-example-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggpubr-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.15: Ejemplo de un gráfico con boxplots paralelos y contraste de hipótesis sobre diferencias entre medias de los grupos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="taller-práctico-1-construcción-de-gráficos-paso-a-paso" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="taller-práctico-1-construcción-de-gráficos-paso-a-paso"><span class="header-section-number">5.10</span> Taller práctico 1: construcción de gráficos paso a paso</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-gomez1984" class="csl-entry" role="listitem">
+Gomez, K. A., &amp; Gomez, A. A. (1984). <em><span>Statistical Procedures for Agricultural Research</span></em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-holland1999" class="csl-entry" role="listitem">
+Holland, J. M., Perry, J. N., &amp; Winder, L. (1999). The within-field spatial and temporal distribution of arthropods within winter wheat. <em>Bulletin of Entomological Research</em>, <em>89</em>, 499-513. <a href="https://doi.org/10.1017/S0007485399000656">https://doi.org/10.1017/S0007485399000656</a>
+</div>
+<div id="ref-patil2021" class="csl-entry" role="listitem">
+Patil, I. (2021). <span>Visualizations with statistical details: The <span>’ggstatsplot’</span> approach</span>. <em><span>Journal of Open Source Software</span></em>, <em>6</em>(61), 3167. <a href="https://doi.org/10.21105/joss.03167">https://doi.org/10.21105/joss.03167</a>
+</div>
+<div id="ref-agriTutorial2020" class="csl-entry" role="listitem">
+Rodney Edmondson, Hans-Peter Piepho, &amp; Muhammad Yaseen. (2020). <em><span>agriTutorial: Tutorial Analysis of Some Agricultural Experiments </span></em>.
+</div>
+<div id="ref-wickham2024" class="csl-entry" role="listitem">
+Wickham, H., Navarro, D., &amp; Pedersen, T. L. (2024). <em>gglot2: Elegant Graphics for Data Analysis (3 ed.)</em>. Versión online (en progreso). <a href="https://ggplot2-book.org/">https://ggplot2-book.org/</a>
+</div>
+<div id="ref-agridat2024" class="csl-entry" role="listitem">
+Wright, K. (2024). <em><span>agridat: Agricultural Datasets</span></em>. <a href="https://CRAN.R-project.org/package=agridat">https://CRAN.R-project.org/package=agridat</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
