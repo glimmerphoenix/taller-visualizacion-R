@@ -174,7 +174,7 @@ como los **canales** de percepción de los espectadores que pretendemos emplear.
 un resumen de las principales marcas y canales como elementos constructivos que podemos emplear para diseñar
 nuestros gráficos [@munzner2016].
 
-![Catálogo de algunas marcas y canales que podemos utilizar en nuestras visualizaciones para representar información. Fuente: [@munzner2016].](img/marks-channels.svg){#fig-marks-channels width=100%}
+![Catálogo de algunos de los canales que podemos utilizar en nuestras visualizaciones para representar información. Fuente: [@munzner2016].](img/marks-channels.svg){#fig-marks-channels width=100%}
 
 Debemos prestar atención a la clasificación que muestra la @fig-marks-channels, puesto que no todas las marcas ni todos
 los canales tienen la misma *efectividad* al representar la información para que el espectador la reciba e interprete.
