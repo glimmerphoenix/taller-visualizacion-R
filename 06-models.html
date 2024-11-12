@@ -402,15 +402,11 @@ Figura&nbsp;6.1: Gráficos para analizar un modelo de regresión lineal sobre el
 </div>
 <p>Algunos paquetes como <code>ggstatsplot</code> <span class="citation" data-cites="patil2021">(<a href="references.html#ref-patil2021" role="doc-biblioref">Patil, 2021</a>)</span> permiten generar gráficos un poco más sofisticados para resumir el resultado de nuestros modelos y generar gráficos para inspeccionar su ajuste. Por ejemplo, en <span class="citation" data-cites="faraway2014">(<a href="references.html#ref-faraway2014" role="doc-biblioref">J. J. Faraway, 2014</a>)</span> se sugiere que una transformación de tipo raíz cuadrada sobre la variable de conteo de especies permite mejorar el ajuste del modelo. La <a href="#fig-lm-gala-sqrt-coefs" class="quarto-xref">Figura&nbsp;<span>6.2</span></a> muestra un resumen gráfico de los coeficientes y tests asociados a este modelo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>You can cite this package as:
-     Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach.
-     Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lmod_sqrt <span class="ot">&lt;-</span> <span class="fu">lm</span>(Species <span class="sc">~</span> Area <span class="sc">+</span> Elevation <span class="sc">+</span> Scruz <span class="sc">+</span> Nearest <span class="sc">+</span> Adjacent,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>gala)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(lmod_sqrt)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lmod_sqrt <span class="ot">&lt;-</span> <span class="fu">lm</span>(Species <span class="sc">~</span> Area <span class="sc">+</span> Elevation <span class="sc">+</span> Scruz <span class="sc">+</span> Nearest <span class="sc">+</span> Adjacent,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>gala)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(lmod_sqrt)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-lm-gala-sqrt-coefs" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -424,14 +420,11 @@ Figura&nbsp;6.2: Resumen de coeficientes y tests estadísticos asociados a un mo
 </div>
 </div>
 </div>
-<p>El paquete adicional <code>ggfortify</code> nos puede ayudar a representar los gráficos de diagnóstico para este modelo de regresión utilizando <code>ggplot2</code>. La <a href="#fig-ggfortify-lm" class="quarto-xref">Figura&nbsp;<span>6.3</span></a> muestra un ejemplo de gráficos de diagnóstico</p>
-<p><a href="https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_lm.html" class="uri">https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_lm.html</a>.</p>
+<p>El paquete adicional <code>ggfortify</code> nos puede ayudar a representar los gráficos de diagnóstico para este modelo de regresión utilizando <code>ggplot2</code>. La <a href="#fig-ggfortify-lm" class="quarto-xref">Figura&nbsp;<span>6.3</span></a> muestra un ejemplo de gráficos de diagnóstico creados mediante la función <code>autoplot()</code>. Esta función es compatible con diversos tipos de modelos en R, incluyendo modelos lineales generalizados y sus versiones regularizadas (Ridge, Lasso y Elastic-net mediante el paquete <code>glmnet</code>), series temporales, familias de PCA, <em>clustering</em> y análisis de supervivencia.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Cargando paquete requerido: ggplot2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(lmod_sqrt, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(lmod_sqrt, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ggfortify-lm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -445,18 +438,19 @@ Figura&nbsp;6.3: Gráficos de diagnóstico del modelo de regresión sobre el <em
 </div>
 </div>
 </div>
+<p>Existen más paquetes que amplían el soporte para creación de gráficos de diagnóstico con otros tipos de modelos. Por ejemplo, el <a href="https://github.com/benjaminleroy/ggDiagnose">paquete <code>ggDiagnose</code></a> puede generar con <code>ggplot2</code> gráficos de diagnóstico para modelos generalizados aditivos (GAM). Otro paquete similar que puede ser de interés para estudiantes de Ecología y Ciencias Ambientales es <a href="https://saskiaotto.github.io/INDperform/index.html"><code>INDperform</code></a>, con soporte para modelos GAM y GAMM.</p>
 </section>
 </section>
 <section id="xai-explanaible-ai" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="xai-explanaible-ai"><span class="header-section-number">6.2</span> XAI: Explanaible AI</h2>
+<p>Tras las reciente aprobación en 2024 de la Ley sobre Inteligencia Artificial del Parlamento y el Consejo Europeo <span class="citation" data-cites="eu-2024-1689">(<a href="references.html#ref-eu-2024-1689" role="doc-biblioref">Council of European Union, 2024</a>)</span>, se considera de vital importancia en el nuevo contexto de aplicación de algoritmos y modelos de IA en el seno de la UE la inclusión de mecanismos que faciliten su explicabilidad e interpretabilidad de los resultados que devuelven. En este contexto, se ha acuñado en inglés el concepto de <em>Explanaible Artificial Intelligence (XAI)</em> como un conjunto de herramientas y métodos para explicar e interpretar modelos de ML.</p>
 <section id="ejemplo-explicabilidad-de-algoritmos-ml" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="ejemplo-explicabilidad-de-algoritmos-ml"><span class="header-section-number">6.2.1</span> Ejemplo: explicabilidad de algoritmos ML</h3>
 <p>Al contrario que los modelos lineales, lineales generalizados o los árboles de decisión y métodos basados en ellos (e.g.&nbsp;Random Forest), muchos modelos de aprendizaje automático (ML) se comportan normalmente como si fuesen modelos opacos (<strong>black-box models</strong>), cuyo funcionamiento interno es dificil de comprender. A pesar de ello, en muchos casos es imprescindible que podamos crear gráficos y resultados que permitan comprender, al menos intuitivamente, las relaciones entre las variables entrantes y las salidas del algoritmo.</p>
-<p>De hecho, tras las reciente aprobación en 2024 de la Ley sobre Inteligencia Artificial del Parlamento y el Consejo Europeo <span class="citation" data-cites="eu-2024-1689">(<a href="references.html#ref-eu-2024-1689" role="doc-biblioref">Council of European Union, 2024</a>)</span>, se considera de vital importancia en el nuevo contexto de aplicación de algoritmos y modelos de IA en el seno de la UE la inclusión de mecanismos que faciliten su explicabilidad e interpretabilidad de los resultados que devuelven. En este contexto, se ha acuñado en inglés el concepto de <em>Explanaible Artificial Intelligence (XAI)</em> como un conjunto de herramientas y métodos para explicar e interpretar modelos de ML.</p>
 <p>En R existen, entre otros, <a href="https://jtr13.github.io/cc21fall2/introduction-to-xai-explainable-ai-in-r.html#introduction-8">dos paquetes principales</a> que implementan métodos y herramientas para XAI:</p>
 <ul>
-<li><p>El paquete <code>iml</code></p></li>
-<li><p>DALEX (Descriptive mAchine Learning EXplanations) <span class="citation" data-cites="biecek2021">(<a href="references.html#ref-biecek2021" role="doc-biblioref">Biecek &amp; Burzykowski, 2021</a>)</span> propone todo un <em>framework</em> para explicabilidad de modelos ML. Su punto de entrada es la función <code>explain()</code> que envuelve un modelo predictivo posibilitando a partir de ese momento la aplicación de <a href="https://github.com/ModelOriented/DrWhy/blob/master/README.md">diversas herramientas de XAI</a> más sofisticadas. La <a href="#fig-DALEX-workflow" class="quarto-xref">Figura&nbsp;<span>6.4</span></a> resume el flujo de trabajo estándar con el paquete DALEX y muestra la gran diversidad de modelos procedentes de otros paquetes que son compatibles con las herramientas de XAI incluidas en este <em>framework</em>.</p>
+<li><p>El paquete <code>iml</code> <span class="citation" data-cites="molnar2018">(<a href="references.html#ref-molnar2018" role="doc-biblioref">Molnar et&nbsp;al., 2018</a>)</span> incluye un buen número de herramientas agnósticas de modelo para AIX (es decir, que son válidas para varios modelos y algoritmos sin particularidades que las hagan incompatibles con alguno de ellos). Estas herramientas están explicadas de forma más amplia en un excelente libro sobre ML interpretable publicado por uno de los autores del paquete <span class="citation" data-cites="molnar2024">(<a href="references.html#ref-molnar2024" role="doc-biblioref">Molnar, 2024</a>)</span>.</p></li>
+<li><p><code>DALEX</code> (Descriptive mAchine Learning EXplanations) <span class="citation" data-cites="biecek2021">(<a href="references.html#ref-biecek2021" role="doc-biblioref">Biecek &amp; Burzykowski, 2021</a>)</span> es un paquete que propone todo un <em>framework</em> para explicabilidad de modelos ML. Su punto de entrada es la función <code>explain()</code> que envuelve un modelo predictivo posibilitando a partir de ese momento la aplicación de <a href="https://github.com/ModelOriented/DrWhy/blob/master/README.md">diversas herramientas de XAI</a> más sofisticadas. La <a href="#fig-DALEX-workflow" class="quarto-xref">Figura&nbsp;<span>6.4</span></a> resume el flujo de trabajo estándar con el paquete DALEX y muestra la gran diversidad de modelos procedentes de otros paquetes que son compatibles con las herramientas de XAI incluidas en este <em>framework</em>.</p>
 <p>A su vez, la <a href="#fig-DALEX-pyramid" class="quarto-xref">Figura&nbsp;<span>6.5</span></a> muestra la organización y conexiones entre las diferentes herramientas incluidas en el paquete DALEX para XAI.</p></li>
 </ul>
 <div id="fig-DALEX-workflow" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -479,6 +473,17 @@ Figura&nbsp;6.5: Organización de las diversas herramientas para XAI incluidas e
 </figcaption>
 </figure>
 </div>
+<p>El paquete DALEX es parte del ecosistema <a href="http://drwhy.ai/">DrWhy.AI</a>, un conjunto de paquetes R para abordar la exploración visual, explicación y diagnóstico de modelos predictivos: <a href="https://github.com/ModelOriented/DrWhy" class="uri">https://github.com/ModelOriented/DrWhy</a>. Incluye adaptadores para compatibilidad con un gran número de paquetes de modelado y ML en R (y otras tecnologías, como H2O), así como herramientas de explicabilidad de modelos y algoritmos, tanto agnósticas del modelo como específicamente diseñadas para cierto tipo de modelos. Por último, también incluye herramientas que automatizan la exploración y diagnóstico interactivos de modelos y algoritmos: los paquetes <a href="https://github.com/ModelOriented/modelStudio"><code>modelStudio</code></a> (interactivo) y <a href="https://github.com/ModelOriented/modelDown"><code>modelDown</code></a> (resumen explicativo de modelos en HTML). La <a href="#fig-modelDown-importance" class="quarto-xref">Figura&nbsp;<span>6.6</span></a> muestra un ejemplo de un gráfico de importancia de variables para interpretar el papel que juegan en las predicciones devueltas por diferentes modelos estadísticos aplicados al mismo conjunto de datos.</p>
+<div id="fig-modelDown-importance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-modelDown-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/modelDown-importance.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-modelDown-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6.6: Gráfica de barras que muestra la importancia de diferentes variables en distintos algoritmos de ML aplicados sobre el mismo conjunto de datos, generada con <code>modelDown</code>. Fuente: <a href="https://github.com/ModelOriented/modelDown" class="uri">https://github.com/ModelOriented/modelDown</a>.
+</figcaption>
+</figure>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -493,6 +498,12 @@ Faraway, J. (2022). <em>’faraway’: Functions and Datasets for Books by Julia
 </div>
 <div id="ref-faraway2014" class="csl-entry" role="listitem">
 Faraway, J. J. (2014). <em>Linear <span>M</span>odels with <span>R</span></em>. Chapman &amp; Hall/CRC Press. <a href="https://julianfaraway.github.io/faraway/LMR/">https://julianfaraway.github.io/faraway/LMR/</a>
+</div>
+<div id="ref-molnar2024" class="csl-entry" role="listitem">
+Molnar, C. (2024). <em>Interpretable Machine Learning (2 ed.)</em>. Versión online (en progreso). <a href="https://christophm.github.io/interpretable-ml-book/">https://christophm.github.io/interpretable-ml-book/</a>
+</div>
+<div id="ref-molnar2018" class="csl-entry" role="listitem">
+Molnar, C., Bischl, B., &amp; Casalicchio, G. (2018). <span>iml: An R package for Interpretable Machine Learning</span>. <em>Journal of Open Source Software</em>, <em>3</em>(26), 786. <a href="https://doi.org/10.21105/joss.00786">https://doi.org/10.21105/joss.00786</a>
 </div>
 <div id="ref-patil2021" class="csl-entry" role="listitem">
 Patil, I. (2021). <span>Visualizations with statistical details: The <span>’ggstatsplot’</span> approach</span>. <em><span>Journal of Open Source Software</span></em>, <em>6</em>(61), 3167. <a href="https://doi.org/10.21105/joss.03167">https://doi.org/10.21105/joss.03167</a>
