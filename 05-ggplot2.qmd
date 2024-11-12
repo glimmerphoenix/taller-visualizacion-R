@@ -411,7 +411,7 @@ función `ggpairs()`, que construye una matriz para comparación de datos multiv
 muestra la @fig-ggpairs-example.
 
 ```{r}
-#| label: fig-ggmatrix-example
+#| label: fig-ggpairs-example
 #| fig-cap: "Ejemplo de una matriz de graficos comparativos entre parejas de atributos en un conjunto de datos multivariante, creada con `ggpairs()`."
 
 library(GGally)
