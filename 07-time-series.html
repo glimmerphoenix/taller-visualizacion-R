@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -243,7 +297,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#el-paquete-tsibble" id="toc-el-paquete-tsibble" class="nav-link" data-scroll-target="#el-paquete-tsibble"><span class="header-section-number">7.1.2</span> El paquete <code>tsibble</code></a></li>
   </ul></li>
   <li><a href="#taller-práctico-2-representación-de-series-temporales" id="toc-taller-práctico-2-representación-de-series-temporales" class="nav-link" data-scroll-target="#taller-práctico-2-representación-de-series-temporales"><span class="header-section-number">7.2</span> Taller práctico 2: representación de series temporales</a></li>
-  <li><a href="#taller-práctico-3-visualización-de-modelos-de-predicción" id="toc-taller-práctico-3-visualización-de-modelos-de-predicción" class="nav-link" data-scroll-target="#taller-práctico-3-visualización-de-modelos-de-predicción"><span class="header-section-number">7.3</span> Taller práctico 3: visualización de modelos de predicción</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/blob/main/07-time-series.qmd" class="toc-action"><i class="bi bi-github"></i>Ver el código</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/edit/main/07-time-series.qmd" class="toc-action"><i class="bi empty"></i>Editar esta página</a></li><li><a href="https://github.com/glimmerphoenix/taller-reprod-R/issues/new" class="toc-action"><i class="bi empty"></i>Informar de un problema</a></li></ul></div></nav>
     </div>
@@ -270,24 +323,226 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>En los dos últimos capítulos de apuntes para este taller práctico abordamos el importante apartado de la representación visual de datos con dependencias estrictas: temporales o espaciales. En este capítulo introducimos algunas herramientas para visualizar datos con dependencias temporales.</p>
+<p><strong>Paquete <code>agridat</code></strong></p>
+<p>Como ejemplo usaremos varios conjuntos de datos del paquete <code>agridat</code>.</p>
+<ul>
+<li><code>nass.barley</code>, <code>nass.corn</code>, <code>nass.rice</code>, <code>nass.soybean</code> y <code>nass.wheat</code>: Cinco conjuntos de datos con valores de producción y superficie (en acres) cosechados en cada estado de EE.UU. para los cultivos agrícolas más importantes en este país, entre aproximadamente el año 1900 y el 2011. [<em>Fuente</em>: United States Department of Agriculture, National Agricultural Statistics Service. <a href="https://quickstats.nass.usda.gov/" class="uri">https://quickstats.nass.usda.gov/</a>]</li>
+</ul>
 <section id="datos-de-series-temporales" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="datos-de-series-temporales"><span class="header-section-number">7.1</span> Datos de series temporales</h2>
-<p>Los datos de series temporales son aquellos que incluyen una columna de marca de tiempo en la que se generó la entrada que describe un ítem analizado junto a sus elementos descriptivos (atributos o <em>features</em>). En el caso particular de datos tabulados, tendremos una columna con una marca de tipo fecha, hora o fecha y hora, que marca el momento en que se generó o registró esa fila de datos.</p>
-<p>Existen diversos paquetes en R que permiten cargar, procesar y analizar datos de series temporales, incluyendo <code>zoo</code> o <code>xts</code> entre otros. Aquí nos vamos a centrar en explicar otro paquete mucho más reciente y potente, para manejo de datos de series temporales en objetos un diseño similar a los objetos de clase <code>tibble</code> en los paquetes del Tidyverse. Este paquete es <a href="https://tsibble.tidyverts.org/"><code>tsibble</code></a> y es parte de un ecosistema de paquetes para datos de series temporales llamado <a href="https://tidyverts.org/">Tidyverts</a>.</p>
+<p>Los datos de series temporales son aquellos que incluyen una columna de marca de tiempo en la que se generó la entrada que para cada ítem con sus elementos descriptivos (atributos o <em>features</em>). En el caso particular de datos tabulados, tendremos una columna con una marca de tipo fecha, hora o fecha y hora, que marca el momento en que se generó o registró esa fila de datos.</p>
 <section id="escala-temporal-en-ggplot2" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="escala-temporal-en-ggplot2"><span class="header-section-number">7.1.1</span> Escala temporal en <code>ggplot2</code></h3>
+<p>Es posible configurar la escala de representación en <code>ggplot2</code> de manera que muestre datos de fecha o fecha y hora. Se consigue mediante <a href="https://ggplot2.tidyverse.org/reference/scale_date.html">varias funciones</a>:</p>
+<ul>
+<li><code>scale_*_date</code> para fechas representadas con la clase R <code>Date</code>.</li>
+<li><code>scale_*_time</code> para tiempo representado con la clase R <code>hms</code>.</li>
+<li><code>scale_*_datetime</code> para fecha y hora (<em>timestamp</em>), representado con la clase R <code>POSIXct</code>.</li>
+</ul>
+<p>Primero, cargamos los paquetes necesarios.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Después, preparamos los datos para la representación gráfica de la serie temporal usando <code>ggplot2</code>. Al conectar la variable <code>date_year</code> que hemos construido transformando la columna <code>year</code> en clase <code>Date</code>, con el eje horizontal del gráfico mediante <code>aes(date_year,...)</code>, la función <code>ggplot()</code> detecta el tipo de dato fecha y selecciona por defecto la escala correcta de representación y la resolución más adecuada (datos anuales).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenemos los totales anuales de cosecha de maiz</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nass_corn_yearly <span class="ot">&lt;-</span> nass.corn <span class="sc">|&gt;</span>                     </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, yield) <span class="sc">|&gt;</span>                             </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span>                                  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_yield =</span> <span class="fu">sum</span>(yield))                </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiamos la columna de fecha a tipo Date</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>nass_corn_yearly <span class="ot">&lt;-</span> nass_corn_yearly <span class="sc">|&gt;</span>              </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_year =</span> <span class="fu">parse_date_time</span>(year, <span class="st">"%Y"</span>))    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(nass_corn_yearly, <span class="fu">aes</span>(date_year, total_yield)) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkolivegreen"</span>) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>p1</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-agridat-tseries" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-agridat-tseries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-time-series_files/figure-html/fig-agridat-tseries-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-agridat-tseries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.1: Representación gráfica de una serie temporal sobre cantidad total de maiz cosechado anualmente en EE.UU., representada con <code>ggplot2</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Si ahora queremos representar un gráfico con la evolución simultánea de la cosecha total anual de maiz y trigo, primero tenemos que trabajar un poco más la tabla de datos antes de poder representarla. Se añade una columna adicional para discriminar la cosecha total por tipo de cultivo, siguiendo los principios de <em>tidy data</em>. Al componer el gráfico, indicamos que se conecte esta nueva variable con el canal de información de color, mediante <code>aes(..., color = crop)</code>. Como resultado, se genera una gráfica en color diferente para cada grupo y aparece una leyenda explicativa a la derecha. El resultado se muestra en la <a href="#fig-yield-tseries-multi" class="quarto-xref">Figura&nbsp;<span>7.2</span></a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Fíjate bien en que no ha sido necesario transformar el tipo de esta nueva columna <code>crop</code> a <code>factor</code>. La función <code>ggplot</code> puede mapear directamente la información de color de gráfico a etiquetas de caracteres.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenemos los totales anuales de cosecha de trigo</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>nass_wheat_yearly <span class="ot">&lt;-</span> nass.wheat <span class="sc">|&gt;</span>                     </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, yield) <span class="sc">|&gt;</span>                             </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span>                                  </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_yield =</span> <span class="fu">sum</span>(yield))                </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiamos la columna de fecha a tipo Date</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>nass_wheat_yearly <span class="ot">&lt;-</span> nass_wheat_yearly <span class="sc">|&gt;</span>              </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_year =</span> <span class="fu">parse_date_time</span>(year, <span class="st">"%Y"</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un gráfico uniendo la información de las dos tablas</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># y creando una variable para identificar cada tipo de cultivo</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">bind_rows</span>(nass_corn_yearly <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">crop =</span> <span class="st">"corn"</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                        nass_wheat_yearly <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">crop =</span> <span class="st">"wheat"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                        ),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date_year, <span class="at">y =</span> total_yield, <span class="at">color =</span> crop)) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Año"</span>, <span class="at">y =</span> <span class="st">"Toneladas"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Evolución de cosechas de cultivos en EE.UU."</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 1866 - 2011"</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-yield-tseries-multi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-yield-tseries-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-time-series_files/figure-html/fig-yield-tseries-multi-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-yield-tseries-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.2: Representación gráfica de dos series temporales sobrepuestas con <code>ggplot2</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="el-paquete-tsibble" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="el-paquete-tsibble"><span class="header-section-number">7.1.2</span> El paquete <code>tsibble</code></h3>
+<p>Existen diversos paquetes en R que permiten cargar, procesar y analizar datos de series temporales, incluyendo <code>zoo</code> o <code>xts</code> entre otros. Aquí nos vamos a centrar en explicar otro paquete mucho más reciente y potente, para manejo de datos de series temporales en objetos un diseño similar a los objetos de clase <code>tibble</code> en los paquetes del Tidyverse. Este paquete es <a href="https://tsibble.tidyverts.org/"><code>tsibble</code></a> y es parte de un ecosistema de paquetes para datos de series temporales llamado <a href="https://tidyverts.org/">Tidyverts</a>.</p>
+<p>Presentamos unos ejemplos prácticos que demuestran algunas de las herrramientas de representación gráfica incluidas en este paquete. Existe un excelente manual sobre predicción de series temporales [Hyndman2021] que está publicado en abierto y utiliza estos paquetes como herramienta básica para todos los ejemplos mostrados: <a href="https://otexts.com/fpp3/" class="uri">https://otexts.com/fpp3/</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tsibble)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="taller-práctico-2-representación-de-series-temporales" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="taller-práctico-2-representación-de-series-temporales"><span class="header-section-number">7.2</span> Taller práctico 2: representación de series temporales</h2>
-</section>
-<section id="taller-práctico-3-visualización-de-modelos-de-predicción" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="taller-práctico-3-visualización-de-modelos-de-predicción"><span class="header-section-number">7.3</span> Taller práctico 3: visualización de modelos de predicción</h2>
+<p>Tal y como se explica en la Sec. 2.1 del libro de referencia <span class="citation" data-cites="Hyndman2021">(<a href="references.html#ref-Hyndman2021" role="doc-biblioref">Hyndman &amp; Athanasopoulos, 2021</a>)</span>, (<a href="https://otexts.com/fpp3/tsibbles.html" class="uri">https://otexts.com/fpp3/tsibbles.html</a>), se puede construir un objeto de tipo <code>tsibble</code> a partir de un objeto <code>tibble</code> o <code>data.frame</code> de R, utilizando la función <code>as_tsibble</code>. El argumento <code>index</code> de esta función permite señalar qué columna contiene la información de dependencia temporal de los datos. Además, un objeto <code>tsibble</code> puede contener múltiples series temporales, en cuyo caso también tenemos que indicar mediante otro argumento <code>key</code> qué columna adicional podemos “acoplar” a la columna <code>index</code> para discriminar los datos correspondientes de cada serie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos los totales anuales de cosecha de ambos cultivos</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ya no necesitamos transformar la columna de año a clase Date</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>nass_corn_yearly <span class="ot">&lt;-</span> nass.corn <span class="sc">|&gt;</span>                     </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, yield) <span class="sc">|&gt;</span>                             </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span>                                  </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_yield =</span> <span class="fu">sum</span>(yield)) </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>nass_wheat_yearly <span class="ot">&lt;-</span> nass.wheat <span class="sc">|&gt;</span>                     </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, yield) <span class="sc">|&gt;</span>                             </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span>                                  </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_yield =</span> <span class="fu">sum</span>(yield)) </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>crops_yearly <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(nass_corn_yearly <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">crop =</span> <span class="st">"corn"</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                         nass_wheat_yearly <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">crop =</span> <span class="st">"wheat"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                        ) </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>crops_yearly_tsibble <span class="ot">&lt;-</span> crops_yearly <span class="sc">|&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">key =</span> crop, <span class="at">index =</span> year)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>crops_yearly_tsibble</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tsibble: 292 x 3 [1Y]
+# Key:       crop [2]
+    year total_yield crop 
+   &lt;int&gt;       &lt;dbl&gt; &lt;chr&gt;
+ 1  1866        860. corn 
+ 2  1867        940  corn 
+ 3  1868        941. corn 
+ 4  1869        854  corn 
+ 5  1870        994. corn 
+ 6  1871        964. corn 
+ 7  1872       1015. corn 
+ 8  1873        878  corn 
+ 9  1874        840. corn 
+10  1875        955. corn 
+# ℹ 282 more rows</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Observa que tampoco es necesario que la columna que va a actuar como <code>key</code> en el objeto <code>tsibble</code> sea de tipo factor. Fíjate también en que, siempre que los datos tengan periodicidad anual, tampoco es necesario transformar la columna de información temporal a clase <code>Date</code>, al contrario de lo que sucede si usamos <code>ggplot2</code> con un <code>data.frame</code> o <code>tibble</code> directamente.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Compatibilidad con el resto de paquetes Tidyverse
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se pueden usar las funciones habituales del paquete <code>dplyr</code>, como <code>mutate()</code>, <code>select()</code>, <code>filter()</code> o <code>summarise()</code> con los objetos <code>tsibble</code> directamente.</p>
+</div>
+</div>
+<p>Ahora ya sólo queda componer nuestro gráfico, que se muestra en la <a href="#fig-tsibble-yield-tseries-multi" class="quarto-xref">Figura&nbsp;<span>7.3</span></a>. La potencia de este método de trabajo con <code>tsibble</code> radica en que la función <code>autoplot()</code> escoge por defecto muchos de los parámetros adecuados para componer la gráfica.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+El paquete <code>feasts</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Las funciones para creación de gráficos mediante <code>autoplot()</code> están en otro paquete de la familia Tidyverts, en concreto en el paquete <code>feasts</code>. Hay que cargar previamente este paquete para que <code>autoplot()</code> funcione correctamente.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(feasts)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># No es necesario especificar etiqueta para el eje X</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(crops_yearly_tsibble, total_yield) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Toneladas"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Evolución de cosechas de cultivos en EE.UU."</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 1866 - 2011"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-tsibble-yield-tseries-multi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tsibble-yield-tseries-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-time-series_files/figure-html/fig-tsibble-yield-tseries-multi-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tsibble-yield-tseries-multi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.3: Evolución del total anual cosechado de maiz y trigo en EE.UU., usando el paquete <code>tsibble</code> para crear la gráfica.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Otra de las ventajas de los objetos de tipo <code>tsibble</code> es que se detecta automáticamente la periodicidad de los datos a partir de la información en la columna que actúa como <code>index</code>, aunque en este ejemplo sólo tenemos un dato global de cosecha para cada año y no se pueden extraer componentes estacionales o realizar otro tipos de análisis sobre la periodicidad de los datos.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Hyndman2021" class="csl-entry" role="listitem">
+Hyndman, R. J., &amp; Athanasopoulos, G. (2021). <em>Forecasting: principles and practice</em> (3.ª ed.). OTexts. <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
