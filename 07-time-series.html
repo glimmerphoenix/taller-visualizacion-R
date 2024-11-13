@@ -237,7 +237,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#datos-de-series-temporales" id="toc-datos-de-series-temporales" class="nav-link active" data-scroll-target="#datos-de-series-temporales"><span class="header-section-number">7.1</span> Datos de series temporales</a></li>
+  <li><a href="#datos-de-series-temporales" id="toc-datos-de-series-temporales" class="nav-link active" data-scroll-target="#datos-de-series-temporales"><span class="header-section-number">7.1</span> Datos de series temporales</a>
+  <ul class="collapse">
+  <li><a href="#escala-temporal-en-ggplot2" id="toc-escala-temporal-en-ggplot2" class="nav-link" data-scroll-target="#escala-temporal-en-ggplot2"><span class="header-section-number">7.1.1</span> Escala temporal en <code>ggplot2</code></a></li>
+  <li><a href="#el-paquete-tsibble" id="toc-el-paquete-tsibble" class="nav-link" data-scroll-target="#el-paquete-tsibble"><span class="header-section-number">7.1.2</span> El paquete <code>tsibble</code></a></li>
+  </ul></li>
   <li><a href="#taller-práctico-2-representación-de-series-temporales" id="toc-taller-práctico-2-representación-de-series-temporales" class="nav-link" data-scroll-target="#taller-práctico-2-representación-de-series-temporales"><span class="header-section-number">7.2</span> Taller práctico 2: representación de series temporales</a></li>
   <li><a href="#taller-práctico-3-visualización-de-modelos-de-predicción" id="toc-taller-práctico-3-visualización-de-modelos-de-predicción" class="nav-link" data-scroll-target="#taller-práctico-3-visualización-de-modelos-de-predicción"><span class="header-section-number">7.3</span> Taller práctico 3: visualización de modelos de predicción</a></li>
   </ul>
@@ -248,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-ggplot2.html">Implementación</a></li><li class="breadcrumb-item"><a href="./07-time-series.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualización de series temporales</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualización de series temporales</span></h1>
+<h1 class="title"><span id="sec-time-series" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualización de series temporales</span></span></h1>
 </div>
 
 
@@ -265,9 +269,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>En los dos últimos capítulos de apuntes para este taller práctico abordamos el importante apartado de la representación visual de datos con dependencias estrictas: temporales o espaciales. En este capítulo introducimos algunas herramientas para visualizar datos con dependencias temporales.</p>
 <section id="datos-de-series-temporales" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="datos-de-series-temporales"><span class="header-section-number">7.1</span> Datos de series temporales</h2>
-<p>Breve introducción a la estructura y representación de datos se series temporales, centrándonos en el paquete <code>tsibble</code>.</p>
+<p>Los datos de series temporales son aquellos que incluyen una columna de marca de tiempo en la que se generó la entrada que describe un ítem analizado junto a sus elementos descriptivos (atributos o <em>features</em>). En el caso particular de datos tabulados, tendremos una columna con una marca de tipo fecha, hora o fecha y hora, que marca el momento en que se generó o registró esa fila de datos.</p>
+<p>Existen diversos paquetes en R que permiten cargar, procesar y analizar datos de series temporales, incluyendo <code>zoo</code> o <code>xts</code> entre otros. Aquí nos vamos a centrar en explicar otro paquete mucho más reciente y potente, para manejo de datos de series temporales en objetos un diseño similar a los objetos de clase <code>tibble</code> en los paquetes del Tidyverse. Este paquete es <a href="https://tsibble.tidyverts.org/"><code>tsibble</code></a> y es parte de un ecosistema de paquetes para datos de series temporales llamado <a href="https://tidyverts.org/">Tidyverts</a>.</p>
+<section id="escala-temporal-en-ggplot2" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="escala-temporal-en-ggplot2"><span class="header-section-number">7.1.1</span> Escala temporal en <code>ggplot2</code></h3>
+</section>
+<section id="el-paquete-tsibble" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="el-paquete-tsibble"><span class="header-section-number">7.1.2</span> El paquete <code>tsibble</code></h3>
+</section>
 </section>
 <section id="taller-práctico-2-representación-de-series-temporales" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="taller-práctico-2-representación-de-series-temporales"><span class="header-section-number">7.2</span> Taller práctico 2: representación de series temporales</h2>
