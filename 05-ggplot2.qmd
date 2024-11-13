@@ -15,48 +15,15 @@ library(tidyverse)
 
 ### Datos de ejemplo
 
-
-Utilizaremos ejemplos del paquete `agriTutorial` [@agriTutorial2020], que incluye conjuntos de datos
-y ejemplos de modelos sobre exprimentos en agricultura. También usaremos el paquete R `agridat` [@agridat2024], 
+Utilizaremos un *dataset* de ejemplo del paquete R `agridat` [@agridat2024], 
 que contiene conjuntos de datos provenientes de publicaciones relacionadas con la agricultura,
 incluyendo cultivos de campo, cultivos arbóreos o estudios con animales, entre otros.
 
-**Paquete `agriTutorial`**
-
-```{r}
-#| label: load-agriTutorial
-
-library(agriTutorial)
-library(agridat)
-```
-
-- `greenrice`: Datos de un experimento sobre absorción de nitrogeno (N), medido en g/maceta en un
-experimento de doble factor en invernadero [@gomez1984]. Se considera la duración del estrés hídrico (W) y el
-nivel de aplicación de nitrógeno. El experimento se llevó a cabo con cuatro niveles de estrés
-hídrico (0, 10, 20 y 40 días) como tratamientos de parcela principal (*main-plot treatment*) y
-cuatro dosis de nitrógeno (0, 90, 180 y 270 kg/ha) como tratamientos de subparcela (*sub-plot treatment*).
-Las parcelas principales se aleatorizaron en cuatro bloques completos (cada bloque incluye todos
-las posibles combinaciones de tratamientos).
-
-```{r}
-#| label: greenrice-eda
-
-data(greenrice)
-str(greenrice)
-```
-
-- `rice`: Datos de un experimento con tres prácticas de gestión (`minimum`, `optimum`, `intensive`), cinco
-cantidades distintas de fertilizante de nitrógeno (N) (0, 50, 80, 110, 140 kg/ha) y tres variedades de planta
-(`V1`, `V2`, `V3`) [@gomez1984]. El experimento sigue un diseño de parcelas divididas (*split-plot design*), donde la
-variedad de planta y el tipo de gestión son factores de tratamiento cualitativos y la cantidad de fertilizante
-de nitrógeno es un factor de tratamiento cuantitativo.
-
-```{r}
-#| label: rice-eda
-
-data(rice)
-str(rice)
-```
+También usaremos un *dataset* de ejemplo de un completo libro sobre métodos de regresión,
+ya en su segunda edición [@fahrmeir2022]. Los archivos con los datasets de ejemplo de esta
+referencia se pueden descargar de su [página web](https://www.uni-goettingen.de/de/551625.html),
+así como también los [archivos de código con los modelos](https://www.uni-goettingen.de/de/551585.html)
+sobre estos datos, en R.
 
 **Paquete `agridat`**
 
@@ -66,10 +33,62 @@ de 1996. Los conteos para cada especie de artrópodo se agregaron sobre los 6 d�
 
 ```{r}
 #| label: arthropods-eda
+library(agridat)
 
 data(holland.arthropods)
 str(holland.arthropods)
 ```
+
+***Dataset* `beech`**
+
+De acuerdo con la información facilitada en [@fahrmeir2022], este *dataset* proviene de un proyecto
+para comprobar las condiciones en que se encuentra el bosque the Rothenbuch (Spessart), realizado
+por Axel Göttlein (Tech. Univ., Munich) desde 1982. En este caso, las localizaciones de los
+árboles examinados están mucho más próximas entre sí de lo habitual en los análisis oficiales
+a gran escala. Se examinaron árboles en 83 ubicaciones diferentes alrededor de la localidad,
+centrándose en cinco especies: haya, roble, abeto, alerce y pino. El archivo de datos está restringido
+a la información sobre las hayas. En concreto, cada año la salud de las hayas se categoriza mediante
+la variable respuesta `defoliation` (defoliación), medida en 9 niveles diferentes. La interpretación
+de los posibles valores es que 0% corresponde a un árbol sano y 100% se asigna a un arbol muerto.
+
+::: {.callout-warning}
+## Datos mal codificados
+
+El archivo de datos `data/beech.raw` incluid en el repositorio de este taller,
+es una copia del archivo original descargado de 
+la [página web](https://www.uni-goettingen.de/de/551625.html) oficial del libro.
+Sin embargo, dicho archivo original contiene 3 valores erróneamente codificados (aparece 
+el valor `.`) para la columna de la variable `ph`, concretamente en las filas 
+1678, 1679 y 1797.
+
+Para evitar errores de lectura, se han recodificado esos tres valores como `4.` para
+los ejemplos de este taller. No obstante, se notifica esta modificación a los
+usuarios/as que estuviesen interesados en utilizar este *dataset* para otros fines (como
+practicar modelos avanzados de regresión).
+:::
+
+```{r}
+#| label: beech-data-describe
+library(Hmisc)
+library(readr)
+
+beech <- read_table("data/beech.raw",
+  col_types = cols(id = col_integer(), year = col_integer(), age = col_integer(),
+                   canopyd = col_integer(), gradient = col_integer(),
+                   alt = col_integer(), depth = col_integer(), ph = col_double(),
+                   watermoisture = col_factor(levels = c("1", "2", "3")),
+                   alkali = col_factor(levels = c("1","2", "3", "4")),
+                   humus = col_factor(levels = c("0", "1", "2", "3", "4",
+                                                 "5", "6", "7", "8", "9")),
+                   type = col_factor(levels = c("0","1")),
+                   fert = col_factor(levels = c("0","1"))
+                   ))
+str(beech)
+
+# Para un resumen más completo:
+# Hmisc::html(describe(beech))
+```
+
 
 ## Anatomía de un gráfico con `ggplot2`
 
@@ -443,3 +462,57 @@ p + stat_compare_means(comparisons = my_comparisons)+ # Añadir p-valores de com
 
 ## Taller práctico 1: construcción de gráficos paso a paso
 
+Vamos a utilizar el dataset `beech`, con datos sobre el estado de salud de las hayas cerca
+de la localidad alemana de Rothenbuch (Spessart), para componer otros ejemplos de
+construcción de gráficos para visualización de datos paso a paso con `ggplot2`.
+
+```{r}
+#| label: fig-beech-2ch
+#| fig-cap: "Visualización utilizando dos canales y facetas."
+#| fig-height: 12
+#| fig-width: 15
+#| column: page-right
+
+beech_years <- beech |>
+               filter(year == 1983 | year == 1987 |
+                      year == 1991 | year == 1995 |
+                      year == 1999 | year == 2004)
+
+p_beech <- ggplot(data = beech_years,
+                  aes(x = x, y = y,
+                      color = defol, size = age)) +
+           geom_point(alpha = 0.6) +
+           facet_wrap(~year, nrow = 3) +
+           theme(
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            strip.text = element_text(size = 12),
+            axis.text = element_text(size = 12),
+            axis.title = element_text(size = 14),
+            
+           )
+p_beech
+```
+
+
+```{r}
+#| label: fig-beech-3ch
+#| fig-cap: "Visualización utilizando tres canales y facetas."
+#| fig-height: 12
+#| fig-width: 15
+#| column: page-right
+
+p_beech <- ggplot(data = beech_years,
+                  aes(x = x, y = y,
+                      color = defol, size = age)) +
+           geom_point(aes(shape = alkali), alpha = 0.6) +
+           facet_wrap(~year, nrow = 3) +
+           theme(
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            strip.text = element_text(size = 12),
+            axis.text = element_text(size = 12),
+            axis.title = element_text(size = 14)
+           )
+p_beech
+```
