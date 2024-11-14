@@ -1,5 +1,9 @@
 # Recursos adicionales
 
-- Manual de `ggplot2`: <https://ggplot2-book.org> (3ª ed. en progreso).
+- Manual oficial de `ggplot2`: <https://ggplot2-book.org> (3ª ed. en progreso).
 
 - Galería de gráficos en R: <https://r-graph-gallery.com>.
+
+- 20 ejemplos destacados de visualización de datos con R: <https://r-graph-gallery.com/best-r-chart-examples>.
+
+- Gráficos para datos espaciales con R: <https://r-charts.com/es/espacial/>.
