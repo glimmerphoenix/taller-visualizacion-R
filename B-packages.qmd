@@ -1,11 +1,36 @@
 # Paquetes R y atribuciones
 
-## Requisitos previos {#sec-pkg-requirements}
+## Paquetes R {#sec-pkg-requirements}
 
 Para ejecutar los ejemplos incluidos en este taller, se necesita tener instalado
 R y una IDE de desarrollo para este lenguaje, como por ejemplo RStudio o Microsoft
-VS Code. 
+VS Code.
 
+Además, es necesario instalar los paquete descritos en la @tbl-R-packages.
+
+| Paquete       | Descripción                                                    |
+|:--------------|:---------------------------------------------------------------|
+| `ggplot2`     | Paquete principal de visualización de datos en el Tidyverse      |
+| `tidyverse`   | Metapaquete que instala las herramientas principales del Tidyverse      |
+| `agridat`     | Conjunto de datos sobre experimentos  deagricultura, incluyendo cultivos de campo, cultivos arbóreos o estudios con animales, entre otros      |
+| `Hmisc`       | Funciones de utilidad desarrolladas por Frank E. Harrell      |
+| `ggthemes`    | Temas adicionales para personalizar gráficos con `ggplot2`       |
+| `ggstatsplot` | Creación de gráficas preapradas para publicaciones científicas      |
+| `patchwork`   | Composición sencilla de varios gráficos con `ggplot2` en la misma imagen      |
+| `GGally`      | Herramientas adicionales que extienden la funcionalidad de `ggplot2`  |
+| `ggpubr`      | Creación de gráficas de calidad para publicación científica      |
+| `ggfortify`   | Herramientas de visualización para diagnóstico de modelos. *Cuidado*: puede tener interacciones problemáticas con otros paquetes |
+| `faraway`     | Funciones y datos para los libros publicados por Julian J. Faraway      |
+| `tsibble`     | Soporte para datos de series temporales compatible con el Tidyverse      |
+| `feasts`      | Funciones adicionales para extracción de *features* y estadísticas en series temporales       |
+| `climaemet`   | Conector para obtención de datos de la API pública de AEMET      |
+| `sf`          | Soporte para manipulación y representación de objetos representados con el estándar *simple features*      |
+| `mapview`     | Creación de gráficos espaciales intereactivos en R      |
+
+: Listado de paquetes R utilizados en los ejemplos de este taller. {#tbl-R-packages .striped .hover}
 
 
 ## Atribución de imágenes e iconos
+
+Todas las imágenes utilizadas de fuentes externas reciben atribución junto a su aparición
+en los contenidos de este taller.
