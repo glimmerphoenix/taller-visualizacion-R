@@ -641,7 +641,7 @@ Figura&nbsp;5.6: Añadimos títulos y personalizamos etiquetas de los ejes.
 </section>
 <section id="anotaciones" class="level2" data-number="5.7">
 <h2 data-number="5.7" class="anchored" data-anchor-id="anotaciones"><span class="header-section-number">5.7</span> Anotaciones</h2>
-<p>En el <a href="https://ggplot2-book.org/annotations">capítulo 8</a> del libro de referencia sobre <code>ggplot 2</code> <span class="citation" data-cites="wickham2024">(<a href="references.html#ref-wickham2024" role="doc-biblioref">Wickham et&nbsp;al., 2024</a>)</span> se muestran varias funciones de este paquete y varios paquetes adicionales que permiten añadir anotaciones de todo tipo en nuestros gráficos: texto, fórmulas, etiquetas, etc. En ocasiones, algunos paquetes, como <code>directlabels</code>, ofrecen incluso <a href="wickham2024">etiquetado automático</a> de los grupos de datos (según los valores de un atributo categórico).</p>
+<p>En el <a href="https://ggplot2-book.org/annotations">capítulo 8</a> del libro de referencia sobre <code>ggplot 2</code> <span class="citation" data-cites="wickham2024">(<a href="references.html#ref-wickham2024" role="doc-biblioref">Wickham et&nbsp;al., 2024</a>)</span> se muestran varias funciones de este paquete y varios paquetes adicionales que permiten añadir anotaciones de todo tipo en nuestros gráficos: texto, fórmulas, etiquetas, etc. En ocasiones, algunos paquetes, como <code>directlabels</code>, ofrecen incluso <a href="https://tdhock.github.io/directlabels/">etiquetado automático</a> de los grupos de datos (según los valores de un atributo categórico).</p>
 <p>La <a href="#fig-ggplot-first-annotations" class="quarto-xref">Figura&nbsp;<span>5.7</span></a> muestra un ejemplo de cuatro anotaciones añadidas manualmente a nuestro gráfico para marcar la ubicación de otros tantos casos atípicos sobre el diagrama de dispersión.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -826,7 +826,9 @@ Figura&nbsp;5.10: Ejemplos de gráficos creados con cuatro paquetes de extensió
 <h3 data-number="5.9.1" class="anchored" data-anchor-id="extensiones-adicionales"><span class="header-section-number">5.9.1</span> Extensiones adicionales</h3>
 <p>Además de las extensiones que figuran en el listado anterior, hay otros paquetes que también incluyen funciones interesantes que extienden las herramientas básicas de <code>ggplot2</code>.</p>
 <ul>
-<li><code>ggstatsplot</code>: una de las extensiones más populares y potentes para <code>ggplot2</code> es esta, que permite crear gráficos muy sofisticados y, además, acompañados de detalles y resultados de nuestros modelos estadísticos <span class="citation" data-cites="patil2021">(<a href="references.html#ref-patil2021" role="doc-biblioref">Patil, 2021</a>)</span>. Veamos un primer ejemplo en la <a href="#fig-ggstatsplot-regression" class="quarto-xref">Figura&nbsp;<span>5.11</span></a>.</li>
+<li><p><code>ggstatsplot</code>: una de las extensiones más populares y potentes para <code>ggplot2</code> es esta, que permite crear gráficos muy sofisticados y, además, acompañados de detalles y resultados de nuestros modelos estadísticos <span class="citation" data-cites="patil2021">(<a href="references.html#ref-patil2021" role="doc-biblioref">Patil, 2021</a>)</span>. Veamos un primer ejemplo en la <a href="#fig-ggstatsplot-regression" class="quarto-xref">Figura&nbsp;<span>5.11</span></a>.</p>
+<p>Otro buen ejemplo de gráfico de calidad listo para publicar con este paquete es el mostrado en la <a href="#fig-ggstatsplot-betweenstats" class="quarto-xref">Figura&nbsp;<span>5.12</span></a>, que muestra una representación gráfica y los resultados estadísticos de varios test comparando la diferencia de medias entre grupos.</p>
+<p>El paquete <code>ggstatsplot</code> también incluye muchas funciones para automatizar el resumen de resultados de modelos de regresión, tanto frecuentistas como bayesianos, con un total de <a href="https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html#supported-models">235 modelos soportados</a>. Veremos algunos ejemplos de estas funciones en el <a href="06-models.html" class="quarto-xref"><span>Capítulo 6</span></a>.</p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -858,21 +860,18 @@ Figura&nbsp;5.11: Gráfico de regresión simple con bandas del C.I. (95%), que i
 </div>
 </div>
 </div>
-<pre><code>Otro buen ejemplo de gráfico de calidad listo para publicar con este paquete es el mostrado en la
-@fig-ggstatsplot-betweenstats, que muestra una representación gráfica y los resultados estadísticos
-de varios test comparando la diferencia de medias entre grupos.</code></pre>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    movies_long,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    genre <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Action"</span>, <span class="st">"Action Comedy"</span>, <span class="st">"Action Drama"</span>, <span class="st">"Comedy"</span>)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> genre,</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> rating,</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"IMDB rating by film genre"</span>,</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Genre"</span>,</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"IMDB rating (average)"</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    movies_long,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    genre <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Action"</span>, <span class="st">"Action Comedy"</span>, <span class="st">"Action Drama"</span>, <span class="st">"Comedy"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> genre,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> rating,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"IMDB rating by film genre"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Genre"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"IMDB rating (average)"</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ggstatsplot-betweenstats" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -886,27 +885,23 @@ Figura&nbsp;5.12: Violín plots paralelos, que incluyen distribución de puntos 
 </div>
 </div>
 </div>
-<pre><code>El paquete `ggstatsplot` también incluye muchas funciones para automatizar el resumen de resultados
-de modelos de regresión, tanto frecuentistas como bayesianos, con un total de 
-[235 modelos soportados](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html#supported-models).
-Veremos algunos ejemplos de estas funciones en el @sec-graphs-model-eval.</code></pre>
 <ul>
 <li><code>patchwork</code>: permite componer fácilmente parrillas de gráficos con diferentes configuraciones a partir de gráficos individuales creados con <code>ggplot2</code>. Además, usa una sintaxis bastante sencilla y directa, puesto que el operador <code>+</code> coloca un gráfico junto a otro, mientras que los operadores <code>|</code> y <code>/</code> construyen una rejilla en dirección horizontal o vertical, respectivamente. La figura <a href="#fig-patchwork-example" class="quarto-xref">Figura&nbsp;<span>5.13</span></a> ilustra con un ejemplo con código cómo funciona este paquete. Se recomienda encarecidamente consultar <a href="https://patchwork.data-imaginist.com/">la página de documentación de <code>patchwork</code></a> para conocer más detalles y ejemplos.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp))  <span class="co"># Primer gráfico</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear)) <span class="co"># Segundo gráfico</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(disp, qsec),</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">method =</span> <span class="st">'loess'</span>,</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">formula =</span> <span class="st">'y ~ x'</span>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(carb))</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3) <span class="sc">/</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>      p4</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp))  <span class="co"># Primer gráfico</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear)) <span class="co"># Segundo gráfico</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(disp, qsec),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">method =</span> <span class="st">'loess'</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">formula =</span> <span class="st">'y ~ x'</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(carb))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3) <span class="sc">/</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>      p4</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-patchwork-example" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -924,14 +919,14 @@ Figura&nbsp;5.13: Ejemplo de funcionamiento del paquete <code>patchwork</code> p
 <li><code>GGally</code>: otro paquete tremendamente potente, que proporciona funciones para creación automática de gráficos con distintos fines: exploración de datos, gráficos bivariantes, evaluación de modelos, etc. Veremos algunos ejemplos de este paquete en el <a href="06-models.html" class="quarto-xref"><span>Capítulo 6</span></a>. Un ejemplo muy habitual y de gran utilidad es la función <code>ggpairs()</code>, que construye una matriz para comparación de datos multivariantes por parejas, tal y como muestra la <a href="#fig-ggpairs-example" class="quarto-xref">Figura&nbsp;<span>5.14</span></a>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Registered S3 method overwritten by 'GGally':
   method from  
   +.gg   ggside</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(tips, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> sex), <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>))</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pm</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(tips, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> sex), <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pm</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
@@ -955,17 +950,17 @@ Figura&nbsp;5.14: Ejemplo de una matriz de graficos comparativos entre parejas d
 <li><code>ggpubr</code>: por último, el paquete <code>ggpubr</code> incluye una serie de funciones para facilitar la composición de gráficos orientados a publicaciones científicas. La <a href="#fig-ggpubr-example" class="quarto-xref">Figura&nbsp;<span>5.15</span></a> muestra un ejemplo con la función <code>ggboxplot()</code>, para crear boxplots paralelos que, además, muestren información sobre contrastes de hipótesis sobre si las diferencias entre las medias de los grupos son estadísticamente significativas.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ToothGrowth"</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ToothGrowth</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Especificamos las comparaciones que se mostrarán</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggboxplot</span>(df, <span class="at">x =</span> <span class="st">"dose"</span>, <span class="at">y =</span> <span class="st">"len"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="st">"dose"</span>, <span class="at">palette =</span><span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">add =</span> <span class="st">"jitter"</span>, <span class="at">shape =</span> <span class="st">"dose"</span>)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>my_comparisons <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"1"</span>), <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"2"</span>) )</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> my_comparisons)<span class="sc">+</span> <span class="co"># Añadir p-valores de comparaciones</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_compare_means</span>(<span class="at">label.y =</span> <span class="dv">50</span>)  <span class="co"># Añadir contraste global diferencia entre medias</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ToothGrowth"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ToothGrowth</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Especificamos las comparaciones que se mostrarán</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggboxplot</span>(df, <span class="at">x =</span> <span class="st">"dose"</span>, <span class="at">y =</span> <span class="st">"len"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="st">"dose"</span>, <span class="at">palette =</span><span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">add =</span> <span class="st">"jitter"</span>, <span class="at">shape =</span> <span class="st">"dose"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>my_comparisons <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"1"</span>), <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"2"</span>) )</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> my_comparisons)<span class="sc">+</span> <span class="co"># Añadir p-valores de comparaciones</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_compare_means</span>(<span class="at">label.y =</span> <span class="dv">50</span>)  <span class="co"># Añadir contraste global diferencia entre medias</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in wilcox.test.default(c(4.2, 11.5, 7.3, 5.8, 6.4, 10, 11.2, 11.2, :
 cannot compute exact p-value with ties</code></pre>
@@ -997,25 +992,25 @@ Figura&nbsp;5.15: Ejemplo de un gráfico con boxplots paralelos y contraste de h
 <h2 data-number="5.10" class="anchored" data-anchor-id="taller-práctico-1-construcción-de-gráficos-paso-a-paso"><span class="header-section-number">5.10</span> Taller práctico 1: construcción de gráficos paso a paso</h2>
 <p>Vamos a utilizar el dataset <code>beech</code>, con datos sobre el estado de salud de las hayas cerca de la localidad alemana de Rothenbuch (Spessart), para componer otros ejemplos de construcción de gráficos para visualización de datos paso a paso con <code>ggplot2</code>.</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>beech_years <span class="ot">&lt;-</span> beech <span class="sc">|&gt;</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1983</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">1987</span> <span class="sc">|</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                      year <span class="sc">==</span> <span class="dv">1991</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">1995</span> <span class="sc">|</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                      year <span class="sc">==</span> <span class="dv">1999</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">2004</span>)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>p_beech <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> beech_years,</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y,</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> defol, <span class="at">size =</span> age)) <span class="sc">+</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>           <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">facet_wrap</span>(<span class="sc">~</span>year, <span class="at">nrow =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>           <span class="fu">theme</span>(</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>p_beech</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>beech_years <span class="ot">&lt;-</span> beech <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1983</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">1987</span> <span class="sc">|</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                      year <span class="sc">==</span> <span class="dv">1991</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">1995</span> <span class="sc">|</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                      year <span class="sc">==</span> <span class="dv">1999</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">2004</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>p_beech <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> beech_years,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> defol, <span class="at">size =</span> age)) <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>           <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">facet_wrap</span>(<span class="sc">~</span>year, <span class="at">nrow =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>           <span class="fu">theme</span>(</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>           )</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>p_beech</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-beech-2ch" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -1030,19 +1025,19 @@ Figura&nbsp;5.16: Visualización utilizando dos canales y facetas.
 </div>
 </div>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>p_beech <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> beech_years,</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> defol, <span class="at">size =</span> age)) <span class="sc">+</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> alkali), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">facet_wrap</span>(<span class="sc">~</span>year, <span class="at">nrow =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">theme</span>(</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>p_beech</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>p_beech <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> beech_years,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> defol, <span class="at">size =</span> age)) <span class="sc">+</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> alkali), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">facet_wrap</span>(<span class="sc">~</span>year, <span class="at">nrow =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">theme</span>(</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>           )</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>p_beech</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-beech-3ch" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
