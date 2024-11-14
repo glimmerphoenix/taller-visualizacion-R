@@ -256,7 +256,7 @@ p
 En el [capítulo 8](https://ggplot2-book.org/annotations) del libro de referencia sobre `ggplot 2`
 [@wickham2024] se muestran varias funciones de este paquete y varios paquetes adicionales que permiten
 añadir anotaciones de todo tipo en nuestros gráficos: texto, fórmulas, etiquetas, etc. En ocasiones,
-algunos paquetes, como `directlabels`, ofrecen incluso [etiquetado automático](wickham2024) de los
+algunos paquetes, como `directlabels`, ofrecen incluso [etiquetado automático](https://tdhock.github.io/directlabels/) de los
 grupos de datos (según los valores de un atributo categórico).
 
 La @fig-ggplot-first-annotations muestra un ejemplo de cuatro anotaciones añadidas manualmente a nuestro
