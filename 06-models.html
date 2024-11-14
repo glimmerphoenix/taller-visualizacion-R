@@ -422,9 +422,13 @@ Figura&nbsp;6.2: Resumen de coeficientes y tests estadísticos asociados a un mo
 </div>
 <p>El paquete adicional <code>ggfortify</code> nos puede ayudar a representar los gráficos de diagnóstico para este modelo de regresión utilizando <code>ggplot2</code>. La <a href="#fig-ggfortify-lm" class="quarto-xref">Figura&nbsp;<span>6.3</span></a> muestra un ejemplo de gráficos de diagnóstico creados mediante la función <code>autoplot()</code>. Esta función es compatible con diversos tipos de modelos en R, incluyendo modelos lineales generalizados y sus versiones regularizadas (Ridge, Lasso y Elastic-net mediante el paquete <code>glmnet</code>), series temporales, familias de PCA, <em>clustering</em> y análisis de supervivencia.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(lmod_sqrt, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cuidado con este paquete y las implementaciones que ofrece</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Algunos autores desaconsejan su utilización porque suele dar</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># problemas de interacción con otros paquetes (sustitución de funciones</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># por otras implementaciones menos eficientes)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(lmod_sqrt, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ggfortify-lm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
