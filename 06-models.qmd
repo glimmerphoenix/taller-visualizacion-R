@@ -82,6 +82,10 @@ generalizados y sus versiones regularizadas (Ridge, Lasso y Elastic-net mediante
 #| fig-cap: "Gráficos de diagnóstico del modelo de regresión sobre el *dataset* `gala` generados con el paquete `ggfortify`."
 #| message: false
 
+# Cuidado con este paquete y las implementaciones que ofrece
+# Algunos autores desaconsejan su utilización porque suele dar
+# problemas de interacción con otros paquetes (sustitución de funciones
+# por otras implementaciones menos eficientes)
 library(ggfortify)
 
 autoplot(lmod_sqrt, which = 1:6, ncol = 3, label.size = 3)
