@@ -12,8 +12,8 @@ Como ejemplo usaremos varios conjuntos de datos del paquete `agridat`.
 `nass.wheat`: Cinco conjuntos de datos con valores de producción y
 superficie (en acres) cosechados en cada estado de EE.UU. para los
 cultivos agrícolas más importantes en este país, entre aproximadamente
-el año 1900 y el 2011. [*Fuente*: United States Department of Agriculture, 
-National Agricultural Statistics Service. <https://quickstats.nass.usda.gov/>]
+el año 1900 y el 2011. (*Fuente*: [United States Department of Agriculture, 
+National Agricultural Statistics Service](https://quickstats.nass.usda.gov/)).
 
 ## Datos de series temporales
 

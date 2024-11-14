@@ -361,6 +361,15 @@ de `ggplot2`.
 crear gráficos muy sofisticados y, además, acompañados de detalles y resultados de nuestros
 modelos estadísticos [@patil2021]. Veamos un primer ejemplo en la @fig-ggstatsplot-regression.
 
+    Otro buen ejemplo de gráfico de calidad listo para publicar con este paquete es el mostrado en la
+    @fig-ggstatsplot-betweenstats, que muestra una representación gráfica y los resultados estadísticos
+    de varios test comparando la diferencia de medias entre grupos.
+
+    El paquete `ggstatsplot` también incluye muchas funciones para automatizar el resumen de resultados
+    de modelos de regresión, tanto frecuentistas como bayesianos, con un total de 
+    [235 modelos soportados](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html#supported-models).
+    Veremos algunos ejemplos de estas funciones en el @sec-graphs-model-eval.
+
 ```{r}
 #| label: fig-ggstatsplot-regression
 #| fig-cap: "Gráfico de regresión simple con bandas del C.I. (95%), que incluye histogramas marginales de cada atributo, coeficiente de correlación, p-valor y tamaño de la muestra. Fuente: <https://r-graph-gallery.com/package/ggstatsplot.html>."
@@ -369,10 +378,6 @@ library(ggstatsplot)
 ggscatterstats(data = mtcars, x = hp, y = mpg)
 ```
 
-
-    Otro buen ejemplo de gráfico de calidad listo para publicar con este paquete es el mostrado en la
-    @fig-ggstatsplot-betweenstats, que muestra una representación gráfica y los resultados estadísticos
-    de varios test comparando la diferencia de medias entre grupos.
 
 ```{r}
 #| label: fig-ggstatsplot-betweenstats
@@ -390,11 +395,6 @@ ggbetweenstats(
   ylab = "IMDB rating (average)"
 )
 ```
-
-    El paquete `ggstatsplot` también incluye muchas funciones para automatizar el resumen de resultados
-    de modelos de regresión, tanto frecuentistas como bayesianos, con un total de 
-    [235 modelos soportados](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcoefstats.html#supported-models).
-    Veremos algunos ejemplos de estas funciones en el @sec-graphs-model-eval.
 
 - `patchwork`: permite componer fácilmente parrillas de gráficos con diferentes configuraciones a partir
 de gráficos individuales creados con `ggplot2`. Además, usa una sintaxis bastante sencilla y
