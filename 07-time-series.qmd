@@ -1,11 +1,217 @@
-# Visualización de series temporales
+# Visualización de series temporales {#sec-time-series}
+
+En los dos últimos capítulos de apuntes para este taller práctico abordamos el importante
+apartado de la representación visual de datos con dependencias estrictas: temporales o espaciales.
+En este capítulo introducimos algunas herramientas para visualizar datos con dependencias temporales.
+
+**Paquete `agridat`**
+
+Como ejemplo usaremos varios conjuntos de datos del paquete `agridat`.
+
+- `nass.barley`, `nass.corn`, `nass.rice`, `nass.soybean` y
+`nass.wheat`: Cinco conjuntos de datos con valores de producción y
+superficie (en acres) cosechados en cada estado de EE.UU. para los
+cultivos agrícolas más importantes en este país, entre aproximadamente
+el año 1900 y el 2011. [*Fuente*: United States Department of Agriculture, 
+National Agricultural Statistics Service. <https://quickstats.nass.usda.gov/>]
 
 ## Datos de series temporales
 
-Breve introducción a la estructura y representación de datos se series
-temporales, centrándonos en el paquete `tsibble`.
+Los datos de series temporales son aquellos que incluyen una columna de marca de tiempo en la
+que se generó la entrada que para cada ítem con sus elementos descriptivos (atributos
+o *features*). En el caso particular de datos tabulados, tendremos una columna con una marca de
+tipo fecha, hora o fecha y hora, que marca el momento en que se generó o registró esa fila de
+datos.
+
+### Escala temporal en `ggplot2`
+
+Es posible configurar la escala de representación en `ggplot2` de manera que muestre datos
+de fecha o fecha y hora. Se consigue mediante 
+[varias funciones](https://ggplot2.tidyverse.org/reference/scale_date.html):
+
+- `scale_*_date` para fechas representadas con la clase R `Date`.
+- `scale_*_time` para tiempo representado con la clase R `hms`.
+- `scale_*_datetime` para fecha y hora (*timestamp*), representado con la clase R `POSIXct`.
+
+Primero, cargamos los paquetes necesarios.
+
+```{r}
+#| label: load-packages-ch7
+#| message: false
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(agridat)
+```
+
+Después, preparamos los datos para la representación gráfica de la serie temporal usando `ggplot2`.
+Al conectar la variable `date_year` que hemos construido transformando la columna `year` en clase
+`Date`, con el eje horizontal del gráfico mediante `aes(date_year,...)`, la función `ggplot()` detecta
+el tipo de dato fecha y selecciona por defecto la escala correcta de representación y la resolución
+más adecuada (datos anuales).
+
+```{r}
+#| label: fig-agridat-tseries
+#| fig-cap: "Representación gráfica de una serie temporal sobre cantidad total de maiz cosechado anualmente en EE.UU., representada con `ggplot2`."
+
+# Obtenemos los totales anuales de cosecha de maiz
+nass_corn_yearly <- nass.corn |>                     
+  select(year, yield) |>                             
+  group_by(year) |>                                  
+  summarise(total_yield = sum(yield))                
+
+# Cambiamos la columna de fecha a tipo Date
+nass_corn_yearly <- nass_corn_yearly |>              
+  mutate(date_year = parse_date_time(year, "%Y"))    
+
+p1 <- ggplot(nass_corn_yearly, aes(date_year, total_yield)) +
+  geom_line(color = "darkolivegreen") +
+  geom_smooth(method = "loess", formula = "y ~ x")
+p1
+```
+
+Si ahora queremos representar un gráfico con la evolución simultánea de la cosecha total
+anual de maiz y trigo, primero tenemos que trabajar un poco más la tabla de datos antes
+de poder representarla. Se añade una columna adicional para discriminar la cosecha total
+por tipo de cultivo, siguiendo los principios de *tidy data*. Al componer el gráfico, 
+indicamos que se conecte esta nueva variable con el canal de información de color,
+mediante `aes(..., color = crop)`. Como resultado, se genera una gráfica en color diferente
+para cada grupo y aparece una leyenda explicativa a la derecha. El resultado se muestra 
+en la @fig-yield-tseries-multi.
+
+::: {.callout-tip}
+Fíjate bien en que no ha sido necesario transformar el tipo de esta nueva columna
+`crop` a `factor`. La función `ggplot` puede mapear directamente la información
+de color de gráfico a etiquetas de caracteres.
+:::
+
+```{r}
+#| label: fig-yield-tseries-multi
+#| fig-cap: "Representación gráfica de dos series temporales sobrepuestas con `ggplot2`."
+
+# Obtenemos los totales anuales de cosecha de trigo
+nass_wheat_yearly <- nass.wheat |>                     
+  select(year, yield) |>                             
+  group_by(year) |>                                  
+  summarise(total_yield = sum(yield))                
+
+# Cambiamos la columna de fecha a tipo Date
+nass_wheat_yearly <- nass_wheat_yearly |>              
+  mutate(date_year = parse_date_time(year, "%Y"))
+
+# Creamos un gráfico uniendo la información de las dos tablas
+# y creando una variable para identificar cada tipo de cultivo
+ggplot(data = bind_rows(nass_corn_yearly |> mutate(crop = "corn"),
+                        nass_wheat_yearly |> mutate(crop = "wheat")
+                        ),
+  aes(x = date_year, y = total_yield, color = crop)) +
+  geom_line() +
+  labs(x = "Año", y = "Toneladas",
+    title = "Evolución de cosechas de cultivos en EE.UU.",
+    subtitle = "Periodo: 1866 - 2011"
+  )
+
+```
+
+### El paquete `tsibble`
+
+Existen diversos paquetes en R que permiten cargar, procesar y analizar datos de series
+temporales, incluyendo `zoo` o `xts` entre otros. Aquí nos vamos a centrar en explicar otro paquete
+mucho más reciente y potente, para manejo de datos de series temporales en objetos un diseño
+similar a los objetos de clase `tibble` en los paquetes del Tidyverse. Este paquete es
+[`tsibble`](https://tsibble.tidyverts.org/) y es parte de un ecosistema de paquetes para
+datos de series temporales llamado [Tidyverts](https://tidyverts.org/).
+
+Presentamos unos ejemplos prácticos que demuestran algunas de las herrramientas de representación
+gráfica incluidas en este paquete. Existe un excelente manual sobre predicción de series temporales
+[Hyndman2021] que está publicado en abierto y utiliza estos paquetes como herramienta básica para todos los
+ejemplos mostrados: <https://otexts.com/fpp3/>.
+
+```{r}
+#| label: load-tsibble
+#| message: false
+library(tsibble)
+```
 
 ## Taller práctico 2: representación de series temporales
 
+Tal y como se explica en la Sec. 2.1 del libro de referencia [@Hyndman2021],
+(<https://otexts.com/fpp3/tsibbles.html>), se puede construir un objeto de tipo
+`tsibble` a partir de un objeto `tibble` o `data.frame` de R, utilizando la función
+`as_tsibble`. El argumento `index` de esta función permite señalar qué columna
+contiene la información de dependencia temporal de los datos. Además, un objeto
+`tsibble` puede contener múltiples series temporales, en cuyo caso también tenemos
+que indicar mediante otro argumento `key` qué columna adicional podemos "acoplar" 
+a la columna `index` para discriminar los datos correspondientes de cada serie.
 
-## Taller práctico 3: visualización de modelos de predicción
+```{r}
+#| label: tsibble-yield-tseries-multi
+
+# Calculamos los totales anuales de cosecha de ambos cultivos
+# Ya no necesitamos transformar la columna de año a clase Date
+nass_corn_yearly <- nass.corn |>                     
+  select(year, yield) |>                             
+  group_by(year) |>                                  
+  summarise(total_yield = sum(yield)) 
+
+nass_wheat_yearly <- nass.wheat |>                     
+  select(year, yield) |>                             
+  group_by(year) |>                                  
+  summarise(total_yield = sum(yield)) 
+
+crops_yearly <- bind_rows(nass_corn_yearly |> mutate(crop = "corn"),
+                         nass_wheat_yearly |> mutate(crop = "wheat")
+                        ) 
+crops_yearly_tsibble <- crops_yearly |>
+  as_tsibble(key = crop, index = year)
+crops_yearly_tsibble
+```
+
+::: {.callout-tip}
+Observa que tampoco es necesario que la columna que va a actuar como `key` en
+el objeto `tsibble` sea de tipo factor. Fíjate también en que, siempre que los
+datos tengan periodicidad anual, tampoco es necesario transformar la columna
+de información temporal a clase `Date`, al contrario de lo que sucede si usamos
+`ggplot2` con un `data.frame` o `tibble` directamente.
+:::
+
+::: {.callout-note}
+## Compatibilidad con el resto de paquetes Tidyverse
+
+Se pueden usar las funciones habituales del paquete `dplyr`, como `mutate()`,
+`select()`, `filter()` o `summarise()` con los objetos `tsibble` directamente.
+:::
+
+Ahora ya sólo queda componer nuestro gráfico, que se muestra en la 
+@fig-tsibble-yield-tseries-multi. La potencia de este método de trabajo con
+`tsibble` radica en que la función `autoplot()` escoge por defecto muchos de
+los parámetros adecuados para componer la gráfica.
+
+::: {.callout-note}
+## El paquete `feasts`
+
+Las funciones para creación de gráficos mediante `autoplot()` están en otro
+paquete de la familia Tidyverts, en concreto en el paquete `feasts`. Hay que
+cargar previamente este paquete para que `autoplot()` funcione correctamente.
+:::
+
+```{r}
+#| label: fig-tsibble-yield-tseries-multi
+#| fig-cap: "Evolución del total anual cosechado de maiz y trigo en EE.UU., usando el paquete `tsibble` para crear la gráfica."
+#| message: false
+library(feasts)
+
+# No es necesario especificar etiqueta para el eje X
+autoplot(crops_yearly_tsibble, total_yield) +
+  labs(y = "Toneladas",
+    title = "Evolución de cosechas de cultivos en EE.UU.",
+    subtitle = "Periodo: 1866 - 2011")
+```
+
+
+Otra de las ventajas de los objetos de tipo `tsibble` es que se detecta automáticamente
+la periodicidad de los datos a partir de la información en la columna que actúa
+como `index`, aunque en este ejemplo sólo tenemos un dato global de cosecha
+para cada año y no se pueden extraer componentes estacionales o realizar otro tipos
+de análisis sobre la periodicidad de los datos.
+

@@ -1,9 +1,174 @@
 # Visualización de datos espaciales {#sec-spatial-data-vis}
 
+Para concluir los contenidos de este taller, ofrecemos información introductoria
+sobre la representación de datos espaciales en R. Es muy probable que esta sea,
+entre otras áreas, una de las que ha experimentado mayores y más potentes avances 
+en R. No en vano, en el III Congreso y XIV Jornadas de Usuarios de R que tuvieron
+lugar en Sevilla (nov. 2024) se presentaron dos talleres prácticos relacionados
+con este ámbito:
+
+- *"Machine learning approaches for working with spatial data"* 
+([Jakub Nowosad](https://jakubnowosad.com/);
+[materiales](https://github.com/Nowosad/IIIRqueR_workshop_materials);
+[diapositivas](https://jakubnowosad.com/IIIRqueR_workshop/#/title-slide)).
+
+- *"Introducción a la cartografía con R"*
+([Dominic Royé](https://dominicroye.github.io/es/);
+[materiales](https://github.com/dominicroye/Taller_Carto_RqueR_2024)).
+
+En estos apuntes tan solo vamos a introducir de manera superficial algunas de las
+posibilidades y herramientas que ofrece R para visualizar datos con dependencias
+espaciales y tareas de geocomputación. En la @sec-refs-spatial-data se pueden
+encontrar algunas referencias que proporcionan mucha más información y ejemplos
+sobre este área de aplicación.
+
 ## Datos espaciales
 
+### *Simple features*
+
+El [estándar **simple features**](https://en.wikipedia.org/wiki/Simple_Features) es un
+modelo común de almacenamiento y acceso para atributos geográficos, creado principalmente
+para geometrías 2-D (puntos, polígonos, líneas, etc.). Permite conexión con bases de
+datos geográficas (e.g. [PostGIS](https://postgis.net/)) y también con *Sistemas de 
+Información Geográfica* (GIS, por sus siglas), tales como [ArcGIS](http://www.esri.com/software/arcgis).
+
+En R, el [paquete `sf`](https://r-spatial.github.io/sf/) da soporte para trabajar con datos
+representados según el estándar *simple features*. Los registros de datos espaciales se
+almacenan en un objeto `data.frame` o `tibble` con una columna que contiene la información
+de geometría a representar. Están soportados los 17 tipos de datos representables con
+*simple features* en todas las dimensiones. También tiene interfaces con sistemas externos
+como [GEOS](https://libgeos.org), [s2geometry](http://s2geometry.io/), [GDAL](https://gdal.org/) o 
+[PRØJ](http://proj.org/) para realizar multitud de operaciones sobre distintos tipos de objetos
+y espacios de coordenadas.
+
+Existe un [listado de operaciones](https://github.com/rstudio/cheatsheets/blob/main/sf.pdf) soportadas
+por `sf` que resume las capacidades completas de este paquete.
+
+En particular la función `geom_sf()` permite incorporar objetos espaciales geométricos gestionados 
+mediante el paquete `sf` como una capa más de nuestros gráficos creados con `ggplot2`. También es
+totalmente compatible con las funciones del paquete `dplyr`.
+
+### Datos *raster* y cubos de datos vectoriales
+
+- El [paquete `stars`](https://r-spatial.github.io/stars/) ofrece soporte para representación y manejo
+de datos *raster* (por ejemplo, de imágenes satelitales) así como cubos de datos vectoriales
+(*vector datacubes*), tal y como muestra la @fig-vec-hypercube.
+
+![Los hipercubos de datos son cubos de varias dimensiones que pueden contener datos de: latitud y longitud, tiempo, distintas bandas y diferentes sensores. Fuente: <https://r-spatial.github.io/stars/>.](img/vec-hypercube.png){#fig-vec-hypercube}
+
+- El [paquete `terra`](https://rspatial.github.io/terra/) incluye numerosas herramientas para procesado
+y análisis de datos espaciales, incluyendo [manipulación de objetos raster](https://r.geocompx.org/attr#manipulating-raster-objects).
+
+### Datos de España
+
+Tenemos la enorme suerte de que en nuestro país existe una comunidad muy activa que desarrolla múltiples
+paquetes R con información cartográfica, datos climáticos y de otra índole, ya preparados y perfectamente
+integrados con el resto de paquetes populares como `ggplot2`. Destacan:
+
+- [`mapSpain`](https://ropenspain.github.io/mapSpain/articles/x02_mapasesp.html): facilita la creación de
+mapas de diferentes niveles administrativos de España. Incluye muchas herramientas, como por ejemplo una
+función para representar las regiones como cuadrados o hexágonos de forma esquemática, siguiendo una idea
+parecida a los gráficos creados por el [paquete `statebins`](https://github.com/hrbrmstr/statebins). Estos
+son una alternativa simplificada a los [mapas de coropletas](https://r-charts.com/es/espacial/mapa-coropletas/).
+
+- [`climaemet`](https://ropenspain.github.io/climaemet/index.html): permite utilizar la API de datos de la
+AEMET, integrándolos de forma directa en nuestro flujo de trabajo con R. Es imprescindible conseguir previamente
+una API KEY
+
+```{r}
+#| label: fig-avg-temp-Spain
+#| fig-cap: "Representación de la temperatura promedio en España para una jornada. Fuente: <https://ropenspain.github.io/climaemet/>."
+#| eval: false
+
+# Instala los paquetes sf y climaemet previamente
+
+# Ejecuta una sola vez para obtener tu API key:
+# aemet_api_key(apikey, overwrite = FALSE, install = FALSE)
+
+library(climaemet)
+library(ggplot2)
+library(dplyr)
+
+all_stations <- aemet_daily_clim(
+  start = "2021-01-08", end = "2021-01-08",
+  return_sf = TRUE
+)
+
+ggplot(all_stations) +
+  geom_sf(aes(colour = tmed), shape = 19, size = 2, alpha = 0.95) +
+  labs(
+    title = "Average temperature in Spain",
+    subtitle = "8 Jan 2021",
+    color = "Max temp.\n(celsius)",
+    caption = "Source: AEMET"
+  ) +
+  scale_colour_gradientn(
+    colours = hcl.colors(10, "RdBu", rev = TRUE),
+    breaks = c(-10, -5, 0, 5, 10, 15, 20),
+    guide = "legend"
+  ) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic")
+  )
+```
+
+![Representación de la temperatura máxima en distintos puntos de España en un día (2021-01-08). Fuente: <https://ropenspain.github.io/climaemet/>.](img/avg-temp-Spain.png){#fig-avg-temp-Spain width=95%}
+
+- `airqualityES`: datos diarios de medidas de calidad del aire en España en un periodo de 18 años
+(2001-2018), incluyendo varios agentes contaminantes. Los datos son publicados por el Gobierno de España
+en abierto.
 
 ## Representación de datos espaciales
 
+Dominic Royé ha creado recientemente un taller titulado 
+[Breve introducción a la cartografía con R](https://github.com/dominicroye/Taller_Carto_RqueR_2024), que
+muestra algunos ejemplos básicos sobre cómo manejar este tipo de datos.
 
-## Taller práctico 4: el paquete `leaflet`
+![Representación gráfica de la red de ríos de la cuenca hidrográfica del Ebro. El grosor de línea se corresponde con el caudal promedio de cada río. Fuente: <https://github.com/dominicroye/Taller_Carto_RqueR_2024>.](img/Ebro-rivers.png){#fig-Ebro-rivers width=95%}
+
+![Modelo digital del terreno (MDT) de Suiza. Se ha añadido efecto de sombreado para interpretar mejor el relieve de cada zona. Fuente: <https://github.com/dominicroye/Taller_Carto_RqueR_2024>.](img/MDT-Switzerland.png){#fig-MDT-Switzerland width=95%}
+
+
+Por supuesto, se pueden realizar todo tipo de representaciones más clásicas, como los mapas de coropletas
+en versión estática (@fig-choropleth-map) como interactiva (@fig-choropleth-leaflet), utilizando la biblioteca JavaScript
+[Leaflet](https://leafletjs.com/).
+
+```{r}
+#| label: fig-choropleth-map
+#| fig-cap: "Mapa de coropletas clásico mostrando nacimientos en 1974 en los condados del estado de Carolina del Norte (EE.UU.). Fuente: <https://r-spatial.org/book/01-hello.html>."
+#| message: false
+
+library(tidyverse)
+library(sf)
+system.file("gpkg/nc.gpkg", package="sf") |>
+    read_sf() -> nc
+nc.32119 <- st_transform(nc, 'EPSG:32119')
+nc.32119 |>
+    select(BIR74) |>
+    plot(graticule = TRUE, axes = TRUE)
+```
+
+```{r}
+#| label: fig-choropleth-leaflet
+#| fig-cap: "Mapa de coropletas interactivo usando Leaflet. Fuente: <https://r-spatial.org/book/01-hello.html>."
+
+library(mapview) |> suppressPackageStartupMessages()
+mapviewOptions(fgb = FALSE)
+nc.32119 |> mapview(zcol = "BIR74", legend = TRUE, col.regions = sf.colors)
+```
+
+## Referencias para análisis de datos espaciales {#sec-refs-spatial-data}
+
+Las dos fuentes principales para aprendizaje sobre procesado y análisis de datos espaciales
+en R son:
+
+- [*Geocomputation with R*](<https://r.geocompx.org/>) [@lovelace2025].
+- [*Spatial Data Science: With Applications in R*](<https://r-spatial.org/book/>) [@pebesma2023].
+
+Además, se pueden recomendar otras referencias interesantes:
+
+- [*Spatial Statistics for Data Science: Theory and Practice with R*](https://www.paulamoraga.com/book-spatial/) [@moraga2023].
+- [*Bayesian Inference with INLA*](https://becarioprecario.bitbucket.io/inla-gitbook/) [@gomez-rubio2020].
