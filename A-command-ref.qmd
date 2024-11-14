@@ -2,9 +2,20 @@
 
 ## Paquete `ggplot2`
 
-
+- Índice de funciones del paquete `ggplot2`: <https://ggplot2.tidyverse.org/reference/>.
+- Data visualization with `ggplot2` cheat sheet: <https://rstudio.github.io/cheatsheets/html/data-visualization.html>.
+- Manual oficial de `ggplot2`: <https://ggplot2-book.org> (3ª ed. en progreso).
 
 ## Series temporales
 
+- Índice de comandos del paquete `tsibble`: <https://tsibble.tidyverts.org/reference/index.html>.
+- Forecasting: Principles and Practice: <https://otexts.com/fpp3/>.
+- Referencias de los paquetes Tidyverts: <https://tidyverts.org/>. 
+
 ## Datos espaciales
+
+- Índice de funciones del paquete `sf`: <https://r-spatial.github.io/sf/reference/index.html>.
+- Índice de funciones del paquete `terra`: <https://rspatial.github.io/terra/reference/index.html>.
+- Spatial Data Science with Applications in R (paquete `sf`): <https://r-spatial.org/book/>.
+- Geocomputation with R (paquete `terra`): <https://r.geocompx.org/>.
 
